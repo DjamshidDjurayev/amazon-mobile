@@ -34,6 +34,8 @@ target 'AmazonMobile' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod 'ReactNativeLocalization', :path => '../node_modules/react-native-localization'
+
   target 'AmazonMobileTests' do
     inherit! :search_paths
     # Pods for testing
