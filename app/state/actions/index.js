@@ -1,7 +1,7 @@
-import * as loginActions from './login';
+import * as splashActions from './splash/splash';
 
 const actions = {
-  ...loginActions,
+  ...splashActions,
 };
 
 export {actions};

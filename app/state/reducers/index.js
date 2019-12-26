@@ -1,3 +1,3 @@
-import login from './login/login';
+import login from './splash/splash';
 
 export {login};

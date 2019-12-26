@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import SplashScreen from '../screens/splash/SplashScreen';
+import SplashScreen from '../ui/splash/SplashScreen';
 
 export const MainNavigator = createStackNavigator({
   Splash: {screen: SplashScreen},
