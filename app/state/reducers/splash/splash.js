@@ -2,7 +2,8 @@ import * as types from '../../actionTypes';
 
 const initialState = {
   isLoading: false,
-  isCancelled: true,
+  isCancelled: false,
+  isFinished: false,
 };
 
 export default function splash(state = initialState, action = {}) {
@@ -11,21 +12,24 @@ export default function splash(state = initialState, action = {}) {
       return {
         ...state,
         isLoading: true,
-        isCancelled: false
+        isCancelled: false,
+        isFinished: false,
       };
 
     case types.SPLASH_TIMEOUT_ACTION_FINISHED:
       return {
         ...state,
         isLoading: false,
-        isCancelled: false
+        isCancelled: false,
+        isFinished: true,
       };
 
     case types.SPLASH_TIMEOUT_ACTION_CANCEL:
       return {
         ...state,
         isLoading: false,
-        isCancelled: true
+        isCancelled: true,
+        isFinished: false,
       };
     default:
       return state;
