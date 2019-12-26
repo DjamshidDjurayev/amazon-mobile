@@ -52,7 +52,7 @@ class SplashScreen extends React.Component {
   };
 
   navigateToNextScreen = () => {
-    this.props.navigation.navigate("Login")
+    this.props.navigation.navigate("Login");
   }
 }
 

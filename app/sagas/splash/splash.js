@@ -4,7 +4,7 @@ import {actions} from '../../state/actions/index';
 
 function* splashTimeoutStartAsync() {
   try {
-    yield delay(3000);
+    yield delay(2000);
     yield put(actions.finishSplashTimeout());
   } catch (e) {
     yield put(actions.cancelSplashTimeout());
