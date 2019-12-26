@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, StatusBar} from 'react-native';
+import {StyleSheet, View, StatusBar, Text} from 'react-native';
 
 import {SafeAreaView} from 'react-navigation';
 import {connect} from 'react-redux';
@@ -16,7 +16,8 @@ class SplashScreen extends React.Component {
       <SafeAreaView style={styles.rootView}>
         <StatusBar barStyle="dark-content" />
 
-        <View style={styles.container} />
+        <View style={styles.container}>
+        </View>
       </SafeAreaView>
     );
   }
