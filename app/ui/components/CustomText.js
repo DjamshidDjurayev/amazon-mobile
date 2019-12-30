@@ -1,6 +1,6 @@
 import React from "react";
 import {StyleSheet, Text} from "react-native";
-import Colors from "../../colors";
+import colors from "../../colors";
 import PropTypes from 'prop-types';
 import {toDp} from "../../utils/ScreenUtils";
 
@@ -22,7 +22,7 @@ class CustomText extends React.Component {
         fontFamily: font,
         fontSize: size ? toDp(size) : toDp(14),
         margin: margin ? toDp(margin) : 0,
-        color: textColor ? textColor : Colors.black
+        color: textColor ? textColor : colors.black
       }]} {...otherProps}
       >
         {title}

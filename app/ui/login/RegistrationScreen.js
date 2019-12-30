@@ -3,11 +3,10 @@ import {
   View,
   Text,
   StatusBar,
-  TouchableOpacity,
-  TextInput
+  TouchableOpacity, TextInput,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {NavigationActions, SafeAreaView, StackActions} from 'react-navigation';
+import {SafeAreaView} from 'react-navigation'
 import {actions} from '../../state/actions';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../colors';
@@ -15,10 +14,12 @@ import CustomText from '../components/CustomText';
 import strings from '../../strings';
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import {toDp} from '../../utils/ScreenUtils';
+import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import TextUtils from '../../utils/TextUtils';
+import FeatherIcon from 'react-native-vector-icons/Feather'
 
-class LoginScreen extends React.Component {
+class RegistrationScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -26,29 +27,11 @@ class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loginButtonDisabled: true,
+      signUpButtonDisabled: true,
+      nameInputValue: "",
       loginInputValue: "",
       passwordInputValue: "",
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.response !== this.props.response) {
-      if (this.props.response.data) {
-        // success
-        this.navigateToNextScreen();
-        return
-      }
-
-      if (this.props.response.error) {
-        // error
-      }
-    }
-  }
-
-  componentWillUnmount(): void {
-    if (this.props.isLoading) {
-      this.props.cancelLogin()
+      passwordHidden: true,
     }
   }
 
@@ -75,16 +58,16 @@ class LoginScreen extends React.Component {
         backgroundColor={colors.statusbar_transparent}
         hidden={false}
         barStyle={'light-content'} />
-      )
+    )
   };
 
   renderLogoHeader = () => {
     return (
-    <View style={styles.logoView}>
-      <Text style={styles.logoText}>
-        LOGO
-      </Text>
-    </View>
+      <View style={styles.logoView}>
+        <Text style={styles.logoText}>
+          LOGO
+        </Text>
+      </View>
     )
   };
 
@@ -94,7 +77,7 @@ class LoginScreen extends React.Component {
         <CustomText
           size={toDp(18)}
           style={styles.loginText}>
-          {strings.log_in}
+          {strings.registration}
         </CustomText>
 
         {/* socials */}
@@ -148,6 +131,25 @@ class LoginScreen extends React.Component {
 
         {/* inputs */}
         <TextInput
+          ref="name_input_id"
+          numberOfLines={1}
+          multiline={false}
+          blurOnSubmit={false}
+          onChangeText={(nameInputValue) => {
+            this.setState({
+              nameInputValue,
+              signUpButtonDisabled: TextUtils.isEmpty(nameInputValue)
+            })
+          }}
+          returnKeyType="next"
+          value={this.state.nameInputValue}
+          placeholder={strings.name}
+          placeholderTextColor={colors.light_gray}
+          autoCapitalize="none"
+          onSubmitEditing={() => this.focusNextField('login_input_id')}
+          style={styles.loginInput}/>
+
+        <TextInput
           ref="login_input_id"
           numberOfLines={1}
           multiline={false}
@@ -155,7 +157,6 @@ class LoginScreen extends React.Component {
           onChangeText={(loginInputValue) => {
             this.setState({
               loginInputValue,
-              loginButtonDisabled: TextUtils.isEmpty(loginInputValue)
             })
           }}
           returnKeyType="next"
@@ -166,42 +167,40 @@ class LoginScreen extends React.Component {
           onSubmitEditing={() => this.focusNextField('password_input_id')}
           style={styles.loginInput}/>
 
-        <TextInput
-          ref="password_input_id"
-          numberOfLines={1}
-          multiline={false}
-          onChangeText={(passwordInputValue) => {
-            this.setState({
-              passwordInputValue,
-            })
-          }}
-          secureTextEntry
-          returnKeyType="done"
-          value={this.state.passwordInputValue}
-          placeholder={strings.password}
-          placeholderTextColor={colors.light_gray}
-          autoCapitalize="none"
-          style={styles.loginInput}/>
+          <View style={styles.passwordContainer}>
+            <TextInput
+              ref="password_input_id"
+              numberOfLines={1}
+              multiline={false}
+              onChangeText={(passwordInputValue) => {
+                this.setState({
+                  passwordInputValue,
+                })
+              }}
+              secureTextEntry={this.state.passwordHidden}
+              returnKeyType="done"
+              value={this.state.passwordInputValue}
+              placeholder={strings.password}
+              placeholderTextColor={colors.light_gray}
+              autoCapitalize="none"
+              style={styles.passwordInput}/>
 
-          <View style={styles.signUpContainer}>
-            <CustomText textColor={colors.light_gray}>
-              {strings.no_account}
-            </CustomText>
-
-            <TouchableOpacity
-              style={styles.signUpText}
-              onPress={() => this.onSignUpClicked()}>
-              <CustomText textColor={colors.green}>{strings.sign_up}</CustomText>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.eyeContainer}
+                onPress={() => this.onEyeClicked()}>
+                <FeatherIcon
+                  color={colors.light_gray}
+                  name={this.state.passwordHidden ? "eye-off" : "eye"}
+                  size={toDp(20)}/>
+              </TouchableOpacity>
           </View>
 
         <CustomButton
-          isLoading={this.props.isLoading}
-          onClick={() => this.onLoginButtonClicked()}
-          disabled={this.state.loginButtonDisabled}
+          style={styles.registrationButton}
+          disabled={this.state.signUpButtonDisabled}
           buttonColor={colors.green}
           disabledColor={colors.button_disabled}
-          title={strings.log_in}/>
+          title={strings.sign_up}/>
       </View>
     )
   };
@@ -226,29 +225,11 @@ class LoginScreen extends React.Component {
     this.props.navigation.navigate("Registration")
   };
 
-  focusNextField = (nextField) => {
-    this.refs[nextField].focus();
+  onEyeClicked = () => {
+    this.setState({
+      passwordHidden: !this.state.passwordHidden
+    })
   };
-
-  navigateToNextScreen = () => {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'Registration' })],
-    });
-    this.props.navigation.dispatch(resetAction);
-  };
-
-  onLoginButtonClicked = () => {
-    if (TextUtils.isEmpty(this.state.loginInputValue)) {
-      return;
-    }
-
-    if (TextUtils.isEmpty(this.state.passwordInputValue)) {
-      return;
-    }
-
-    this.props.performLogin()
-  }
 }
 
 const styles = EStyleSheet.create({
@@ -325,22 +306,49 @@ const styles = EStyleSheet.create({
     paddingRight: '16rem',
     fontSize: "15rem",
     fontWeight: 'normal',
+    backgroundColor: colors.white,
+    borderRadius: '8rem',
     marginLeft: "16rem",
     marginRight: "16rem",
-    backgroundColor: colors.white,
     marginBottom: '8rem',
+  },
+  passwordInput: {
+    paddingTop: "14rem",
+    paddingBottom: "14rem",
+    paddingLeft: '16rem',
+    paddingRight: '40rem',
+    fontSize: "15rem",
+    fontWeight: 'normal',
+    backgroundColor: colors.white,
     borderRadius: '8rem',
+  },
+  registrationButton: {
+    marginTop: '20rem'
+  },
+  passwordContainer: {
+    marginLeft: "16rem",
+    marginRight: "16rem",
+    marginBottom: '8rem',
+  },
+  eyeContainer: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    marginRight: "12rem"
   },
 });
 
 export default connect(
   (state, props) => ({
-    isLoading: state.login.isLoading,
-    isCancelled: state.login.isCancelled,
-    response: state.login.response,
+    isLoading: state.registration.isLoading,
+    isCancelled: state.registration.isCancelled,
+    response: state.registration.response,
   }),
   dispatch => ({
-    performLogin: () => dispatch(actions.loginPerform()),
-    cancelLogin: () => dispatch(actions.loginCancel()),
+    performRegistration: () => dispatch(actions.registrationPerform()),
+    cancelRegistration: () => dispatch(actions.registrationCancel()),
   }),
-)(LoginScreen);
+)(RegistrationScreen);

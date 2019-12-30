@@ -36,6 +36,8 @@ target 'AmazonMobile' do
 
   pod 'ReactNativeLocalization', :path => '../node_modules/react-native-localization'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'AmazonMobileTests' do
     inherit! :search_paths
     # Pods for testing

@@ -1,6 +1,6 @@
 import {put, takeEvery, delay, cancelled, call, take, race} from 'redux-saga/effects';
-import * as types from '../../state/actionTypes';
-import {actions} from '../../state/actions/index';
+import * as types from '../state/actionTypes';
+import {actions} from '../state/actions';
 
 function* splashTimeoutStartAsync() {
   try {

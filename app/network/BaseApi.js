@@ -1,6 +1,6 @@
 import axios from 'axios';
 import url from 'url';
-import AppConstants from '../Constants';
+import AppConstants from '../constants';
 import queryString from 'qs';
 
 function executeRequest(method, pathname, data, options = {}, urlEncoded) {
