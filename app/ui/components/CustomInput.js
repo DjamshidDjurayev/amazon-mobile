@@ -1,17 +1,25 @@
 import React from "react";
-import {TextInput} from "react-native";
+import {
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import colors from "../../colors";
 import PropTypes from 'prop-types';
 import EStyleSheet from "react-native-extended-stylesheet";
+import FeatherIcon from 'react-native-vector-icons/Feather';
+import {toDp} from '../../utils/ScreenUtils';
 
 class CustomInput extends React.Component {
   static propTypes = {
     onChangeText: PropTypes.func,
+    inputRef: PropTypes.func,
     style: PropTypes.object,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     underlineColorBlurred: PropTypes.string,
     underlineColorFocused: PropTypes.string,
+    showHidePassword: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -23,6 +31,7 @@ class CustomInput extends React.Component {
     super(props);
     this.state = {
       isFocused: false,
+      passwordHidden: true,
     };
   }
 
@@ -43,19 +52,47 @@ class CustomInput extends React.Component {
   };
 
   render() {
-    const {isFocused} = this.state;
-    const {style, onChangeText, underlineColorBlurred, underlineColorFocused, ...otherProps} = this.props;
+    const {
+      showHidePassword,
+      inputRef,
+      style,
+      onChangeText,
+      underlineColorBlurred,
+      underlineColorFocused,
+      ...otherProps} = this.props;
 
     return (
-      <TextInput
-        onChangeText={onChangeText}
-        style={[style || styles.defaultStyle]}
-        onFocus={this.onFocus}
-        onBlur={this.onBlur}
-        {...otherProps}
-      />
+      <View style={showHidePassword ? styles.container : {}}>
+        <TextInput
+          ref={inputRef}
+          secureTextEntry={showHidePassword && this.state.passwordHidden}
+          onChangeText={onChangeText}
+          style={[style || styles.defaultStyle]}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          {...otherProps}
+        />
+        {
+          showHidePassword ?
+            <TouchableOpacity
+              style={styles.eyeContainer}
+              onPress={() => this.onEyeClicked()}>
+              <FeatherIcon
+                color={colors.light_gray}
+                name={this.state.passwordHidden ? "eye-off" : "eye"}
+                size={toDp(20)}/>
+            </TouchableOpacity>
+            : null
+        }
+      </View>
     );
   }
+
+  onEyeClicked = () => {
+    this.setState({
+      passwordHidden: !this.state.passwordHidden
+    })
+  };
 }
 
 const styles = EStyleSheet.create({
@@ -68,6 +105,20 @@ const styles = EStyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: '16rem',
   },
+  eyeContainer: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    marginRight: "12rem"
+  },
+  container: {
+    marginLeft: "16rem",
+    marginRight: "16rem",
+    marginBottom: '8rem',
+  }
 });
 
 export default CustomInput;

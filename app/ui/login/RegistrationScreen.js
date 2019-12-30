@@ -3,7 +3,7 @@ import {
   View,
   Text,
   StatusBar,
-  TouchableOpacity, TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {SafeAreaView} from 'react-navigation'
@@ -14,10 +14,9 @@ import CustomText from '../components/CustomText';
 import strings from '../../strings';
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import {toDp} from '../../utils/ScreenUtils';
-import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import TextUtils from '../../utils/TextUtils';
-import FeatherIcon from 'react-native-vector-icons/Feather'
+import CustomInput from '../components/CustomInput';
 
 class RegistrationScreen extends React.Component {
   static navigationOptions = {
@@ -26,12 +25,13 @@ class RegistrationScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    this.inputs = {};
+
     this.state = {
       signUpButtonDisabled: true,
       nameInputValue: "",
       loginInputValue: "",
       passwordInputValue: "",
-      passwordHidden: true,
     }
   }
 
@@ -130,8 +130,8 @@ class RegistrationScreen extends React.Component {
         </View>
 
         {/* inputs */}
-        <TextInput
-          ref="name_input_id"
+        <CustomInput
+          inputRef={r => this.inputs['name_input_id'] = r}
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -149,8 +149,8 @@ class RegistrationScreen extends React.Component {
           onSubmitEditing={() => this.focusNextField('login_input_id')}
           style={styles.loginInput}/>
 
-        <TextInput
-          ref="login_input_id"
+        <CustomInput
+          inputRef={r => this.inputs['login_input_id'] = r}
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -167,33 +167,22 @@ class RegistrationScreen extends React.Component {
           onSubmitEditing={() => this.focusNextField('password_input_id')}
           style={styles.loginInput}/>
 
-          <View style={styles.passwordContainer}>
-            <TextInput
-              ref="password_input_id"
-              numberOfLines={1}
-              multiline={false}
-              onChangeText={(passwordInputValue) => {
-                this.setState({
-                  passwordInputValue,
-                })
-              }}
-              secureTextEntry={this.state.passwordHidden}
-              returnKeyType="done"
-              value={this.state.passwordInputValue}
-              placeholder={strings.password}
-              placeholderTextColor={colors.light_gray}
-              autoCapitalize="none"
-              style={styles.passwordInput}/>
-
-              <TouchableOpacity
-                style={styles.eyeContainer}
-                onPress={() => this.onEyeClicked()}>
-                <FeatherIcon
-                  color={colors.light_gray}
-                  name={this.state.passwordHidden ? "eye-off" : "eye"}
-                  size={toDp(20)}/>
-              </TouchableOpacity>
-          </View>
+        <CustomInput
+          inputRef={r => this.inputs['password_input_id'] = r}
+          showHidePassword
+          numberOfLines={1}
+          multiline={false}
+          onChangeText={(passwordInputValue) => {
+            this.setState({
+              passwordInputValue,
+            })
+          }}
+          returnKeyType="done"
+          value={this.state.passwordInputValue}
+          placeholder={strings.password}
+          placeholderTextColor={colors.light_gray}
+          autoCapitalize="none"
+          style={styles.passwordInput}/>
 
         <CustomButton
           style={styles.registrationButton}
@@ -221,14 +210,12 @@ class RegistrationScreen extends React.Component {
     }
   };
 
-  onSignUpClicked = () => {
-    this.props.navigation.navigate("Registration")
+  focusNextField = id => {
+    this.inputs[id].focus();
   };
 
-  onEyeClicked = () => {
-    this.setState({
-      passwordHidden: !this.state.passwordHidden
-    })
+  onSignUpClicked = () => {
+    this.props.navigation.navigate("Registration")
   };
 }
 
@@ -324,20 +311,6 @@ const styles = EStyleSheet.create({
   },
   registrationButton: {
     marginTop: '20rem'
-  },
-  passwordContainer: {
-    marginLeft: "16rem",
-    marginRight: "16rem",
-    marginBottom: '8rem',
-  },
-  eyeContainer: {
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    marginRight: "12rem"
   },
 });
 

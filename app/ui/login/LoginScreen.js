@@ -4,7 +4,6 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
-  TextInput
 } from 'react-native';
 import {connect} from 'react-redux';
 import {NavigationActions, SafeAreaView, StackActions} from 'react-navigation';
@@ -17,6 +16,7 @@ import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import {toDp} from '../../utils/ScreenUtils';
 import CustomButton from '../components/CustomButton';
 import TextUtils from '../../utils/TextUtils';
+import CustomInput from '../components/CustomInput';
 
 class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -25,11 +25,13 @@ class LoginScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    this.inputs = {};
+
     this.state = {
       loginButtonDisabled: true,
       loginInputValue: "",
       passwordInputValue: "",
-    }
+    };
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -147,8 +149,8 @@ class LoginScreen extends React.Component {
         </View>
 
         {/* inputs */}
-        <TextInput
-          ref="login_input_id"
+        <CustomInput
+          inputRef={r => this.inputs['login_input_id'] = r}
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -166,8 +168,8 @@ class LoginScreen extends React.Component {
           onSubmitEditing={() => this.focusNextField('password_input_id')}
           style={styles.loginInput}/>
 
-        <TextInput
-          ref="password_input_id"
+        <CustomInput
+          inputRef={r => this.inputs['password_input_id'] = r}
           numberOfLines={1}
           multiline={false}
           onChangeText={(passwordInputValue) => {
@@ -226,8 +228,8 @@ class LoginScreen extends React.Component {
     this.props.navigation.navigate("Registration")
   };
 
-  focusNextField = (nextField) => {
-    this.refs[nextField].focus();
+  focusNextField = id => {
+    this.inputs[id].focus();
   };
 
   navigateToNextScreen = () => {
