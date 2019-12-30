@@ -1,11 +1,14 @@
 import {put, takeEvery, delay, cancelled, call, take, race} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
+import * as NavigationService from '../navigation/NavigationService'
 
 function* splashTimeoutStartAsync() {
   try {
     yield delay(2000);
     yield put(actions.finishSplashTimeout());
+    // navigate to Login page
+    yield put(NavigationService.navigateWithReset('Login'));
   } catch (e) {
     yield put(actions.cancelSplashTimeout());
   } finally {

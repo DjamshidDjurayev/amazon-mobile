@@ -1,4 +1,3 @@
-import {connect} from 'react-redux';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import SplashScreen from '../ui/splash/SplashScreen';
@@ -13,8 +12,4 @@ export const MainNavigator = createStackNavigator({
 
 const AppNavigator = createAppContainer(MainNavigator);
 
-const mapStateToProps = state => ({
-  nav: state.nav,
-});
-
-export default connect(mapStateToProps)(AppNavigator);
+export default AppNavigator;

@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, StatusBar, Text} from 'react-native'
-import {SafeAreaView, StackActions, NavigationActions} from 'react-navigation'
+import {SafeAreaView} from 'react-navigation'
 import {connect} from 'react-redux'
 import colors from '../../colors'
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -20,12 +20,6 @@ class SplashScreen extends React.Component {
 
   componentDidMount(): void {
     this.props.startTimeout()
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.isFinished) {
-      this.navigateToNextScreen()
-    }
   }
 
   render() {
@@ -50,14 +44,6 @@ class SplashScreen extends React.Component {
       </View>
     )
   };
-
-  navigateToNextScreen = () => {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'Login' })],
-    });
-    this.props.navigation.dispatch(resetAction);
-  }
 }
 
 const styles = EStyleSheet.create({

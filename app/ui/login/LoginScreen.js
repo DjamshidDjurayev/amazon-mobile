@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {NavigationActions, SafeAreaView, StackActions} from 'react-navigation';
+import {SafeAreaView} from 'react-navigation';
 import {actions} from '../../state/actions';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../colors';
@@ -17,6 +17,7 @@ import {toDp} from '../../utils/ScreenUtils';
 import CustomButton from '../components/CustomButton';
 import TextUtils from '../../utils/TextUtils';
 import CustomInput from '../components/CustomInput';
+import * as NavigationService from '../../navigation/NavigationService'
 
 class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -26,26 +27,11 @@ class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.inputs = {};
-
     this.state = {
       loginButtonDisabled: true,
       loginInputValue: "",
       passwordInputValue: "",
     };
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.response !== this.props.response) {
-      if (this.props.response.data) {
-        // success
-        this.navigateToNextScreen();
-        return
-      }
-
-      if (this.props.response.error) {
-        // error
-      }
-    }
   }
 
   componentWillUnmount(): void {
@@ -58,11 +44,9 @@ class LoginScreen extends React.Component {
     return (
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
-
         <View style={styles.container}>
           {/* header */}
           {this.renderLogoHeader()}
-
           {/* content */}
           {this.renderContent()}
         </View>
@@ -105,42 +89,35 @@ class LoginScreen extends React.Component {
             activeOpacity={.7}
             onPress={this.onSocialIconClicked("google")}
             style={styles.iconContainer}>
-
             <EvilIcon
               name={"sc-google-plus"}
               color={colors.white}
               size={toDp(32)} />
-
           </TouchableOpacity>
 
           <TouchableOpacity
             activeOpacity={.7}
             onPress={this.onSocialIconClicked("fb")}
             style={styles.iconContainer}>
-
             <EvilIcon
               name={"sc-facebook"}
               color={colors.white}
               size={toDp(48)} />
-
           </TouchableOpacity>
 
           <TouchableOpacity
             activeOpacity={.7}
             onPress={this.onSocialIconClicked("vk")}
             style={styles.iconContainer}>
-
             <EvilIcon
               name={"sc-vk"}
               color={colors.white}
               size={toDp(40)} />
-
           </TouchableOpacity>
         </View>
 
         <View style={styles.orContainer}>
           <View style={styles.line}/>
-
           <CustomText
             size={toDp(18)}
             style={styles.orText}>
@@ -225,19 +202,11 @@ class LoginScreen extends React.Component {
   };
 
   onSignUpClicked = () => {
-    this.props.navigation.navigate("Registration")
+    NavigationService.navigate('Registration')
   };
 
   focusNextField = id => {
     this.inputs[id].focus();
-  };
-
-  navigateToNextScreen = () => {
-    const resetAction = StackActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'Registration' })],
-    });
-    this.props.navigation.dispatch(resetAction);
   };
 
   onLoginButtonClicked = () => {
@@ -282,7 +251,8 @@ const styles = EStyleSheet.create({
   orContainer: {
     marginTop: '26rem',
     marginBottom: '20rem',
-    justifyContent:'center', alignItems:'center'
+    justifyContent:'center',
+    alignItems:'center'
   },
   orText: {
     backgroundColor: colors.ultra_light_gray,
