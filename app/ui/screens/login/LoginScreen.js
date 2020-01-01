@@ -83,10 +83,9 @@ class LoginScreen extends Component {
     return (
       <View style={styles.contentContainer} >
         <CustomText
+          title={strings.log_in}
           size={toDp(18)}
-          style={styles.loginText}>
-          {strings.log_in}
-        </CustomText>
+          style={styles.loginText} />
 
         {/* socials */}
         <View style={styles.socialsContainer}>
@@ -124,10 +123,9 @@ class LoginScreen extends Component {
         <View style={styles.orContainer}>
           <View style={styles.line}/>
           <CustomText
+            title={strings.or}
             size={toDp(18)}
-            style={styles.orText}>
-            {strings.or}
-          </CustomText>
+            style={styles.orText} />
         </View>
 
         {/* inputs */}
@@ -169,14 +167,16 @@ class LoginScreen extends Component {
           style={styles.loginInput}/>
 
           <View style={styles.signUpContainer}>
-            <CustomText textColor={colors.light_gray}>
-              {strings.no_account}
-            </CustomText>
+            <CustomText
+              title={strings.no_account}
+              textColor={colors.light_gray} />
 
             <TouchableOpacity
               style={styles.signUpText}
               onPress={() => this.onSignUpClicked()}>
-              <CustomText textColor={colors.green}>{strings.sign_up}</CustomText>
+              <CustomText
+                title={strings.sign_up}
+                textColor={colors.green} />
             </TouchableOpacity>
           </View>
 

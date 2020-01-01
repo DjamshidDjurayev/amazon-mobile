@@ -77,10 +77,9 @@ class RegistrationScreen extends Component {
     return (
       <View style={styles.contentContainer}>
         <CustomText
+          title={strings.registration}
           size={toDp(18)}
-          style={styles.loginText}>
-          {strings.registration}
-        </CustomText>
+          style={styles.loginText} />
 
         {/* socials */}
         <View style={styles.socialsContainer}>
@@ -125,10 +124,9 @@ class RegistrationScreen extends Component {
           <View style={styles.line}/>
 
           <CustomText
+            title={strings.or}
             size={toDp(18)}
-            style={styles.orText}>
-            {strings.or}
-          </CustomText>
+            style={styles.orText} />
         </View>
 
         {/* inputs */}

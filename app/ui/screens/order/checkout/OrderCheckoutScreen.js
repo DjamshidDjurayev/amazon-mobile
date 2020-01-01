@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import {
   View,
-  SafeAreaView, StatusBar,
-  ScrollView, TouchableOpacity
+  StatusBar,
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
+import {SafeAreaView} from 'react-navigation';
 import {connect} from 'react-redux';
 import styles from './style';
 import colors from '../../../../colors';
