@@ -10,7 +10,7 @@ function* loginPerformAsync() {
     // TODO replace with api call
     yield put(actions.loginSuccess({}));
     // if response
-    yield put(NavigationService.navigateWithReset('Registration'))
+    yield put(NavigationService.navigate('OrderCheckout'))
   } catch (e) {
     yield put(actions.loginError(e));
   } finally {

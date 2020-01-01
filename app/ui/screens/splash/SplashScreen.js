@@ -1,12 +1,11 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {View, StatusBar, Text} from 'react-native'
 import {SafeAreaView} from 'react-navigation'
 import {connect} from 'react-redux'
-import colors from '../../colors'
-import EStyleSheet from 'react-native-extended-stylesheet';
-import {actions} from '../../state/actions';
+import {actions} from '../../../state/actions';
+import styles from './style';
 
-class SplashScreen extends React.Component {
+class SplashScreen extends Component {
   static navigationOptions = {
     header: null,
   };
@@ -45,21 +44,6 @@ class SplashScreen extends React.Component {
     )
   };
 }
-
-const styles = EStyleSheet.create({
-  rootView: {flex: 1},
-  container: {
-    flex: 1,
-    backgroundColor: colors.green,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textStyle: {
-    color: colors.white,
-    fontSize: '60rem',
-    fontWeight: 'bold',
-  },
-});
 
 export default connect(
   (state, props) => ({

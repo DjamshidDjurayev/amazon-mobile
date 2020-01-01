@@ -8,7 +8,7 @@ function* splashTimeoutStartAsync() {
     yield delay(2000);
     yield put(actions.finishSplashTimeout());
     // navigate to Login page
-    yield put(NavigationService.navigateWithReset('Login'));
+    yield put(NavigationService.navigateWithReset('OrderCheckout'));
   } catch (e) {
     yield put(actions.cancelSplashTimeout());
   } finally {

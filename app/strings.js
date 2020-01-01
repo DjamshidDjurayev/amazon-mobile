@@ -11,6 +11,12 @@ const strings = new LocalizedStrings({
     phone: 'Телефон',
     password: 'Пароль',
     name: 'Имя',
+    order_checkout: 'Оформление заказа',
+    add_delivery_address: 'Добавить адрес доставки',
+    payment_method_choose: 'Выберите способ оплаты',
+    your_order: 'Ваш заказ',
+    delivery: 'Доставка',
+    order_details: 'Информация о доставке',
   },
 });
 

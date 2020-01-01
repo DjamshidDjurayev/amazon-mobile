@@ -70,7 +70,7 @@ class CustomButton extends React.Component {
 
 const styles = EStyleSheet.create({
   button: {
-    borderRadius: "6rem",
+    borderRadius: "10rem",
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: '16rem',
