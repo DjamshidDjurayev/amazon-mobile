@@ -2,12 +2,13 @@ import React from 'react'
 import BaseComponent from '../../../base/BaseComponent';
 import {SafeAreaView} from "react-navigation";
 import styles from './style';
-import {ScrollView, StatusBar, View} from 'react-native';
+import {ScrollView, StatusBar, View, Image} from 'react-native';
 import colors from '../../../../colors';
 import {connect} from 'react-redux';
 import CustomText from '../../../components/CustomText';
 import MainSearchView from '../../../components/MainSearchView';
-import ImageSlider from 'react-native-image-slider';
+import Swiper from '../../../../libs/Swiper'
+import {toDp} from '../../../../utils/ScreenUtils';
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -41,15 +42,28 @@ class HomeScreen extends BaseComponent {
   renderSlider = () => {
     return(
       <View style={styles.sliderContainer}>
-        <ImageSlider
-          autoPlayWithInterval={3000}
-          style={styles.slider}
-          images={[
-            'http://placeimg.com/640/480/any',
-            'http://placeimg.com/640/480/any',
-            'http://placeimg.com/640/480/any'
-          ]}/>
+        <Swiper
+          paginationStyle={styles.paginationStyle}
+          dot={this.renderInactiveDot()}
+          activeDot={this.renderActiveDot()}
+          height={toDp(180)}
+          removeClippedSubviews={false}
+          autoplay
+          autoplayTimeout={10}
+          loop>
+          {this.state.images.map((image, index) => this.renderSliderItem(image, index))}
+        </Swiper>
       </View>
+    )
+  };
+
+  renderSliderItem = (image, index) => {
+    return(
+      <Image
+        key={index}
+        style={styles.imageStyle}
+        source={{uri: image}}
+        resizeMode={'cover'}/>
     )
   };
 
@@ -76,12 +90,23 @@ class HomeScreen extends BaseComponent {
   renderStatusBar = () => {
     return(
       <StatusBar
-        translucent
         backgroundColor={colors.statusbar_transparent}
         hidden={false}
         barStyle={'light-content'} />
     )
   };
+
+  renderInactiveDot() {
+    return (
+      <View style={styles.inactiveDot}/>
+    )
+  }
+
+  renderActiveDot() {
+    return (
+      <View style={styles.activeDot}/>
+    )
+  }
 }
 
 export default connect(

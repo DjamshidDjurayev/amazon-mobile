@@ -9,6 +9,6 @@ export default {
   light_gray: '#969696',
   dark: '#3a3a3a',
   green: '#00CC9F',
-  statusbar_transparent: '#00000022',
+  statusbar_transparent: '#00B18A',
   button_disabled: '#BAEEEB',
 };

@@ -11,7 +11,7 @@ const styles = EStyleSheet.create({
     color: colors.white,
     fontSize: '50rem',
     fontWeight: 'bold',
-    marginTop: '36rem',
+    marginTop: '16rem',
     marginBottom: '16rem',
   },
   logoView: {

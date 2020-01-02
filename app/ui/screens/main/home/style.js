@@ -32,9 +32,32 @@ const styles = EStyleSheet.create({
   sliderContainer: {
 
   },
-  slider: {
-    height: '160rem',
-  }
+  inactiveDot: {
+    backgroundColor: colors.gray_D6,
+    width: '5rem',
+    height: '5rem',
+    borderRadius: 10,
+    marginRight: '3rem',
+    marginBottom: '8rem'
+  },
+  activeDot: {
+    backgroundColor: colors.green,
+    width: '5rem',
+    height: '5rem',
+    borderRadius: 10,
+    marginRight: '3rem',
+    marginBottom: '8rem'
+  },
+  imageStyle: {
+    height: '180rem',
+    backgroundColor: 'white',
+    width: null,
+  },
+  paginationStyle: {
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
 });
 
 export default styles

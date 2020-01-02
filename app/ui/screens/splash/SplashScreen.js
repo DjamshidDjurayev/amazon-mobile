@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {actions} from '../../../state/actions';
 import styles from './style';
 import BaseComponent from '../../base/BaseComponent';
+import colors from '../../../colors';
 
 class SplashScreen extends BaseComponent {
   static navigationOptions = {
@@ -27,7 +28,7 @@ class SplashScreen extends BaseComponent {
   }
 
   render() {
-    return (
+    return(
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
         {this.renderContent()}
@@ -36,7 +37,12 @@ class SplashScreen extends BaseComponent {
   }
 
   renderStatusBar = () => {
-    return <StatusBar hidden={true} />
+    return(
+      <StatusBar
+        backgroundColor={colors.green}
+        hidden={false}
+        barStyle={'light-content'} />
+    )
   };
 
   renderContent = () => {

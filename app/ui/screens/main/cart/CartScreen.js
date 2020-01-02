@@ -22,7 +22,6 @@ class CartScreen extends BaseComponent {
   renderStatusBar = () => {
     return(
       <StatusBar
-        translucent
         backgroundColor={colors.statusbar_transparent}
         hidden={false}
         barStyle={'light-content'} />
