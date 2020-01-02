@@ -1,8 +1,9 @@
 import React from "react";
-import {StyleSheet, Text} from "react-native";
+import {Text} from "react-native";
 import colors from "../../colors";
 import PropTypes from 'prop-types';
 import {toDp} from "../../utils/ScreenUtils";
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class CustomText extends React.Component {
   static propTypes = {
@@ -32,7 +33,7 @@ class CustomText extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   textStyle: {}
 });
 

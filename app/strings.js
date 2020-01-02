@@ -22,6 +22,8 @@ const strings = new LocalizedStrings({
     contact_info: 'Контактные данные',
     delivery_address: 'Адрес доставки',
     save: 'Сохранить',
+    search: 'Поиск',
+    all_categories: 'Все категории',
   },
 });
 

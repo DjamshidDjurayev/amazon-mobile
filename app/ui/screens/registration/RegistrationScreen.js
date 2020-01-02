@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {
   View,
   Text,
@@ -19,8 +19,9 @@ import CustomButton from '../../components/CustomButton';
 import TextUtils from '../../../utils/TextUtils';
 import CustomInput from '../../components/CustomInput';
 import styles from './style';
+import BaseComponent from '../../base/BaseComponent';
 
-class RegistrationScreen extends Component {
+class RegistrationScreen extends BaseComponent {
   static navigationOptions = {
     header: null,
   };

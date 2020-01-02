@@ -1,14 +1,19 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {View, StatusBar, Text} from 'react-native'
 import {SafeAreaView} from 'react-navigation'
 import {connect} from 'react-redux'
 import {actions} from '../../../state/actions';
 import styles from './style';
+import BaseComponent from '../../base/BaseComponent';
 
-class SplashScreen extends Component {
+class SplashScreen extends BaseComponent {
   static navigationOptions = {
     header: null,
   };
+
+  constructor(props) {
+    super(props);
+  }
 
   componentWillUnmount(): void {
     // cancel timeout action

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {
   ScrollView,
   StatusBar,
@@ -13,8 +13,9 @@ import CustomText from '../../../components/CustomText';
 import CustomInput from '../../../components/CustomInput';
 import {toDp} from '../../../../utils/ScreenUtils';
 import CustomButton from '../../../components/CustomButton';
+import BaseComponent from '../../../base/BaseComponent';
 
-class AddAddressScreen extends Component {
+class AddAddressScreen extends BaseComponent {
   static navigationOptions = {
     title: strings.add_delivery_address,
     headerStyle: {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {
   View,
   StatusBar,
@@ -14,8 +14,9 @@ import Feather from 'react-native-vector-icons/Feather'
 import {toDp} from '../../../../utils/ScreenUtils';
 import CustomText from '../../../components/CustomText';
 import CustomButton from '../../../components/CustomButton';
+import BaseComponent from '../../../base/BaseComponent';
 
-class OrderCheckoutScreen extends Component {
+class OrderCheckoutScreen extends BaseComponent {
   static navigationOptions = {
     title: strings.order_checkout,
     headerStyle: {
