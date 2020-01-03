@@ -24,6 +24,7 @@ const strings = new LocalizedStrings({
     save: 'Сохранить',
     search: 'Поиск',
     all_categories: 'Все категории',
+    catalog: 'Каталог',
   },
 });
 

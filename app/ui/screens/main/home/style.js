@@ -5,6 +5,7 @@ const styles = EStyleSheet.create({
   rootView: {
     flex: 1,
     backgroundColor: colors.ultra_light_gray,
+    paddingBottom: '50rem'
   },
   container: {
     flex: 1,
