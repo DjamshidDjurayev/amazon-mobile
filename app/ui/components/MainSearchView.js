@@ -11,6 +11,12 @@ class MainSearchView extends Component {
   static propTypes = {
     style: PropTypes.object,
     inputRef: PropTypes.func,
+    title: PropTypes.string,
+    fontSize: PropTypes.number,
+  };
+
+  static defaultProps = {
+    fontSize: toDp(13),
   };
 
   constructor(props) {
@@ -21,7 +27,7 @@ class MainSearchView extends Component {
   }
 
   render() {
-    const {style, inputRef} = this.props;
+    const {style, inputRef, title, fontSize} = this.props;
     return(
       <View style={[styles.rootView, style]}>
         <Feather
@@ -37,8 +43,10 @@ class MainSearchView extends Component {
           }}
           value={this.state.inputValue}
           placeholderTextColor={colors.gray_D6}
-          placeholder={strings.search}
-          style={styles.input}/>
+          placeholder={title || strings.search}
+          style={[styles.input, {
+            fontSize: fontSize,
+          }]}/>
       </View>
     )
   }
@@ -52,7 +60,6 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    fontSize: "13rem",
     fontWeight: 'normal',
     flex: 1,
     padding: '8rem',

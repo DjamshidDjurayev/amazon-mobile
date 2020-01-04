@@ -25,6 +25,8 @@ const strings = new LocalizedStrings({
     search: 'Поиск',
     all_categories: 'Все категории',
     catalog: 'Каталог',
+    what_to_find: 'Что вам найти?',
+    popularSearches: 'Популярные запросы',
   },
 });
 

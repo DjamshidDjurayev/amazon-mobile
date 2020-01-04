@@ -71,7 +71,7 @@ class Toolbar extends Component {
 
     return(
       <TouchableOpacity
-        onPress={() => onSearchClick}
+        onPress={onSearchClick}
         style={styles.searchContainer}>
         <Feather
           name={'search'}
@@ -87,7 +87,7 @@ class Toolbar extends Component {
     return(
       <TouchableOpacity
         style={styles.backButtonContainer}
-        onPress={() => onBackButtonClick}>
+        onPress={onBackButtonClick}>
         <Entypo name={'chevron-thin-left'} size={toDp(20)} color={colors.white}/>
       </TouchableOpacity>
     )
@@ -101,7 +101,12 @@ const styles = EStyleSheet.create({
     height: Platform.select({
       android: toDp(56),
       ios: toDp(48),
-    })
+    }),
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 1,
+    shadowRadius: 15,
+    elevation: toDp(10),
   },
   searchContainer: {
     marginRight: '14rem',

@@ -14,6 +14,7 @@ import CustomText from '../../../components/CustomText';
 import strings from '../../../../strings';
 import {toDp} from '../../../../utils/ScreenUtils';
 import Toolbar from '../../../components/Toolbar';
+import * as NavigationService from '../../../../navigation/NavigationService'
 
 const items = Array.apply(null, Array(20)).map((v, i) => {
   return { id: i, src: 'http://placehold.it/200x200?text=' + (i + 1), title: 'title ' + i, empty: false };
@@ -55,6 +56,8 @@ class CatalogScreen extends BaseComponent {
         title={strings.catalog}
         backButtonEnabled
         searchEnabled
+        onBackButtonClick={() => this.onBackButtonClicked()}
+        onSearchClick={() => this.onSearchClicked()}
       />
     )
   };
@@ -104,6 +107,14 @@ class CatalogScreen extends BaseComponent {
 
   onCategoryItemClicked = item => {
 
+  };
+
+  onBackButtonClicked = () => {
+
+  };
+
+  onSearchClicked = () => {
+    NavigationService.navigate('CatalogSearch')
   };
 }
 
