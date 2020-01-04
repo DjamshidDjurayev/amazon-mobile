@@ -32,8 +32,11 @@ class LoginScreen extends BaseComponent {
     this.inputs = {};
     this.state = {
       loginButtonDisabled: true,
-      loginInputValue: "",
-      passwordInputValue: "",
+      loginInputValue: '',
+      passwordInputValue: '',
+
+      loginError: '',
+      passwordError: '',
     };
   }
 
@@ -89,15 +92,17 @@ class LoginScreen extends BaseComponent {
           onChangeText={(passwordInputValue) => {
             this.setState({
               passwordInputValue,
+              loginError: '',
             })
           }}
+          errorText={this.state.loginError}
           showHidePassword
           returnKeyType="done"
           value={this.state.passwordInputValue}
           placeholder={strings.password}
           placeholderTextColor={colors.light_gray}
           autoCapitalize="none"
-          style={styles.passwordInput}/>
+          style={styles.loginInput}/>
 
         <View style={styles.signUpContainer}>
           <CustomText
@@ -220,15 +225,18 @@ class LoginScreen extends BaseComponent {
   };
 
   onLoginButtonClicked = () => {
-    if (TextUtils.isEmpty(this.state.loginInputValue)) {
-      return;
-    }
-
-    if (TextUtils.isEmpty(this.state.passwordInputValue)) {
-      return;
-    }
-
-    this.props.performLogin()
+    this.setState({
+      loginError: "Axaxaxaxax axaxaxa"
+    })
+    // if (TextUtils.isEmpty(this.state.loginInputValue)) {
+    //   return;
+    // }
+    //
+    // if (TextUtils.isEmpty(this.state.passwordInputValue)) {
+    //   return;
+    // }
+    //
+    // this.props.performLogin()
   }
 }
 

@@ -9,6 +9,8 @@ import EStyleSheet from "react-native-extended-stylesheet";
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {toDp} from '../../utils/ScreenUtils';
 import TextInputMask from 'react-native-text-input-mask';
+import CustomText from './CustomText';
+import TextUtils from '../../utils/TextUtils';
 
 class CustomInput extends React.Component {
   static propTypes = {
@@ -21,11 +23,16 @@ class CustomInput extends React.Component {
     underlineColorFocused: PropTypes.string,
     showHidePassword: PropTypes.bool,
     mask: PropTypes.string,
+    errorText: PropTypes.string,
+    errorColor: PropTypes.string,
   };
 
   static defaultProps = {
     underlineColorBlurred: colors.ultra_light_gray,
-    underlineColorFocused: colors.black
+    underlineColorFocused: colors.black,
+    errorColor: colors.red,
+    showHidePassword: false,
+    error: true,
   };
 
   constructor(props) {
@@ -33,6 +40,7 @@ class CustomInput extends React.Component {
     this.state = {
       isFocused: false,
       passwordHidden: true,
+      inputError: false,
     };
   }
 
@@ -54,39 +62,48 @@ class CustomInput extends React.Component {
 
   render() {
     const {
-      showHidePassword,
-      inputRef,
-      style,
-      onChangeText,
-      underlineColorBlurred,
-      underlineColorFocused,
-      mask,
+      showHidePassword, inputRef,
+      style, onChangeText, underlineColorBlurred,
+      underlineColorFocused, mask, errorText, errorColor,
       ...otherProps} = this.props;
 
     return (
-      <View style={showHidePassword ? styles.container : {}}>
-        <TextInputMask
-          mask={mask}
-          refInput={inputRef}
-          secureTextEntry={showHidePassword && this.state.passwordHidden}
-          onChangeText={onChangeText}
-          style={[style || styles.defaultStyle]}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          {...otherProps}
-        />
-        {
-          showHidePassword ?
-            <TouchableOpacity
-              style={styles.eyeContainer}
-              onPress={() => this.onEyeClicked()}>
-              <FeatherIcon
-                color={colors.light_gray}
-                name={this.state.passwordHidden ? "eye-off" : "eye"}
-                size={toDp(20)}/>
-            </TouchableOpacity>
-            : null
-        }
+      <View
+        style={styles.rootView}>
+        <View>
+          <TextInputMask
+            style={[{
+              paddingRight: showHidePassword ? toDp(40) : toDp(16),
+              paddingLeft: toDp(16),
+              paddingTop: toDp(14),
+              paddingBottom: toDp(14),
+              borderBottomWidth: errorText && !TextUtils.isEmpty(errorText) ? 1 : 0,
+              borderBottomColor: errorText && !TextUtils.isEmpty(errorText) ? errorColor : 'transparent'
+            }, style]}
+            mask={mask}
+            refInput={inputRef}
+            secureTextEntry={showHidePassword && this.state.passwordHidden}
+            onChangeText={onChangeText}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            {...otherProps}
+          />
+          { showHidePassword ?
+              <TouchableOpacity
+                style={styles.eyeContainer}
+                onPress={() => this.onEyeClicked()}>
+                <FeatherIcon
+                  color={colors.light_gray}
+                  name={this.state.passwordHidden ? "eye-off" : "eye"}
+                  size={toDp(20)}/>
+              </TouchableOpacity> : null}
+        </View>
+        {errorText && !TextUtils.isEmpty(errorText) ?
+          <CustomText
+            style={styles.errorText}
+            title={errorText}
+            textColor={errorColor}
+            size={11}/> : null}
       </View>
     );
   }
@@ -99,14 +116,10 @@ class CustomInput extends React.Component {
 }
 
 const styles = EStyleSheet.create({
-  defaultStyle: {
-    flex: 1,
-    paddingTop: "12rem",
-    paddingBottom: "6rem",
-    fontSize: "16rem",
-    fontWeight: 'normal',
-    backgroundColor: colors.white,
-    borderRadius: '16rem',
+  rootView: {
+    marginLeft: "16rem",
+    marginRight: "16rem",
+    marginBottom: '8rem',
   },
   eyeContainer: {
     position: 'absolute',
@@ -117,10 +130,8 @@ const styles = EStyleSheet.create({
     bottom: 0,
     marginRight: "12rem"
   },
-  container: {
-    marginLeft: "16rem",
-    marginRight: "16rem",
-    marginBottom: '8rem',
+  errorText: {
+    marginLeft: '5rem',
   }
 });
 

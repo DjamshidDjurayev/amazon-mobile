@@ -148,9 +148,10 @@ class RegistrationScreen extends BaseComponent {
           placeholder={strings.password}
           placeholderTextColor={colors.light_gray}
           autoCapitalize="none"
-          style={styles.passwordInput}/>
+          style={styles.loginInput}/>
 
         <CustomButton
+          onClick={() => this.onSignUpClicked()}
           style={styles.registrationButton}
           disabled={this.state.signUpButtonDisabled}
           buttonColor={colors.green}
@@ -259,7 +260,7 @@ class RegistrationScreen extends BaseComponent {
   };
 
   onSignUpClicked = () => {
-    this.props.navigation.navigate("Registration")
+
   };
 }
 
