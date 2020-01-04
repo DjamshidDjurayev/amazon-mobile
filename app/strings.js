@@ -36,7 +36,7 @@ const strings = new LocalizedStrings({
     client_support: 'Поддержка клиентов',
     app_language: 'Язык приложения',
     profile_settings: 'Настройки профиля',
-    personalData: 'Персональные данные',
+    personalData: 'Личные данные',
     change_password: 'Сменить пароль',
     log_out: 'Выйти',
   },
