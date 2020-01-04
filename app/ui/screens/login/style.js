@@ -82,6 +82,16 @@ const styles = EStyleSheet.create({
     marginBottom: '8rem',
     borderRadius: '8rem',
   },
+  passwordInput: {
+    paddingTop: "14rem",
+    paddingBottom: "14rem",
+    paddingLeft: '16rem',
+    paddingRight: '40rem',
+    fontSize: "15rem",
+    fontWeight: 'normal',
+    backgroundColor: colors.white,
+    borderRadius: '8rem',
+  },
 });
 
 export default styles

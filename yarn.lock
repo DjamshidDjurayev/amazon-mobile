@@ -5310,6 +5310,11 @@ react-native-tab-view@^2.11.0:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.11.0.tgz#2e57d1f617ccc88c7f452708804f3409f880b700"
   integrity sha512-vqetlxGO7A8bnqvXcB50MWpRZAImXFrDGz1WCQKdCqe03Ey3ZzENe7yLuWrtBJYlepGfOLAsmCXv+wW82Yfm1w==
 
+react-native-text-input-mask@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-text-input-mask/-/react-native-text-input-mask-1.0.6.tgz#21ca0c1886f5b547e9f6594ba2f4bb50d39fe3a1"
+  integrity sha512-pCTYEnqiKw1F9VuEwxOt42Roaigilpp0xjb2JhjIeuVlc6Cvf9IqA+vzAXLJTOzoxImOOAasGxrZpTgdFYMvOQ==
+
 react-native-vector-icons@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.6.0.tgz#66cf004918eb05d90778d64bd42077c1800d481b"

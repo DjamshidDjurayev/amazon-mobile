@@ -92,7 +92,8 @@ const styles = EStyleSheet.create({
     borderRadius: '8rem',
   },
   registrationButton: {
-    marginTop: '20rem'
+    marginTop: '20rem',
+    marginBottom: '20rem',
   },
 });
 

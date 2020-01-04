@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -9,6 +8,7 @@ import PropTypes from 'prop-types';
 import EStyleSheet from "react-native-extended-stylesheet";
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {toDp} from '../../utils/ScreenUtils';
+import TextInputMask from 'react-native-text-input-mask';
 
 class CustomInput extends React.Component {
   static propTypes = {
@@ -20,6 +20,7 @@ class CustomInput extends React.Component {
     underlineColorBlurred: PropTypes.string,
     underlineColorFocused: PropTypes.string,
     showHidePassword: PropTypes.bool,
+    mask: PropTypes.string,
   };
 
   static defaultProps = {
@@ -59,12 +60,14 @@ class CustomInput extends React.Component {
       onChangeText,
       underlineColorBlurred,
       underlineColorFocused,
+      mask,
       ...otherProps} = this.props;
 
     return (
       <View style={showHidePassword ? styles.container : {}}>
-        <TextInput
-          ref={inputRef}
+        <TextInputMask
+          mask={mask}
+          refInput={inputRef}
           secureTextEntry={showHidePassword && this.state.passwordHidden}
           onChangeText={onChangeText}
           style={[style || styles.defaultStyle]}

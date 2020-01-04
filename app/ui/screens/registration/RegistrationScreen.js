@@ -33,8 +33,10 @@ class RegistrationScreen extends BaseComponent {
     this.state = {
       signUpButtonDisabled: true,
       nameInputValue: "",
-      loginInputValue: "",
+      lastNameInputValue: "",
+      phoneInputValue: "",
       passwordInputValue: "",
+      emailInputValue: "",
     }
   }
 
@@ -44,15 +46,119 @@ class RegistrationScreen extends BaseComponent {
         {this.renderStatusBar()}
         <ScrollView keyboardShouldPersistTaps={'always'}>
           <KeyboardAvoidingView behavior={null} style={styles.container}>
-            {/* header */}
             {this.renderLogoHeader()}
-            {/* content */}
-            {this.renderContent()}
+            {this.renderSocials()}
+            {this.renderInputs()}
           </KeyboardAvoidingView>
         </ScrollView>
       </SafeAreaView>
     )
   }
+
+  renderInputs = () => {
+    return(
+      <View>
+        <CustomInput
+          inputRef={r => this.inputs['name_input_id'] = r}
+          numberOfLines={1}
+          multiline={false}
+          blurOnSubmit={false}
+          onChangeText={(nameInputValue) => {
+            this.setState({
+              nameInputValue,
+              signUpButtonDisabled: TextUtils.isEmpty(nameInputValue)
+            })
+          }}
+          returnKeyType="next"
+          value={this.state.nameInputValue}
+          placeholder={strings.name}
+          placeholderTextColor={colors.light_gray}
+          autoCapitalize="none"
+          onSubmitEditing={() => this.focusNextField('last_name_input_id')}
+          style={styles.loginInput}/>
+
+        <CustomInput
+          inputRef={r => this.inputs['last_name_input_id'] = r}
+          numberOfLines={1}
+          multiline={false}
+          blurOnSubmit={false}
+          onChangeText={(lastNameInputValue) => {
+            this.setState({
+              lastNameInputValue,
+            })
+          }}
+          returnKeyType="next"
+          value={this.state.lastNameInputValue}
+          placeholder={strings.lastName}
+          placeholderTextColor={colors.light_gray}
+          autoCapitalize="none"
+          onSubmitEditing={() => this.focusNextField('phone_input_id')}
+          style={styles.loginInput}/>
+
+        <CustomInput
+          inputRef={r => this.inputs['phone_input_id'] = r}
+          numberOfLines={1}
+          multiline={false}
+          blurOnSubmit={false}
+          onChangeText={(value, extractedValue) => {
+            this.setState({
+              phoneInputValue: extractedValue,
+            });
+          }}
+          mask={'+[00000] [000] [00] [00]'}
+          keyboardType={'numeric'}
+          returnKeyType="next"
+          value={this.state.phoneInputValue}
+          placeholder={strings.phone}
+          placeholderTextColor={colors.light_gray}
+          autoCapitalize="none"
+          onSubmitEditing={() => this.focusNextField('email_input_id')}
+          style={styles.loginInput}/>
+
+        <CustomInput
+          inputRef={r => this.inputs['email_input_id'] = r}
+          numberOfLines={1}
+          multiline={false}
+          blurOnSubmit={false}
+          onChangeText={(emailInputValue) => {
+            this.setState({
+              emailInputValue,
+            })
+          }}
+          returnKeyType="next"
+          value={this.state.emailInputValue}
+          placeholder={strings.email}
+          placeholderTextColor={colors.light_gray}
+          autoCapitalize="none"
+          onSubmitEditing={() => this.focusNextField('password_input_id')}
+          style={styles.loginInput}/>
+
+        <CustomInput
+          inputRef={r => this.inputs['password_input_id'] = r}
+          showHidePassword
+          numberOfLines={1}
+          multiline={false}
+          onChangeText={(passwordInputValue) => {
+            this.setState({
+              passwordInputValue,
+            })
+          }}
+          returnKeyType="done"
+          value={this.state.passwordInputValue}
+          placeholder={strings.password}
+          placeholderTextColor={colors.light_gray}
+          autoCapitalize="none"
+          style={styles.passwordInput}/>
+
+        <CustomButton
+          style={styles.registrationButton}
+          disabled={this.state.signUpButtonDisabled}
+          buttonColor={colors.green}
+          disabledColor={colors.button_disabled}
+          title={strings.sign_up}/>
+      </View>
+    )
+  };
 
   renderStatusBar = () => {
     return (
@@ -73,7 +179,7 @@ class RegistrationScreen extends BaseComponent {
     )
   };
 
-  renderContent = () => {
+  renderSocials = () => {
     return (
       <View style={styles.contentContainer}>
         <CustomText
@@ -128,69 +234,6 @@ class RegistrationScreen extends BaseComponent {
             size={toDp(18)}
             style={styles.orText} />
         </View>
-
-        {/* inputs */}
-        <CustomInput
-          inputRef={r => this.inputs['name_input_id'] = r}
-          numberOfLines={1}
-          multiline={false}
-          blurOnSubmit={false}
-          onChangeText={(nameInputValue) => {
-            this.setState({
-              nameInputValue,
-              signUpButtonDisabled: TextUtils.isEmpty(nameInputValue)
-            })
-          }}
-          returnKeyType="next"
-          value={this.state.nameInputValue}
-          placeholder={strings.name}
-          placeholderTextColor={colors.light_gray}
-          autoCapitalize="none"
-          onSubmitEditing={() => this.focusNextField('login_input_id')}
-          style={styles.loginInput}/>
-
-        <CustomInput
-          inputRef={r => this.inputs['login_input_id'] = r}
-          numberOfLines={1}
-          multiline={false}
-          blurOnSubmit={false}
-          onChangeText={(loginInputValue) => {
-            this.setState({
-              loginInputValue,
-            })
-          }}
-          keyboardType={'numeric'}
-          returnKeyType="next"
-          value={this.state.loginInputValue}
-          placeholder={strings.phone}
-          placeholderTextColor={colors.light_gray}
-          autoCapitalize="none"
-          onSubmitEditing={() => this.focusNextField('password_input_id')}
-          style={styles.loginInput}/>
-
-        <CustomInput
-          inputRef={r => this.inputs['password_input_id'] = r}
-          showHidePassword
-          numberOfLines={1}
-          multiline={false}
-          onChangeText={(passwordInputValue) => {
-            this.setState({
-              passwordInputValue,
-            })
-          }}
-          returnKeyType="done"
-          value={this.state.passwordInputValue}
-          placeholder={strings.password}
-          placeholderTextColor={colors.light_gray}
-          autoCapitalize="none"
-          style={styles.passwordInput}/>
-
-        <CustomButton
-          style={styles.registrationButton}
-          disabled={this.state.signUpButtonDisabled}
-          buttonColor={colors.green}
-          disabledColor={colors.button_disabled}
-          title={strings.sign_up}/>
       </View>
     )
   };
