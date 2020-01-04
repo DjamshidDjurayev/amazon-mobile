@@ -10,6 +10,37 @@ const styles = EStyleSheet.create({
     flex: 1,
     backgroundColor: colors.ultra_light_gray,
   },
+  profileEditContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: '18rem',
+    backgroundColor: colors.white,
+    paddingLeft: '14rem',
+    paddingTop: '14rem',
+    paddingBottom: '14rem',
+    borderRadius: '16rem',
+  },
+  rightIcon: {
+    marginRight: '8rem',
+  },
+  nameContainer: {
+    flex: 1,
+  },
+  profileImage: {
+    width: '60rem',
+    height: '60rem',
+    borderRadius: '30rem',
+    marginRight: '14rem',
+  },
+  myCouponsContainer: {
+    marginTop: '18rem'
+  },
+  ordersAndFavoritesContainer: {
+    marginTop: '18rem'
+  },
+  profileSettingsContainer: {
+    marginTop: '18rem'
+  },
 });
 
 export default styles

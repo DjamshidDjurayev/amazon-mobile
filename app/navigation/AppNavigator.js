@@ -13,6 +13,7 @@ import OrderCheckoutScreen from '../ui/screens/order/checkout/OrderCheckoutScree
 import AddAddressScreen from '../ui/screens/order/address/AddAddressScreen'
 import HomeScreen from '../ui/screens/main/home/HomeScreen';
 import ProfileScreen from '../ui/screens/main/profile/ProfileScreen';
+import ProfileSettingsScreen from '../ui/screens/main/profile/settings/ProfileSettingsScreen';
 import CatalogScreen from '../ui/screens/main/catalog/CatalogScreen';
 import CartScreen from '../ui/screens/main/cart/CartScreen';
 import CatalogSearchScreen from '../ui/screens/main/catalog/search/CatalogSearchScreen';
@@ -38,12 +39,22 @@ const tabs = ({ navigation }) => ({
   },
 });
 
+const ProfileStack = createStackNavigator({
+  Profile: {screen: ProfileScreen},
+  ProfileSettings: {screen: ProfileSettingsScreen}
+});
+
 const MainBottomNavigator = createBottomTabNavigator(
   {
     Home: {screen: HomeScreen},
     Catalog: {screen: CatalogScreen},
     Cart: {screen: CartScreen},
-    Profile: {screen: ProfileScreen},
+    Profile: {
+      screen: ProfileStack,
+      navigationOptions: {
+        header: null
+      }
+    },
   },
   {
     defaultNavigationOptions: tabs,

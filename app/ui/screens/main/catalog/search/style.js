@@ -15,8 +15,8 @@ const styles = EStyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: '20rem',
-    marginBottom: '20rem',
+    marginTop: '18rem',
+    marginBottom: '18rem',
   },
   backButtonContainer: {
     marginLeft: '16rem',

@@ -16,6 +16,7 @@ import MainSearchView from '../../../../components/MainSearchView';
 import strings from '../../../../../strings';
 import CustomText from '../../../../components/CustomText';
 import * as NavigationService from '../../../../../navigation/NavigationService'
+import MenuItem from '../../../../components/MenuItem';
 
 class CatalogSearchScreen extends BaseComponent {
   static navigationOptions = {
@@ -24,6 +25,8 @@ class CatalogSearchScreen extends BaseComponent {
 
   constructor(props) {
     super(props);
+
+    this.inputs = {};
 
     this.state = {
       popularCategories: [
@@ -38,12 +41,16 @@ class CatalogSearchScreen extends BaseComponent {
     };
   }
 
+  componentDidMount(): void {
+
+  }
+
   render() {
     return(
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
         {this.renderSearchView()}
-        {this.renderCategoriesTitle()}
+        {this.renderAllCategoriesTitle()}
         {this.renderPopularCategories()}
       </SafeAreaView>
     )
@@ -70,6 +77,7 @@ class CatalogSearchScreen extends BaseComponent {
 
     return(
       <TouchableOpacity
+        key={index}
         onPress={() => this.onPopularCategoriesItemClicked(item)}
         style={[styles.popularCategoriesItemContainer,
           firstItem ? styles.firstItem : lastItem ? styles.lastItem : styles.item
@@ -77,33 +85,22 @@ class CatalogSearchScreen extends BaseComponent {
         <CustomText
           style={{flex: 1}}
           title={item.title}
-          size={14}
+          size={15}
           textColor={colors.black}/>
 
         <Materialicon
           name={'arrow-top-left'}
           size={toDp(18)}
-          color={colors.gray_D6}/>
+          color={colors.gray_5F}/>
       </TouchableOpacity>
     )
   };
 
-  renderCategoriesTitle = () => {
+  renderAllCategoriesTitle = () => {
     return(
-      <TouchableOpacity
-        onPress={() => this.onCategoriesTitleClicked()}
-        style={styles.categoriesTitleContainer}>
-
-        <CustomText
-          style={styles.categoriesTitle}
-          title={strings.all_categories}/>
-
-        <Entypo
-          style={styles.rightIcon}
-          name={'chevron-thin-right'}
-          size={toDp(14)}
-          color={colors.gray_D6}/>
-      </TouchableOpacity>
+      <MenuItem
+        onClick={() => this.onCategoriesTitleClicked()}
+        title={strings.all_categories}/>
     )
   };
 
@@ -121,6 +118,7 @@ class CatalogSearchScreen extends BaseComponent {
 
         <View style={styles.searchContainer}>
           <MainSearchView
+            autoFocus
             fontSize={toDp(16)}
             title={strings.what_to_find} />
         </View>
