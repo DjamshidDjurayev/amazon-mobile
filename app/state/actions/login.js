@@ -1,37 +1,28 @@
 import * as types from '../actionTypes';
 
-export function loginPerform() {
+export function loginPerform(payload) {
   return {
     type: types.LOGIN_ACTION_PERFORM,
+    payload
   };
 }
 
 export function loginSuccess(data) {
   return {
     type: types.LOGIN_ACTION_SUCCESS,
-    response: {
-      data,
-      error: null,
-    }
+    data
   };
 }
 
 export function loginCancel() {
   return {
     type: types.LOGIN_ACTION_CANCEL,
-    response: {
-      data: null,
-      error: null,
-    }
   };
 }
 
 export function loginError(error) {
   return {
     type: types.LOGIN_ACTION_ERROR,
-    response: {
-      data: null,
-      error
-    }
+    error
   };
 }

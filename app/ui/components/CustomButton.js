@@ -26,15 +26,17 @@ class CustomButton extends React.Component {
   static defaultProps = {
     isLoading: false,
     disabled: false,
-    textColor: colors.white,
     buttonColor: colors.light_gray,
+    disabledColor: colors.light_gray,
+    textColor: colors.white,
+    font: '',
   };
 
   render() {
     const {
       style, isLoading, buttonColor,
-      textColor, title, font, disabledColor,
-      disabled, onClick, ...otherProps} = this.props;
+      textColor, title, font, onClick,
+      disabledColor, disabled, ...otherProps} = this.props;
 
     return (
       <TouchableOpacity
@@ -44,30 +46,26 @@ class CustomButton extends React.Component {
         style={[
           style,
           styles.button, {
-            backgroundColor: (isLoading || disabled)
-              ? (disabledColor ? disabledColor : buttonColor ? buttonColor : colors.light_gray)
-              : (buttonColor ? buttonColor : colors.light_gray)
+            backgroundColor: (isLoading || disabled) ? disabledColor : buttonColor
           }
         ]}>
 
         <Text
           style={[
-            styles.buttonText,
-            {
-              color: isLoading ? (disabledColor ? disabledColor : buttonColor) : textColor,
-              fontFamily: font ? font : '',
+            styles.buttonText, {
+              color: isLoading ? disabledColor : textColor,
+              fontFamily: font,
             },
           ]}
           {...otherProps}>
-
           {title}
         </Text>
 
-        {isLoading ? <ActivityIndicator
-                                   color={textColor}
-                                   style={styles.indicator}
-                                   size={toDp(22)}/> : null}
-
+        {isLoading ?
+          <ActivityIndicator
+            color={textColor ? textColor : colors.white}
+            style={styles.indicator}
+            size={toDp(22)}/> : null}
       </TouchableOpacity>
     );
   }

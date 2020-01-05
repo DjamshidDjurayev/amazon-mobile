@@ -7,10 +7,7 @@ function* splashTimeoutStartAsync() {
   try {
     yield delay(2000);
     yield put(actions.finishSplashTimeout());
-    // navigate to Login page
-    yield put(NavigationService.navigateWithReset('Login'));
-  } catch (e) {
-    yield put(actions.cancelSplashTimeout());
+    NavigationService.navigateWithReset('Login');
   } finally {
     if (yield cancelled()) {
       yield put(actions.cancelSplashTimeout());

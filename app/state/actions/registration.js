@@ -1,8 +1,9 @@
 import * as types from '../actionTypes';
 
-export function registrationPerform() {
+export function registrationPerform(payload) {
   return {
     type: types.REGISTRATION_ACTION_PERFORM,
+    payload
   };
 }
 

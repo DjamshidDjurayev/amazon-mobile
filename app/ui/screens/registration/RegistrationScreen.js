@@ -188,48 +188,40 @@ class RegistrationScreen extends BaseComponent {
           size={toDp(18)}
           style={styles.loginText} />
 
-        {/* socials */}
         <View style={styles.socialsContainer}>
           <TouchableOpacity
             activeOpacity={.7}
             onPress={this.onSocialIconClicked("google")}
             style={styles.iconContainer}>
-
             <EvilIcon
               name={"sc-google-plus"}
               color={colors.white}
               size={toDp(32)} />
-
           </TouchableOpacity>
 
           <TouchableOpacity
             activeOpacity={.7}
             onPress={this.onSocialIconClicked("fb")}
             style={styles.iconContainer}>
-
             <EvilIcon
               name={"sc-facebook"}
               color={colors.white}
               size={toDp(48)} />
-
           </TouchableOpacity>
 
           <TouchableOpacity
             activeOpacity={.7}
             onPress={this.onSocialIconClicked("vk")}
             style={styles.iconContainer}>
-
             <EvilIcon
               name={"sc-vk"}
               color={colors.white}
               size={toDp(40)} />
-
           </TouchableOpacity>
         </View>
 
         <View style={styles.orContainer}>
           <View style={styles.line}/>
-
           <CustomText
             title={strings.or}
             size={toDp(18)}
@@ -256,7 +248,9 @@ class RegistrationScreen extends BaseComponent {
   };
 
   focusNextField = id => {
-    this.inputs[id].focus();
+    if (this.inputs[id]) {
+      this.inputs[id].focus();
+    }
   };
 
   onSignUpClicked = () => {
@@ -271,7 +265,7 @@ export default connect(
     response: state.registration.response,
   }),
   dispatch => ({
-    performRegistration: () => dispatch(actions.registrationPerform()),
+    performRegistration: (payload) => dispatch(actions.registrationPerform(payload)),
     cancelRegistration: () => dispatch(actions.registrationCancel()),
   }),
 )(RegistrationScreen);

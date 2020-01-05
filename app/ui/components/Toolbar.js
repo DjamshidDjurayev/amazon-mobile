@@ -16,7 +16,6 @@ import {toDp} from '../../utils/ScreenUtils';
 class Toolbar extends Component {
   static propTypes = {
     searchEnabled: PropTypes.bool,
-    titleEnabled: PropTypes.bool,
     title: PropTypes.string,
     backButtonEnabled: PropTypes.bool,
     onSearchClick: PropTypes.func,
@@ -28,7 +27,7 @@ class Toolbar extends Component {
     searchEnabled: false,
     title: null,
     backButtonEnabled: false,
-    titleEnabled: true,
+    toolbarColor: colors.green,
   };
 
   constructor(props) {
@@ -41,7 +40,7 @@ class Toolbar extends Component {
     return(
       <View
         style={[styles.rootView, {
-          backgroundColor: toolbarColor ? toolbarColor : colors.green
+          backgroundColor: toolbarColor
         }]}>
         {backButtonEnabled ? this.renderBackButton() : null}
         {this.renderTitle()}
@@ -51,11 +50,11 @@ class Toolbar extends Component {
   }
 
   renderTitle = () => {
-    const {titleEnabled, title} = this.props;
+    const {title} = this.props;
 
     return(
       <View style={styles.titleContainer}>
-        {titleEnabled ?
+        {title ?
           <CustomText
             title={title}
             textColor={colors.white}
@@ -88,7 +87,10 @@ class Toolbar extends Component {
       <TouchableOpacity
         style={styles.backButtonContainer}
         onPress={onBackButtonClick}>
-        <Entypo name={'chevron-thin-left'} size={toDp(20)} color={colors.white}/>
+        <Entypo
+          name={'chevron-thin-left'}
+          size={toDp(20)}
+          color={colors.white}/>
       </TouchableOpacity>
     )
   };

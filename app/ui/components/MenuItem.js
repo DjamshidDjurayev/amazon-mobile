@@ -114,7 +114,6 @@ const styles = EStyleSheet.create({
   subTitle: {
   },
   rightIcon: {
-
   },
   rightContainer: {
     flexDirection: 'row',

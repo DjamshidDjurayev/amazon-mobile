@@ -15,17 +15,24 @@ class CustomText extends React.Component {
     margin: PropTypes.number,
   };
 
+  static defaultProps = {
+    textColor: colors.black,
+    size: 14,
+    margin: 0,
+  };
+
   render() {
-    const {style, font, size, margin, textColor, title, children, ...otherProps} = this.props;
+    const {
+      style, font, size, margin,
+      textColor, title, children, ...otherProps} = this.props;
 
     return (
       <Text style={[style, styles.textStyle, {
         fontFamily: font,
-        fontSize: size ? toDp(size) : toDp(14),
-        margin: margin ? toDp(margin) : 0,
-        color: textColor ? textColor : colors.black
-      }]} {...otherProps}
-      >
+        fontSize: toDp(size),
+        margin: toDp(margin),
+        color: textColor
+      }]} {...otherProps}>
         {title}
         {children}
       </Text>
@@ -34,7 +41,8 @@ class CustomText extends React.Component {
 }
 
 const styles = EStyleSheet.create({
-  textStyle: {}
+  textStyle: {
+  }
 });
 
 export default CustomText;

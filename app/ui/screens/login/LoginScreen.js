@@ -72,12 +72,14 @@ class LoginScreen extends BaseComponent {
           onChangeText={(loginInputValue) => {
             this.setState({
               loginInputValue,
-              loginButtonDisabled: TextUtils.isEmpty(loginInputValue)
+              loginButtonDisabled: TextUtils.isEmpty(loginInputValue),
+              loginError: '',
             })
           }}
           mask={'+[00000] [000] [00] [00]'}
           keyboardType={'numeric'}
           returnKeyType="next"
+          errorText={this.state.loginError}
           value={this.state.loginInputValue}
           placeholder={strings.phone}
           placeholderTextColor={colors.light_gray}
@@ -92,10 +94,10 @@ class LoginScreen extends BaseComponent {
           onChangeText={(passwordInputValue) => {
             this.setState({
               passwordInputValue,
-              loginError: '',
+              passwordError: '',
             })
           }}
-          errorText={this.state.loginError}
+          errorText={this.state.passwordError}
           showHidePassword
           returnKeyType="done"
           value={this.state.passwordInputValue}
@@ -125,6 +127,13 @@ class LoginScreen extends BaseComponent {
           buttonColor={colors.green}
           disabledColor={colors.button_disabled}
           title={strings.log_in}/>
+
+        {/*<CustomButton*/}
+        {/*  onClick={() => {*/}
+        {/*    this.props.cancelLogin()*/}
+        {/*  }}*/}
+        {/*  buttonColor={colors.green}*/}
+        {/*  title={'cancel'}/>*/}
       </View>
     )
   };
@@ -225,18 +234,33 @@ class LoginScreen extends BaseComponent {
   };
 
   onLoginButtonClicked = () => {
-    this.setState({
-      loginError: "Axaxaxaxax axaxaxa"
-    })
-    // if (TextUtils.isEmpty(this.state.loginInputValue)) {
-    //   return;
-    // }
-    //
-    // if (TextUtils.isEmpty(this.state.passwordInputValue)) {
-    //   return;
-    // }
-    //
-    // this.props.performLogin()
+
+    if (TextUtils.isEmpty(this.state.loginInputValue)) {
+      this.setState({
+        loginError: "Не может быть пустым"
+      });
+      return;
+    }
+
+    if (TextUtils.isEmpty(this.state.passwordInputValue)) {
+      this.setState({
+        passwordError: "Не может быть пустым"
+      });
+      return;
+    }
+
+    if (this.state.passwordInputValue.length < 3) {
+      this.setState({
+        passwordError: "Не менее 3-х символов"
+      });
+      return;
+    }
+
+    let payload = {
+      login: this.state.loginInputValue,
+      password: this.state.passwordInputValue
+    };
+    this.props.performLogin(payload)
   }
 }
 
@@ -247,7 +271,7 @@ export default connect(
     response: state.login.response,
   }),
   dispatch => ({
-    performLogin: () => dispatch(actions.loginPerform()),
+    performLogin: (payload) => dispatch(actions.loginPerform(payload)),
     cancelLogin: () => dispatch(actions.loginCancel()),
   }),
 )(LoginScreen);

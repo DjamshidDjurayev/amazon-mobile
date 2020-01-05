@@ -1,62 +1,60 @@
 import axios from 'axios';
-import url from 'url';
-import AppConstants from '../constants';
-import queryString from 'qs';
+import { CANCEL } from 'redux-saga'
+import constants from '../constants';
 
-function executeRequest(method, pathname, data, options = {}, urlEncoded) {
-  let headers = {};
+axios.defaults.baseURL = constants.BASE_URL;
+axios.defaults.timeout = 30000;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-  if (urlEncoded) {
-    headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    };
-  } else {
-    headers = {
-      'Content-Type': 'application/json',
-    };
-  }
+axios.interceptors.request.use(function (config) {
+  console.log("REQUEST " + config.method.toString().toUpperCase() + " " + config.baseURL + config.url);
+  return config;
+}, function (error) {
+  console.log(error);
+  return Promise.reject(error);
+});
 
-  let callInstance = axios.create({
-    baseURL: url.format(AppConstants.BASE_URL),
-    timeout: options.timeout || 30000,
-    headers: headers,
-  });
+axios.interceptors.response.use(function (response) {
+  console.log("RESPONSE " + response.config.method.toString().toUpperCase() + " " + response.config.url + " " + response.status);
+  console.log(response);
+  return response;
+}, function (error) {
+  console.log(error);
+  return Promise.reject(error);
+});
 
-  let body = method === 'get' || !data ? {} : data;
+function executeRequest(method, pathname, data) {
+  const CancelToken = axios.CancelToken;
+  const source = CancelToken.source();
+  const httpMethod = method.toLowerCase();
 
-  if (method === 'post' && urlEncoded) {
-    body = queryString.stringify(data);
-  }
+  const defOptions = {
+    cancelToken: source.token
+  };
 
-  let reqObj = {method, url: pathname, params: options.query, data: body};
+  let request = data
+    ? axios[httpMethod](pathname, data, defOptions)
+    : axios[httpMethod](pathname, defOptions);
 
-  return new Promise((resolve, reject) => {
-    return callInstance
-      .request(reqObj)
-      .then(res => {
-        resolve(res.data);
-      })
-      .catch(error => {
-        reject(error);
-      });
-  });
+  request[CANCEL] = () => source.cancel();
+  return request;
 }
 
 export default {
-  get(pathname, options) {
-    return executeRequest('get', pathname, null, options, false);
+  get(pathname) {
+    return executeRequest('get', pathname, null);
   },
 
-  post(pathname, data, options, urlEncoded) {
-    return executeRequest('post', pathname, data, options, urlEncoded);
+  post(pathname, data) {
+    return executeRequest('post', pathname, data);
   },
 
-  put(pathname, data, options) {
-    return executeRequest('put', pathname, data, options, false);
+  put(pathname, data) {
+    return executeRequest('put', pathname, data);
   },
 
-  delete(pathname, data, options) {
-    return executeRequest('delete', pathname, data, options, false);
+  delete(pathname, data) {
+    return executeRequest('delete', pathname, data);
   },
 
   all(promises) {

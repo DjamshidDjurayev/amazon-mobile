@@ -1,17 +1,15 @@
-import {put, takeEvery, delay, cancelled, call, take, race} from 'redux-saga/effects';
+import {put, cancelled, call, take, race, takeLatest} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
 import * as NavigationService from '../navigation/NavigationService'
+import BaseApi from '../network/BaseApi';
+import Api from '../network/Api';
 
-function* registrationPerformAsync() {
+function* registrationPerformAsync(action) {
   try {
-    yield delay(2000);
-    // simulating login api call
-    // TODO replace with api call
-    yield put(actions.registrationSuccess({}));
-    // yield put(actions.loginError({}));
-    // if response
-    // yield put(NavigationService.navigate('Somewhere'))
+    const response = yield call(() => BaseApi.post(Api.userRegistration(), action.payload));
+    yield put(actions.registrationSuccess(response));
+    NavigationService.navigate('Main')
   } catch (e) {
     yield put(actions.registrationError(e));
   } finally {
@@ -22,7 +20,7 @@ function* registrationPerformAsync() {
 }
 
 export function* watchRegistrationPerform() {
-  yield takeEvery(types.REGISTRATION_ACTION_PERFORM, function* (...args) {
+  yield takeLatest(types.REGISTRATION_ACTION_PERFORM, function* (...args) {
     yield race({
       task: call(registrationPerformAsync, ...args),
       cancel: take(types.REGISTRATION_ACTION_CANCEL),

@@ -4,7 +4,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../colors';
 import Feather from 'react-native-vector-icons/Feather'
 import {toDp} from '../../utils/ScreenUtils';
-import strings from '../../strings';
 import PropTypes from 'prop-types';
 
 class MainSearchView extends Component {
@@ -19,6 +18,7 @@ class MainSearchView extends Component {
   static defaultProps = {
     fontSize: toDp(13),
     autoFocus: false,
+    title: ''
   };
 
   constructor(props) {
@@ -46,7 +46,7 @@ class MainSearchView extends Component {
           autoFocus={autoFocus}
           value={this.state.inputValue}
           placeholderTextColor={colors.gray_D6}
-          placeholder={title || strings.search}
+          placeholder={title}
           style={[styles.input, {
             fontSize: fontSize,
           }]}/>
