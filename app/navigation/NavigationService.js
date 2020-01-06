@@ -2,7 +2,7 @@ import {NavigationActions, StackActions} from 'react-navigation';
 
 const config = {};
 
-export function setNavigator(nav) {
+export function setTopLevelNavigator(nav) {
   if (nav) {
     config.navigator = nav;
   }

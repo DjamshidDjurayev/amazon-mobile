@@ -1,13 +1,15 @@
-import {put, takeEvery, delay, cancelled, call, take, race} from 'redux-saga/effects';
+import {put, takeEvery, delay, cancelled, call, take, race, select} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
 import * as NavigationService from '../navigation/NavigationService'
+import {getUser} from './selectors/selectors'
 
 function* splashTimeoutStartAsync() {
   try {
-    yield delay(2000);
+    yield delay(1500);
     yield put(actions.finishSplashTimeout());
-    NavigationService.navigateWithReset('Login');
+    const user = yield select(getUser);
+    NavigationService.navigateWithReset(user ? 'Main' : 'Login');
   } finally {
     if (yield cancelled()) {
       yield put(actions.cancelSplashTimeout());

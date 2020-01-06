@@ -49,12 +49,7 @@ const MainBottomNavigator = createBottomTabNavigator(
     Home: {screen: HomeScreen},
     Catalog: {screen: CatalogScreen},
     Cart: {screen: CartScreen},
-    Profile: {
-      screen: ProfileStack,
-      navigationOptions: {
-        header: null
-      }
-    },
+    Profile: { screen: ProfileScreen},
   },
   {
     defaultNavigationOptions: tabs,
@@ -88,6 +83,7 @@ export const MainNavigator = createStackNavigator({
     }
   },
   CatalogSearch: {screen: CatalogSearchScreen},
+  ProfileSettings: {screen: ProfileSettingsScreen},
 });
 
 const styles = EStyleSheet.create({

@@ -10,6 +10,8 @@ function* loginPerformAsync(action) {
     const response = yield call(() => BaseApi.get(Api.userRegistration()));
     if (response && response.status === 200) {
       yield put(actions.loginSuccess(response));
+      // save user data
+      yield put(actions.userLoginSuccess(response.data));
       NavigationService.navigateWithReset('Main')
     }
   } catch (e) {

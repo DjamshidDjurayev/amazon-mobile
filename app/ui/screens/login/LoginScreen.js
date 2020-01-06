@@ -127,13 +127,6 @@ class LoginScreen extends BaseComponent {
           buttonColor={colors.green}
           disabledColor={colors.button_disabled}
           title={strings.log_in}/>
-
-        {/*<CustomButton*/}
-        {/*  onClick={() => {*/}
-        {/*    this.props.cancelLogin()*/}
-        {/*  }}*/}
-        {/*  buttonColor={colors.green}*/}
-        {/*  title={'cancel'}/>*/}
       </View>
     )
   };

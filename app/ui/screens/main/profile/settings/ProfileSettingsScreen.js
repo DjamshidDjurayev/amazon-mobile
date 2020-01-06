@@ -13,6 +13,7 @@ import {toDp} from '../../../../../utils/ScreenUtils';
 import CustomText from '../../../../components/CustomText';
 import MenuItem from '../../../../components/MenuItem';
 import Divider from '../../../../components/Divider';
+import {actions} from '../../../../../state/actions';
 
 class ProfileSettingsScreen extends BaseComponent {
   static navigationOptions = {
@@ -47,6 +48,7 @@ class ProfileSettingsScreen extends BaseComponent {
         <Divider />
 
         <MenuItem
+          onClick={() => this.onMenuItemClicked('log_out')}
           rightIconEnabled={false}
           topBorder={false}
           textColor={colors.red}
@@ -146,11 +148,20 @@ class ProfileSettingsScreen extends BaseComponent {
   onBackButtonClicked = () => {
     NavigationService.goBack()
   };
+
+  onMenuItemClicked = (id) => {
+    switch (id) {
+      case 'log_out':
+        this.props.userLogout();
+        break;
+    }
+  };
 }
 
 export default connect(
   (state, props) => ({
   }),
   dispatch => ({
+    userLogout: () => dispatch(actions.userLogout()),
   }),
 )(ProfileSettingsScreen);

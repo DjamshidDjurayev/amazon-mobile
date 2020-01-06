@@ -1,5 +1,14 @@
+import {combineReducers} from 'redux';
 import splash from './splash';
 import login from './login';
 import registration from './registration';
+import profile from './profile';
 
-export {splash, login, registration};
+const rootReducer = combineReducers(
+  {
+    splash,
+    login,
+    registration,
+    profile
+  });
+export default rootReducer
