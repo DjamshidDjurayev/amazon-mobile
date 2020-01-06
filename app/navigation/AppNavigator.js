@@ -17,6 +17,7 @@ import ProfileSettingsScreen from '../ui/screens/main/profile/settings/ProfileSe
 import CatalogScreen from '../ui/screens/main/catalog/CatalogScreen';
 import CartScreen from '../ui/screens/main/cart/CartScreen';
 import CatalogSearchScreen from '../ui/screens/main/catalog/search/CatalogSearchScreen';
+import WebViewScreen from '../ui/screens/webview/WebViewScreen';
 
 const TabBarComponent = (props) => (<BottomTabBar {...props} />);
 
@@ -84,6 +85,7 @@ export const MainNavigator = createStackNavigator({
   },
   CatalogSearch: {screen: CatalogSearchScreen},
   ProfileSettings: {screen: ProfileSettingsScreen},
+  WebView: {screen: WebViewScreen},
 });
 
 const styles = EStyleSheet.create({
