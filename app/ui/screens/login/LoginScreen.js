@@ -34,7 +34,6 @@ class LoginScreen extends BaseComponent {
       loginButtonDisabled: true,
       loginInputValue: '',
       passwordInputValue: '',
-
       loginError: '',
       passwordError: '',
     };

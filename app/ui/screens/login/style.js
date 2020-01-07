@@ -2,7 +2,10 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../../colors';
 
 const styles = EStyleSheet.create({
-  rootView: {flex: 1},
+  rootView: {
+    flex: 1,
+    backgroundColor: colors.ultra_light_gray,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.ultra_light_gray,
@@ -40,7 +43,7 @@ const styles = EStyleSheet.create({
   },
   line: {
     height: '0.5rem',
-    backgroundColor: colors.light_gray,
+    backgroundColor: colors.divider,
     position: 'absolute',
     left: 0,
     right: 0,

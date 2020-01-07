@@ -93,7 +93,7 @@ class CustomInput extends React.Component {
                 style={styles.eyeContainer}
                 onPress={() => this.onEyeClicked()}>
                 <FeatherIcon
-                  color={colors.light_gray}
+                  color={colors.gray_5F}
                   name={this.state.passwordHidden ? "eye-off" : "eye"}
                   size={toDp(20)}/>
               </TouchableOpacity> : null}

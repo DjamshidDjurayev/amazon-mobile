@@ -9,6 +9,7 @@ export default {
   gray_5F: '#5F5F5F',
   light_gray: '#969696',
   divider: '#cbcbcb',
+  divider_transparent: '#cbcbcb99',
   dark: '#3a3a3a',
   green: '#00CC9F',
   statusbar_transparent: '#00B18A',

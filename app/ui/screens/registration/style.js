@@ -42,7 +42,7 @@ const styles = EStyleSheet.create({
   },
   line: {
     height: '0.5rem',
-    backgroundColor: colors.light_gray,
+    backgroundColor: colors.divider,
     position: 'absolute',
     left: 0,
     right: 0,

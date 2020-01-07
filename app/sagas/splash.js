@@ -10,6 +10,7 @@ function* splashTimeoutStartAsync() {
     yield put(actions.finishSplashTimeout());
     const user = yield select(getUser);
     NavigationService.navigateWithReset(user ? 'Main' : 'Login');
+    // NavigationService.navigateWithReset('ProductDetails');
   } finally {
     if (yield cancelled()) {
       yield put(actions.cancelSplashTimeout());
