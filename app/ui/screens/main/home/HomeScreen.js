@@ -9,6 +9,7 @@ import CustomText from '../../../components/CustomText';
 import MainSearchView from '../../../components/MainSearchView';
 import Swiper from '../../../../libs/Swiper'
 import {toDp} from '../../../../utils/ScreenUtils';
+import strings from '../../../../strings';
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -82,7 +83,9 @@ class HomeScreen extends BaseComponent {
         </View>
 
         {/* main search view */}
-        <MainSearchView style={styles.mainSearchView}/>
+        <MainSearchView
+          title={strings.search}
+          style={styles.mainSearchView}/>
       </View>
     )
   };

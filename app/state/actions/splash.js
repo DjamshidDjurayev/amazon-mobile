@@ -1,19 +1,7 @@
 import * as types from '../actionTypes';
 
-export function runSplashTimeout() {
-  return {
-    type: types.SPLASH_TIMEOUT_ACTION_START,
-  };
-}
+export const runSplashTimeout = () => ({ type: types.SPLASH_TIMEOUT_ACTION_START });
 
-export function finishSplashTimeout() {
-  return {
-    type: types.SPLASH_TIMEOUT_ACTION_FINISHED,
-  };
-}
+export const finishSplashTimeout = () => ({ type: types.SPLASH_TIMEOUT_ACTION_FINISHED });
 
-export function cancelSplashTimeout() {
-  return {
-    type: types.SPLASH_TIMEOUT_ACTION_CANCEL,
-  };
-}
+export const cancelSplashTimeout = () => ({ type: types.SPLASH_TIMEOUT_ACTION_CANCEL });

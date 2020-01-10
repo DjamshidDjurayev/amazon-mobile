@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   StatusBar,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -20,6 +19,7 @@ import TextUtils from '../../../utils/TextUtils';
 import CustomInput from '../../components/CustomInput';
 import styles from './style';
 import BaseComponent from '../../base/BaseComponent';
+import Logo from '../../components/Logo';
 
 class RegistrationScreen extends BaseComponent {
   static navigationOptions = {
@@ -172,11 +172,7 @@ class RegistrationScreen extends BaseComponent {
 
   renderLogoHeader = () => {
     return (
-      <View style={styles.logoView}>
-        <Text style={styles.logoText}>
-          LOGO
-        </Text>
-      </View>
+      <Logo title={'LOGO'}/>
     )
   };
 

@@ -41,6 +41,9 @@ const strings = new LocalizedStrings({
     log_out: 'Выйти',
     select_all: 'Выбрать все',
     choose_product: 'Выберите товар',
+    empty_field: 'Не может быть пустым',
+    password_length_3: 'Не менее 3-х символов',
+    phone_wrong_format: 'Неверный формат номера',
   },
 });
 

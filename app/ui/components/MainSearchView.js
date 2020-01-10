@@ -18,7 +18,7 @@ class MainSearchView extends Component {
   };
 
   static defaultProps = {
-    fontSize: toDp(13),
+    fontSize: 13,
     autoFocus: false,
     font: fontHelper.fontDefault
   };
@@ -50,7 +50,7 @@ class MainSearchView extends Component {
           placeholderTextColor={colors.gray_D6}
           placeholder={title}
           style={[styles.input, {
-            fontSize: fontSize,
+            fontSize: toDp(fontSize),
             fontFamily: font,
           }]}/>
       </View>

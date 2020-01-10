@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   View,
-  Text,
   StatusBar,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -21,6 +20,7 @@ import CustomInput from '../../components/CustomInput';
 import * as NavigationService from '../../../navigation/NavigationService'
 import styles from './style';
 import BaseComponent from '../../base/BaseComponent';
+import Logo from '../../components/Logo';
 
 class LoginScreen extends BaseComponent {
   static navigationOptions = {
@@ -68,10 +68,10 @@ class LoginScreen extends BaseComponent {
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
-          onChangeText={(loginInputValue) => {
+          onChangeText={(loginInputValue, extractedValue) => {
             this.setState({
-              loginInputValue,
-              loginButtonDisabled: TextUtils.isEmpty(loginInputValue),
+              loginInputValue: extractedValue,
+              loginButtonDisabled: TextUtils.isEmpty(extractedValue),
               loginError: '',
             })
           }}
@@ -141,11 +141,7 @@ class LoginScreen extends BaseComponent {
 
   renderLogoHeader = () => {
     return (
-    <View style={styles.logoView}>
-      <Text style={styles.logoText}>
-        LOGO
-      </Text>
-    </View>
+      <Logo title={'LOGO'}/>
     )
   };
 
@@ -226,31 +222,37 @@ class LoginScreen extends BaseComponent {
   };
 
   onLoginButtonClicked = () => {
-
     if (TextUtils.isEmpty(this.state.loginInputValue)) {
       this.setState({
-        loginError: "Не может быть пустым"
+        loginError: strings.empty_field
       });
       return;
     }
 
     if (TextUtils.isEmpty(this.state.passwordInputValue)) {
       this.setState({
-        passwordError: "Не может быть пустым"
+        passwordError: strings.empty_field
       });
       return;
     }
 
     if (this.state.passwordInputValue.length < 3) {
       this.setState({
-        passwordError: "Не менее 3-х символов"
+        passwordError: strings.password_length_3
+      });
+      return;
+    }
+
+    if (!TextUtils.isDigitsOnly(this.state.loginInputValue)) {
+      this.setState({
+        passwordError: strings.phone_wrong_format
       });
       return;
     }
 
     let payload = {
-      login: this.state.loginInputValue,
-      password: this.state.passwordInputValue
+      email: 'farruxx@bk.ru', //this.state.loginInputValue
+      password: '123456' //this.state.passwordInputValue
     };
     this.props.performLogin(payload)
   }
@@ -260,7 +262,6 @@ export default connect(
   (state, props) => ({
     isLoading: state.login.isLoading,
     isCancelled: state.login.isCancelled,
-    response: state.login.response,
   }),
   dispatch => ({
     performLogin: (payload) => dispatch(actions.loginPerform(payload)),

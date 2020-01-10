@@ -8,7 +8,7 @@ class TextUtils {
     return text.trim() === ""
   };
 
-  static isNumbersOnly = (text) => {
+  static isDigitsOnly = (text) => {
     return /^\d+$/.test(text)
   };
 }

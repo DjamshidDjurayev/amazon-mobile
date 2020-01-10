@@ -7,7 +7,8 @@ axios.defaults.timeout = 30000;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 axios.interceptors.request.use(function (config) {
-  console.log("REQUEST " + config.method.toString().toUpperCase() + " " + config.baseURL + config.url);
+  let message = "REQUEST " + config.method.toString().toUpperCase() + " " + config.baseURL + config.url;
+  console.log(`%c${message}`, "color: red");
   return config;
 }, function (error) {
   console.log(error);
@@ -15,8 +16,10 @@ axios.interceptors.request.use(function (config) {
 });
 
 axios.interceptors.response.use(function (response) {
-  console.log("RESPONSE " + response.config.method.toString().toUpperCase() + " " + response.config.url + " " + response.status);
-  console.log(response);
+  let message = "RESPONSE " + response.config.method.toString().toUpperCase() + " " + response.config.url;
+  let statusCode = response.status.toString();
+  console.log(`%c${message}` + ` %c${statusCode}`, "color: red", "color: blue");
+  console.log("\n" + JSON.stringify(response.data));
   return response;
 }, function (error) {
   console.log(error);

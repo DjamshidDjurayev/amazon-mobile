@@ -1,38 +1,10 @@
 import * as types from '../actionTypes';
 
-export function registrationPerform(payload) {
-  return {
-    type: types.REGISTRATION_ACTION_PERFORM,
-    payload
-  };
-}
+export const registrationPerform = payload => ({ type: types.REGISTRATION_ACTION_PERFORM, payload });
 
-export function registrationSuccess(data) {
-  return {
-    type: types.REGISTRATION_ACTION_SUCCESS,
-    response: {
-      data,
-      error: null,
-    }
-  };
-}
+export const registrationSuccess = data => ({ type: types.REGISTRATION_ACTION_SUCCESS, data });
 
-export function registrationCancel() {
-  return {
-    type: types.REGISTRATION_ACTION_CANCEL,
-    response: {
-      data: null,
-      error: null,
-    }
-  };
-}
+export const registrationCancel = () => ({ type: types.REGISTRATION_ACTION_CANCEL });
 
-export function registrationError(error) {
-  return {
-    type: types.REGISTRATION_ACTION_ERROR,
-    response: {
-      data: null,
-      error
-    }
-  };
-}
+export const registrationError = error => ({ type: types.REGISTRATION_ACTION_ERROR, error });
+

@@ -10,18 +10,6 @@ const styles = EStyleSheet.create({
     flex: 1,
     backgroundColor: colors.ultra_light_gray,
   },
-  logoText: {
-    color: colors.white,
-    fontSize: '50rem',
-    fontWeight: 'bold',
-    marginTop: '16rem',
-    marginBottom: '16rem',
-  },
-  logoView: {
-    backgroundColor: colors.green,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   contentContainer: {
 
   },

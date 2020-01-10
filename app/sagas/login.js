@@ -4,12 +4,12 @@ import {actions} from '../state/actions';
 import * as NavigationService from '../navigation/NavigationService'
 import Api from "../network/Api"
 import BaseApi from '../network/BaseApi';
+import codes from '../codes';
 
 function* loginPerformAsync(action) {
   try {
-    const response = yield call(() => BaseApi.get(Api.userRegistration()));
-    if (response && response.status === 200) {
-      yield put(actions.loginSuccess(response));
+    const response = yield call(() => BaseApi.post(Api.userLogin(), action.payload));
+    if (response && response.status === codes.STATUS_SUCCESS) {
       // save user data
       yield put(actions.userLoginSuccess(response.data));
       NavigationService.navigateWithReset('Main')
