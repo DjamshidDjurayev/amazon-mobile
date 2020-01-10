@@ -13,7 +13,7 @@ class MenuItem extends Component {
     title: PropTypes.string,
     textSize: PropTypes.number,
     textColor: PropTypes.string,
-    containerStyle: PropTypes.object,
+    containerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     iconSize: PropTypes.number,
     iconColor: PropTypes.string,
     topBorder: PropTypes.bool,

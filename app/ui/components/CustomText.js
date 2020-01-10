@@ -4,34 +4,35 @@ import colors from "../../colors";
 import PropTypes from 'prop-types';
 import {toDp} from "../../utils/ScreenUtils";
 import EStyleSheet from 'react-native-extended-stylesheet';
+import fontHelper from '../../fontHelper';
 
 class CustomText extends React.Component {
   static propTypes = {
     title: PropTypes.string,
     textColor: PropTypes.string,
-    style: PropTypes.object,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     font: PropTypes.string,
     size: PropTypes.number,
-    margin: PropTypes.number,
+    fontStyle: PropTypes.oneOfType(['bold', 'italic', 'underlined'])
   };
 
   static defaultProps = {
     textColor: colors.black,
     size: 14,
-    margin: 0,
+    font: fontHelper.fontDefault
   };
 
   render() {
     const {
-      style, font, size, margin,
+      style, font, size, fontStyle,
       textColor, title, children, ...otherProps} = this.props;
 
     return (
-      <Text style={[style, styles.textStyle, {
-        fontFamily: font,
-        fontSize: toDp(size),
-        margin: toDp(margin),
-        color: textColor
+      <Text
+        style={[style, styles[fontStyle], {
+          fontFamily: font,
+          fontSize: toDp(size),
+          color: textColor
       }]} {...otherProps}>
         {title}
         {children}
@@ -41,8 +42,9 @@ class CustomText extends React.Component {
 }
 
 const styles = EStyleSheet.create({
-  textStyle: {
-  }
+  bold: {fontWeight: 'bold'},
+  italic: {fontStyle: 'italic'},
+  underline: {textDecorationLine: 'underline'}
 });
 
 export default CustomText;

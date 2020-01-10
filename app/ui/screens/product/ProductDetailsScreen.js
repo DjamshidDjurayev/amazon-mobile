@@ -2,7 +2,7 @@ import React from 'react'
 import BaseComponent from '../../base/BaseComponent';
 import styles from './style';
 import {SafeAreaView} from "react-navigation";
-import {Image, ScrollView, StatusBar, View, TouchableOpacity} from 'react-native';
+import {Image, ScrollView, StatusBar, View, TouchableOpacity, Share} from 'react-native';
 import colors from '../../../colors';
 import Swiper from '../../../libs/Swiper';
 import {toDp} from '../../../utils/ScreenUtils';
@@ -86,7 +86,7 @@ class ProductDetailsScreen extends BaseComponent {
 
           <TouchableOpacity
             style={styles.iconStyle}
-            onPress={() => {}}>
+            onPress={() => this.onShare()}>
             <Feather
               name={'share-2'}
               size={toDp(24)}
@@ -177,6 +177,27 @@ class ProductDetailsScreen extends BaseComponent {
 
   onBackButtonClicked = () => {
     NavigationService.goBack()
+  };
+
+  onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'React Native | A framework for building native apps using React',
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
 }
 

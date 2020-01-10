@@ -5,20 +5,22 @@ import colors from '../../colors';
 import Feather from 'react-native-vector-icons/Feather'
 import {toDp} from '../../utils/ScreenUtils';
 import PropTypes from 'prop-types';
+import fontHelper from '../../fontHelper';
 
 class MainSearchView extends Component {
   static propTypes = {
-    style: PropTypes.object,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     inputRef: PropTypes.func,
     title: PropTypes.string,
     fontSize: PropTypes.number,
     autoFocus: PropTypes.bool,
+    font: PropTypes.string,
   };
 
   static defaultProps = {
     fontSize: toDp(13),
     autoFocus: false,
-    title: ''
+    font: fontHelper.fontDefault
   };
 
   constructor(props) {
@@ -29,7 +31,7 @@ class MainSearchView extends Component {
   }
 
   render() {
-    const {style, inputRef, title, fontSize, autoFocus} = this.props;
+    const {style, inputRef, title, fontSize, autoFocus, font} = this.props;
     return(
       <View style={[styles.rootView, style]}>
         <Feather
@@ -49,6 +51,7 @@ class MainSearchView extends Component {
           placeholder={title}
           style={[styles.input, {
             fontSize: fontSize,
+            fontFamily: font,
           }]}/>
       </View>
     )

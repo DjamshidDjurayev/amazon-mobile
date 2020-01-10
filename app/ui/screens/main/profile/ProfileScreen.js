@@ -141,7 +141,7 @@ class ProfileScreen extends BaseComponent {
   };
 
   onBackButtonClicked = () => {
-
+    NavigationService.goBack()
   };
 
   onProfileItemClicked = id => {

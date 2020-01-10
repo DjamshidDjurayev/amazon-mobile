@@ -7,6 +7,7 @@ export default {
   ultra_light_gray: '#F6F4FC',
   gray_D6: '#D6D6D6',
   gray_5F: '#5F5F5F',
+  gray_F4: '#F4F4F4',
   light_gray: '#969696',
   divider: '#cbcbcb',
   divider_transparent: '#cbcbcb99',

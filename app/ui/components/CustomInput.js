@@ -11,12 +11,13 @@ import {toDp} from '../../utils/ScreenUtils';
 import TextInputMask from 'react-native-text-input-mask';
 import CustomText from './CustomText';
 import TextUtils from '../../utils/TextUtils';
+import fontHelper from '../../fontHelper';
 
 class CustomInput extends React.Component {
   static propTypes = {
     onChangeText: PropTypes.func,
     inputRef: PropTypes.func,
-    style: PropTypes.object,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     underlineColorBlurred: PropTypes.string,
@@ -25,6 +26,7 @@ class CustomInput extends React.Component {
     mask: PropTypes.string,
     errorText: PropTypes.string,
     errorColor: PropTypes.string,
+    font: PropTypes.string,
   };
 
   static defaultProps = {
@@ -33,6 +35,7 @@ class CustomInput extends React.Component {
     errorColor: colors.red,
     showHidePassword: false,
     error: true,
+    font: fontHelper.fontDefault,
   };
 
   constructor(props) {
@@ -64,7 +67,7 @@ class CustomInput extends React.Component {
     const {
       showHidePassword, inputRef,
       style, onChangeText, underlineColorBlurred,
-      underlineColorFocused, mask, errorText, errorColor,
+      underlineColorFocused, mask, errorText, errorColor, font,
       ...otherProps} = this.props;
 
     return (
@@ -78,7 +81,8 @@ class CustomInput extends React.Component {
               paddingTop: toDp(14),
               paddingBottom: toDp(14),
               borderBottomWidth: errorText && !TextUtils.isEmpty(errorText) ? 1 : 0,
-              borderBottomColor: errorText && !TextUtils.isEmpty(errorText) ? errorColor : 'transparent'
+              borderBottomColor: errorText && !TextUtils.isEmpty(errorText) ? errorColor : 'transparent',
+              fontFamily: font,
             }, style]}
             mask={mask}
             refInput={inputRef}

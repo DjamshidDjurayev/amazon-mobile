@@ -52,7 +52,7 @@ class CatalogItem extends Component {
 
     return(
       <TouchableOpacity
-        onPress={() => onClick}
+        onPress={onClick}
         opacity={0.8}
         style={[styles.rootView, {
           flex: 1 / numColumns,

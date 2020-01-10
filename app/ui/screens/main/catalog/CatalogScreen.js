@@ -89,7 +89,7 @@ class CatalogScreen extends BaseComponent {
   renderCategoryItem = (index, item) => {
     return(
       <CatalogItem
-        onClick={this.onCategoryItemClicked(item)}
+        onClick={() => this.onCategoryItemClicked(item)}
         id={index}
         item={item}
         numColumns={3} />
@@ -110,7 +110,7 @@ class CatalogScreen extends BaseComponent {
   };
 
   onBackButtonClicked = () => {
-
+    NavigationService.goBack()
   };
 
   onSearchClicked = () => {

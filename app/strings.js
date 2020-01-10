@@ -39,6 +39,8 @@ const strings = new LocalizedStrings({
     personalData: 'Личные данные',
     change_password: 'Сменить пароль',
     log_out: 'Выйти',
+    select_all: 'Выбрать все',
+    choose_product: 'Выберите товар',
   },
 });
 

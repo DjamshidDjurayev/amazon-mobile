@@ -1,13 +1,13 @@
 import React from "react";
 import {
-  Text,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import colors from "../../colors";
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {toDp} from "../../utils/ScreenUtils";
+import CustomText from './CustomText';
 
 class CustomButton extends React.Component {
   static propTypes = {
@@ -15,12 +15,13 @@ class CustomButton extends React.Component {
     title: PropTypes.string,
     textColor: PropTypes.string,
     buttonColor: PropTypes.string,
-    style: PropTypes.object,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     isLoading: PropTypes.bool,
     textSize: PropTypes.number,
     font: PropTypes.string,
     disabledColor: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -30,12 +31,13 @@ class CustomButton extends React.Component {
     disabledColor: colors.light_gray,
     textColor: colors.white,
     font: '',
+    textSize: 14,
   };
 
   render() {
     const {
       style, isLoading, buttonColor,
-      textColor, title, font, onClick,
+      textColor, title, font, onClick, textSize, textStyle,
       disabledColor, disabled, ...otherProps} = this.props;
 
     return (
@@ -43,24 +45,15 @@ class CustomButton extends React.Component {
         disabled={disabled || isLoading}
         activeOpacity={.6}
         onPress={onClick}
-        style={[
-          style,
-          styles.button, {
-            backgroundColor: (isLoading || disabled) ? disabledColor : buttonColor
-          }
+        style={[style, styles.button, {
+            backgroundColor: (isLoading || disabled) ? disabledColor : buttonColor}
         ]}>
-
-        <Text
-          style={[
-            styles.buttonText, {
-              color: isLoading ? disabledColor : textColor,
-              fontFamily: font,
-            },
-          ]}
-          {...otherProps}>
-          {title}
-        </Text>
-
+        <CustomText
+          textColor={isLoading ? disabledColor : textColor}
+          title={title}
+          size={textSize}
+          style={[styles.buttonText, textStyle, {fontFamily: font}]}
+          {...otherProps} />
         {isLoading ?
           <ActivityIndicator
             color={textColor ? textColor : colors.white}

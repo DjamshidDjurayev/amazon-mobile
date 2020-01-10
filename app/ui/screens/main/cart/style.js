@@ -10,6 +10,18 @@ const styles = EStyleSheet.create({
     flex: 1,
     backgroundColor: colors.ultra_light_gray,
   },
+  headerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: colors.white,
+    borderRadius: '16rem',
+    marginTop: '14rem',
+  },
+  emptyViewContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
 
 export default styles
