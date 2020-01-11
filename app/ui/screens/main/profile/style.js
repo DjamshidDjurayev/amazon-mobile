@@ -41,6 +41,15 @@ const styles = EStyleSheet.create({
   profileSettingsContainer: {
     marginTop: '18rem'
   },
+  avatarPlaceholder: {
+    width: '60rem',
+    height: '60rem',
+    borderRadius: '30rem',
+    marginRight: '14rem',
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
 
 export default styles

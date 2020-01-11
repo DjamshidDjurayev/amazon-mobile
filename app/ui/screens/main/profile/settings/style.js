@@ -59,6 +59,14 @@ const styles = EStyleSheet.create({
     marginTop: '18rem',
     marginBottom: '80rem',
   },
+  avatarPlaceholder: {
+    width: '100rem',
+    height: '100rem',
+    borderRadius: '50rem',
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
 
 export default styles

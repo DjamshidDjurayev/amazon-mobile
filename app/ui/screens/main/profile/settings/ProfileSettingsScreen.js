@@ -22,6 +22,9 @@ import MenuItem from '../../../../components/MenuItem';
 import Divider from '../../../../components/Divider';
 import {actions} from '../../../../../state/actions';
 import TextUtils from '../../../../../utils/TextUtils';
+import RBSheet from "react-native-raw-bottom-sheet";
+import CustomButton from '../../../../components/CustomButton';
+import BottomSheet from '../../../../dialogs/BottomSheet';
 
 class ProfileSettingsScreen extends BaseComponent {
   static navigationOptions = {
@@ -41,6 +44,7 @@ class ProfileSettingsScreen extends BaseComponent {
           {this.renderSettingsHeader()}
           {this.renderPersonalData()}
           {this.renderChangePasswordAndExit()}
+          {this.renderBottomSheets()}
         </ScrollView>
       </SafeAreaView>
     )
@@ -77,6 +81,7 @@ class ProfileSettingsScreen extends BaseComponent {
           title={strings.personalData}/>
 
         <MenuItem
+          onClick={() => this.onEditNameClicked()}
           bottomBorder={false}
           subTitle={strings.name}
           title={user && (user.name + " " + user.surname)}/>
@@ -110,22 +115,16 @@ class ProfileSettingsScreen extends BaseComponent {
     const {user} = this.props;
     return(
       <View style={styles.settingsHeaderContainer}>
-        {/* image */}
         <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={{ uri: 'https://source.unsplash.com/1024x768/?nature'}}/>
-
+          {user.image ? this.renderAvatar(user.image) : this.renderAvatarPlaceHolder()}
           <TouchableOpacity
             style={styles.addImageContainer}>
-
             <View style={styles.addImage}>
               <AntDesign
                 name={'plus'}
                 size={toDp(20)}
                 color={colors.white}/>
             </View>
-
           </TouchableOpacity>
         </View>
 
@@ -135,6 +134,25 @@ class ProfileSettingsScreen extends BaseComponent {
           title={user && (user.name + " " + user.surname)}
           size={20}/>
       </View>
+    )
+  };
+
+  renderAvatarPlaceHolder = () => {
+    const {user} = this.props;
+    return(
+      <View style={styles.avatarPlaceholder}>
+        <CustomText
+          size={20}
+          title={TextUtils.getInitialLetter(user && user.name)}/>
+      </View>
+    )
+  };
+
+  renderAvatar = image => {
+    return(
+      <Image
+        style={styles.image}
+        source={{ uri: image}}/>
     )
   };
 
@@ -154,6 +172,12 @@ class ProfileSettingsScreen extends BaseComponent {
         backgroundColor={colors.statusbar_transparent}
         hidden={false}
         barStyle={'light-content'} />
+    )
+  };
+
+  renderBottomSheets = () => {
+    return(
+      <BottomSheet inputRef={ref => this.RBSheet = ref} />
     )
   };
 
@@ -184,6 +208,12 @@ class ProfileSettingsScreen extends BaseComponent {
 
   onChangePasswordClicked = () => {
 
+  };
+
+  onEditNameClicked = () => {
+    if (this.RBSheet) {
+      this.RBSheet.open()
+    }
   };
 }
 

@@ -13,6 +13,7 @@ import {toDp} from '../../../../utils/ScreenUtils';
 import MenuItem from '../../../components/MenuItem';
 import Divider from '../../../components/Divider';
 import * as NavigationService from '../../../../navigation/NavigationService'
+import TextUtils from '../../../../utils/TextUtils';
 
 class ProfileScreen extends BaseComponent {
   static navigationOptions = {
@@ -99,9 +100,8 @@ class ProfileScreen extends BaseComponent {
       <TouchableOpacity
         onPress={() => this.onProfileItemClicked('edit_profile')}
         style={styles.profileEditContainer}>
-        <Image
-          source={{uri: 'https://source.unsplash.com/1024x768/?nature'}}
-          style={styles.profileImage} />
+
+        {user && user.image ? this.renderAvatar(user.image) : this.renderAvatarPlaceHolder()}
 
         <View style={styles.nameContainer}>
           <CustomText
@@ -120,6 +120,25 @@ class ProfileScreen extends BaseComponent {
           size={toDp(18)}
           color={colors.gray_5F}/>
       </TouchableOpacity>
+    )
+  };
+
+  renderAvatarPlaceHolder = () => {
+    const {user} = this.props;
+    return(
+      <View style={styles.avatarPlaceholder}>
+        <CustomText
+          size={20}
+          title={TextUtils.getInitialLetter(user && user.name)}/>
+      </View>
+    )
+  };
+
+  renderAvatar = image => {
+    return(
+      <Image
+        style={styles.profileImage}
+        source={{ uri: image}}/>
     )
   };
 

@@ -21,6 +21,7 @@ import * as NavigationService from '../../../navigation/NavigationService'
 import styles from './style';
 import BaseComponent from '../../base/BaseComponent';
 import Logo from '../../components/Logo';
+import Social from '../../components/Social';
 
 class LoginScreen extends BaseComponent {
   static navigationOptions = {
@@ -152,37 +153,21 @@ class LoginScreen extends BaseComponent {
           size={toDp(18)}
           style={styles.loginText} />
 
-        {/* socials */}
         <View style={styles.socialsContainer}>
-          <TouchableOpacity
-            activeOpacity={.7}
-            onPress={this.onSocialIconClicked("google")}
-            style={styles.iconContainer}>
-            <EvilIcon
-              name={"sc-google-plus"}
-              color={colors.white}
-              size={toDp(32)} />
-          </TouchableOpacity>
+          <Social
+            iconSize={32}
+            onClick={() => this.onSocialIconClicked("google")}
+            iconName={'sc-google-plus'}/>
 
-          <TouchableOpacity
-            activeOpacity={.7}
-            onPress={this.onSocialIconClicked("fb")}
-            style={styles.iconContainer}>
-            <EvilIcon
-              name={"sc-facebook"}
-              color={colors.white}
-              size={toDp(48)} />
-          </TouchableOpacity>
+          <Social
+            iconSize={48}
+            onClick={() => this.onSocialIconClicked("fb")}
+            iconName={'sc-facebook'}/>
 
-          <TouchableOpacity
-            activeOpacity={.7}
-            onPress={this.onSocialIconClicked("vk")}
-            style={styles.iconContainer}>
-            <EvilIcon
-              name={"sc-vk"}
-              color={colors.white}
-              size={toDp(40)} />
-          </TouchableOpacity>
+          <Social
+            iconSize={40}
+            onClick={() => this.onSocialIconClicked("vk")}
+            iconName={'sc-vk'}/>
         </View>
 
         <View style={styles.orContainer}>
