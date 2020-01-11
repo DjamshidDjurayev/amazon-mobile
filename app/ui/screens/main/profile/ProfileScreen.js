@@ -93,6 +93,8 @@ class ProfileScreen extends BaseComponent {
   };
 
   renderProfileEdit = () => {
+    const {user} = this.props;
+
     return(
       <TouchableOpacity
         onPress={() => this.onProfileItemClicked('edit_profile')}
@@ -104,12 +106,12 @@ class ProfileScreen extends BaseComponent {
         <View style={styles.nameContainer}>
           <CustomText
             size={15}
-            title={'Andy Larkin'}/>
+            title={user && user.name}/>
 
           <CustomText
             textColor={colors.light_gray}
             size={13}
-            title={'andy.larkin@example.com'}/>
+            title={user && user.surname}/>
         </View>
 
         <Entypo
@@ -173,6 +175,7 @@ class ProfileScreen extends BaseComponent {
 
 export default connect(
   (state, props) => ({
+    user: state.profile.user
   }),
   dispatch => ({
   }),

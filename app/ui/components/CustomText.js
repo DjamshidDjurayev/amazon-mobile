@@ -13,7 +13,7 @@ class CustomText extends React.Component {
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     font: PropTypes.string,
     size: PropTypes.number,
-    fontStyle: PropTypes.oneOfType(['bold', 'italic', 'underlined'])
+    fontStyle: PropTypes.oneOf(['bold', 'italic', 'underlined'])
   };
 
   static defaultProps = {

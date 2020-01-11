@@ -3,13 +3,16 @@ import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
 import * as NavigationService from '../navigation/NavigationService'
 import BaseApi from '../network/BaseApi';
-import Api from '../network/Api';
+import * as Api from '../network/Api';
+import codes from '../codes';
 
 function* registrationPerformAsync(action) {
   try {
-    const response = yield call(() => BaseApi.post(Api.userRegistration(), action.payload));
-    yield put(actions.registrationSuccess(response));
-    NavigationService.navigate('Main')
+    const response = yield call(() => BaseApi.post(Api.userRegistration(), action.data, null));
+    if (response && response.status === codes.STATUS_200) {
+      yield put(actions.registrationSuccess(response.data));
+      NavigationService.goBack()
+    }
   } catch (e) {
     yield put(actions.registrationError(e));
   } finally {

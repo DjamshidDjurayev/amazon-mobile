@@ -2,7 +2,14 @@ import React from 'react'
 import BaseComponent from '../../../../base/BaseComponent';
 import Toolbar from '../../../../components/Toolbar';
 import strings from '../../../../../strings';
-import {ScrollView, StatusBar, View, Image, TouchableOpacity} from 'react-native';
+import {
+  ScrollView,
+  StatusBar,
+  View,
+  Image,
+  TouchableOpacity,
+  Alert
+} from 'react-native';
 import colors from '../../../../../colors';
 import styles from './style';
 import {SafeAreaView} from "react-navigation";
@@ -14,6 +21,7 @@ import CustomText from '../../../../components/CustomText';
 import MenuItem from '../../../../components/MenuItem';
 import Divider from '../../../../components/Divider';
 import {actions} from '../../../../../state/actions';
+import TextUtils from '../../../../../utils/TextUtils';
 
 class ProfileSettingsScreen extends BaseComponent {
   static navigationOptions = {
@@ -42,13 +50,14 @@ class ProfileSettingsScreen extends BaseComponent {
     return(
       <View style={styles.changePasswordAndExitContainer}>
         <MenuItem
+          onClick={() => this.onChangePasswordClicked()}
           bottomBorder={false}
           textColor={colors.blue}
           title={strings.change_password}/>
         <Divider />
 
         <MenuItem
-          onClick={() => this.onMenuItemClicked('log_out')}
+          onClick={() => this.onLogoutClicked()}
           rightIconEnabled={false}
           topBorder={false}
           textColor={colors.red}
@@ -58,6 +67,8 @@ class ProfileSettingsScreen extends BaseComponent {
   };
 
   renderPersonalData = () => {
+    const {user} = this.props;
+
     return(
       <View style={styles.personalDataContainer}>
         <CustomText
@@ -68,21 +79,21 @@ class ProfileSettingsScreen extends BaseComponent {
         <MenuItem
           bottomBorder={false}
           subTitle={strings.name}
-          title={'Andy Larkin'}/>
+          title={user && (user.name + " " + user.surname)}/>
         <Divider />
 
         <MenuItem
           topBorder={false}
           bottomBorder={false}
           subTitle={strings.email}
-          title={'andy.larkin@gmail.com'}/>
+          title={user && user.email}/>
         <Divider />
 
         <MenuItem
           topBorder={false}
           bottomBorder={false}
           subTitle={strings.phone}
-          title={'+998 97 450 00 00'}/>
+          title={user && (TextUtils.getMaskedPhone(user.phoneNumber))}/>
         <Divider />
 
         <MenuItem
@@ -96,6 +107,7 @@ class ProfileSettingsScreen extends BaseComponent {
   };
 
   renderSettingsHeader = () => {
+    const {user} = this.props;
     return(
       <View style={styles.settingsHeaderContainer}>
         {/* image */}
@@ -120,7 +132,7 @@ class ProfileSettingsScreen extends BaseComponent {
         {/* name */}
         <CustomText
           style={styles.name}
-          title={'Andy Larkin'}
+          title={user && (user.name + " " + user.surname)}
           size={20}/>
       </View>
     )
@@ -149,19 +161,38 @@ class ProfileSettingsScreen extends BaseComponent {
     NavigationService.goBack()
   };
 
-  onMenuItemClicked = (id) => {
-    switch (id) {
-      case 'log_out':
-        this.props.userLogout();
-        break;
-    }
+  onLogoutClicked = () => {
+    Alert.alert(null, strings.sure_to_logout, [{
+      text: strings.cancel,
+      onPress: () => null,
+      style: 'cancel',
+    }, {
+      text: strings.yes,
+      onPress: () => this.logOut()
+    }],
+      {
+        cancelable: true
+      });
+  };
+
+  logOut = () => {
+    let body = {
+      accessToken: this.props.userLogin.id
+    };
+    this.props.userLogout(body);
+  };
+
+  onChangePasswordClicked = () => {
+
   };
 }
 
 export default connect(
   (state, props) => ({
+    user: state.profile.user,
+    userLogin: state.profile.userLogin
   }),
   dispatch => ({
-    userLogout: () => dispatch(actions.userLogout()),
+    userLogout: (data) => dispatch(actions.userLogout(data)),
   }),
 )(ProfileSettingsScreen);

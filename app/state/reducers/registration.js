@@ -1,10 +1,8 @@
 import * as types from '../actionTypes';
 
 const initialState = {
-  response: {
-    data: null,
-    error: null,
-  },
+  data: null,
+  error: null,
   isLoading: false,
   isCancelled: false,
 };
@@ -21,7 +19,7 @@ export default function registration(state = initialState, action = {}) {
     case types.REGISTRATION_ACTION_SUCCESS:
       return {
         ...state,
-        response: action.response,
+        data: action.data,
         isLoading: false,
         isCancelled: false,
       };
@@ -29,7 +27,6 @@ export default function registration(state = initialState, action = {}) {
     case types.REGISTRATION_ACTION_CANCEL:
       return {
         ...state,
-        response: action.response,
         isLoading: false,
         isCancelled: true,
         isFinished: false,
@@ -38,7 +35,7 @@ export default function registration(state = initialState, action = {}) {
     case types.REGISTRATION_ACTION_ERROR:
       return {
         ...state,
-        response: action.response,
+        error: action.error,
         isLoading: false,
         isCancelled: false,
       };

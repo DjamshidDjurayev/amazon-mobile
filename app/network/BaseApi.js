@@ -26,13 +26,14 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 
-function executeRequest(method, pathname, data) {
+function executeRequest(method, pathname, data, config) {
   const CancelToken = axios.CancelToken;
   const source = CancelToken.source();
   const httpMethod = method.toLowerCase();
 
   const defOptions = {
-    cancelToken: source.token
+    cancelToken: source.token,
+    headers: config && config.headers
   };
 
   let request = data
@@ -44,20 +45,20 @@ function executeRequest(method, pathname, data) {
 }
 
 export default {
-  get(pathname) {
-    return executeRequest('get', pathname, null);
+  get(pathname, config) {
+    return executeRequest('get', pathname, null, config);
   },
 
-  post(pathname, data) {
-    return executeRequest('post', pathname, data);
+  post(pathname, data, config) {
+    return executeRequest('post', pathname, data, config);
   },
 
-  put(pathname, data) {
-    return executeRequest('put', pathname, data);
+  put(pathname, data, config) {
+    return executeRequest('put', pathname, data, config);
   },
 
-  delete(pathname, data) {
-    return executeRequest('delete', pathname, data);
+  delete(pathname, data, config) {
+    return executeRequest('delete', pathname, data, config);
   },
 
   all(promises) {

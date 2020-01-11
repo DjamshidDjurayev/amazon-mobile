@@ -1,3 +1,6 @@
 export default {
-  STATUS_SUCCESS: 200,
+  STATUS_200: 200,
+  STATUS_204: 204,
+  STATUS_401: 401,
+  STATUS_422: 422,
 }

@@ -16,6 +16,15 @@ export default function login(state = initialState, action = {}) {
         isCancelled: false,
       };
 
+    case types.LOGIN_ACTION_SUCCESS:
+      return {
+        ...state,
+        data: action.data,
+        isLoading: false,
+        isCancelled: false,
+        isFinished: true,
+      };
+
     case types.LOGIN_ACTION_CANCEL:
       return {
         ...state,

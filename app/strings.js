@@ -44,6 +44,9 @@ const strings = new LocalizedStrings({
     empty_field: 'Не может быть пустым',
     password_length_3: 'Не менее 3-х символов',
     phone_wrong_format: 'Неверный формат номера',
+    sure_to_logout: 'Вы действительно хотите выйти?',
+    cancel: 'Отмена',
+    yes: 'Да',
   },
 });
 

@@ -10,6 +10,7 @@ import MainSearchView from '../../../components/MainSearchView';
 import Swiper from '../../../../libs/Swiper'
 import {toDp} from '../../../../utils/ScreenUtils';
 import strings from '../../../../strings';
+import LanguageSelector from '../../../components/LanguageSelector';
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -78,7 +79,7 @@ class HomeScreen extends BaseComponent {
 
           {/* languages */}
           <View style={styles.langContainer}>
-            <CustomText title={'UZS'} />
+            <LanguageSelector />
           </View>
         </View>
 

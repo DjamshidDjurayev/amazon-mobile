@@ -1,16 +1,18 @@
-class TextUtils {
-  static validateEmail = (text) => {
+import Masker from '../libs/Masker'
+
+export default {
+  validateEmail: (text) => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
     return reg.test(text);
-  };
+  },
 
-  static isEmpty = (text) => {
+  isEmpty: (text) => {
     return text.trim() === ""
-  };
+  },
 
-  static isDigitsOnly = (text) => {
+  isDigitsOnly: (text) => {
     return /^\d+$/.test(text)
-  };
-}
+  },
 
-export default TextUtils
+  getMaskedPhone : phone => Masker.toPattern(phone, {pattern: '+99999 999 99 99'})
+}

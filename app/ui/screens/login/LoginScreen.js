@@ -68,19 +68,18 @@ class LoginScreen extends BaseComponent {
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
-          onChangeText={(loginInputValue, extractedValue) => {
+          onChangeText={(value) => {
             this.setState({
-              loginInputValue: extractedValue,
-              loginButtonDisabled: TextUtils.isEmpty(extractedValue),
+              loginInputValue: value,
+              loginButtonDisabled: TextUtils.isEmpty(value),
               loginError: '',
             })
           }}
-          mask={'+[00000] [000] [00] [00]'}
-          keyboardType={'numeric'}
+          keyboardType={'default'}
           returnKeyType="next"
           errorText={this.state.loginError}
           value={this.state.loginInputValue}
-          placeholder={strings.phone}
+          placeholder={strings.email}
           placeholderTextColor={colors.light_gray}
           autoCapitalize="none"
           onSubmitEditing={() => this.focusNextField('password_input_id')}
@@ -243,18 +242,20 @@ class LoginScreen extends BaseComponent {
       return;
     }
 
-    if (!TextUtils.isDigitsOnly(this.state.loginInputValue)) {
-      this.setState({
-        passwordError: strings.phone_wrong_format
-      });
-      return;
-    }
+    // if (!TextUtils.isDigitsOnly(this.state.loginInputValue)) {
+    //   this.setState({
+    //     passwordError: strings.phone_wrong_format
+    //   });
+    //   return;
+    // }
 
-    let payload = {
-      email: 'farruxx@bk.ru', //this.state.loginInputValue
-      password: '123456' //this.state.passwordInputValue
+    const { loginInputValue, passwordInputValue} = this.state;
+
+    let body = {
+      email: loginInputValue,
+      password: passwordInputValue
     };
-    this.props.performLogin(payload)
+    this.props.performLogin(body)
   }
 }
 
@@ -264,7 +265,7 @@ export default connect(
     isCancelled: state.login.isCancelled,
   }),
   dispatch => ({
-    performLogin: (payload) => dispatch(actions.loginPerform(payload)),
+    performLogin: (body) => dispatch(actions.loginPerform(body)),
     cancelLogin: () => dispatch(actions.loginCancel()),
   }),
 )(LoginScreen);

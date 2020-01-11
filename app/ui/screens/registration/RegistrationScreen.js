@@ -151,6 +151,7 @@ class RegistrationScreen extends BaseComponent {
           style={styles.loginInput}/>
 
         <CustomButton
+          isLoading={this.props.isLoading}
           onClick={() => this.onSignUpClicked()}
           style={styles.registrationButton}
           disabled={this.state.signUpButtonDisabled}
@@ -250,7 +251,21 @@ class RegistrationScreen extends BaseComponent {
   };
 
   onSignUpClicked = () => {
+    const {
+      nameInputValue,
+      lastNameInputValue,
+      phoneInputValue,
+      passwordInputValue,
+      emailInputValue} = this.state;
 
+    let body = {
+      name: nameInputValue,
+      surname: lastNameInputValue,
+      phoneNumber: "+" + phoneInputValue.toString(),
+      email: emailInputValue,
+      password: passwordInputValue
+    };
+    this.props.performRegistration(body)
   };
 }
 
@@ -261,7 +276,7 @@ export default connect(
     response: state.registration.response,
   }),
   dispatch => ({
-    performRegistration: (payload) => dispatch(actions.registrationPerform(payload)),
+    performRegistration: (data) => dispatch(actions.registrationPerform(data)),
     cancelRegistration: () => dispatch(actions.registrationCancel()),
   }),
 )(RegistrationScreen);

@@ -2,16 +2,19 @@ import {put, cancelled, call, take, race, takeLatest} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
 import * as NavigationService from '../navigation/NavigationService'
-import Api from "../network/Api"
+import * as Api from "../network/Api"
 import BaseApi from '../network/BaseApi';
 import codes from '../codes';
 
 function* loginPerformAsync(action) {
   try {
-    const response = yield call(() => BaseApi.post(Api.userLogin(), action.payload));
-    if (response && response.status === codes.STATUS_SUCCESS) {
+    const response = yield call(() => BaseApi.post(Api.userLogin(), action.data, null));
+    if (response && response.status === codes.STATUS_200) {
       // save user data
+      yield put(actions.loginSuccess(response.data));
       yield put(actions.userLoginSuccess(response.data));
+      // get user details
+      yield put(actions.userGetDetails(response.data.userId));
       NavigationService.navigateWithReset('Main')
     }
   } catch (e) {

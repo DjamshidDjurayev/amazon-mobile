@@ -1,6 +1,6 @@
 import * as types from '../actionTypes';
 
-export const registrationPerform = payload => ({ type: types.REGISTRATION_ACTION_PERFORM, payload });
+export const registrationPerform = data => ({ type: types.REGISTRATION_ACTION_PERFORM, data });
 
 export const registrationSuccess = data => ({ type: types.REGISTRATION_ACTION_SUCCESS, data });
 
