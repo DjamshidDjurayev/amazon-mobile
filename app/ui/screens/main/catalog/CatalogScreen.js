@@ -11,10 +11,9 @@ import colors from '../../../../colors';
 import {connect} from 'react-redux';
 import CatalogItem from './CatalogItem';
 import CustomText from '../../../components/CustomText';
-import strings from '../../../../strings';
-import {toDp} from '../../../../utils/ScreenUtils';
+import strings from '../../../../lang/strings';
 import Toolbar from '../../../components/Toolbar';
-import * as NavigationService from '../../../../navigation/NavigationService'
+import NavigationService from '../../../../navigation/NavigationService'
 
 const items = Array.apply(null, Array(20)).map((v, i) => {
   return { id: i, src: 'http://placehold.it/200x200?text=' + (i + 1), title: 'title ' + i, empty: false };

@@ -5,7 +5,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import CustomButton from '../components/CustomButton';
 import PropTypes from 'prop-types'
 import CustomInput from '../components/CustomInput';
-import strings from '../../strings';
+import strings from '../../lang/strings';
 import colors from '../../colors';
 import {toDp} from '../../utils/ScreenUtils';
 import {connect} from 'react-redux';

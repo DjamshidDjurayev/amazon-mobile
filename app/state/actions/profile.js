@@ -13,3 +13,5 @@ export const userGetDetails = data => ({ type: types.USER_GET_DETAILS_ACTION, da
 export const userGetDetailsSuccess = data => ({ type: types.USER_GET_DETAILS_ACTION_SUCCESS, data });
 
 export const userGetDetailsError = error => ({ type: types.USER_GET_DETAILS_ACTION_ERROR, error });
+
+export const appLanguageSet = data => ({ type: types.APP_LANGUAGE_SET_ACTION, data });

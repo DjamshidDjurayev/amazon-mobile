@@ -1,9 +1,9 @@
 import {put, cancelled, call, take, race, takeLatest} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
-import * as NavigationService from '../navigation/NavigationService'
+import NavigationService from '../navigation/NavigationService'
 import BaseApi from '../network/BaseApi';
-import * as Api from '../network/Api';
+import Api from '../network/Api';
 import codes from '../codes';
 
 function* registrationPerformAsync(action) {

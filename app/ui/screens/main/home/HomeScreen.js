@@ -2,15 +2,16 @@ import React from 'react'
 import BaseComponent from '../../../base/BaseComponent';
 import {SafeAreaView} from "react-navigation";
 import styles from './style';
-import {ScrollView, StatusBar, View, Image} from 'react-native';
+import {ScrollView, StatusBar, View} from 'react-native';
 import colors from '../../../../colors';
 import {connect} from 'react-redux';
 import CustomText from '../../../components/CustomText';
 import MainSearchView from '../../../components/MainSearchView';
 import Swiper from '../../../../libs/Swiper'
 import {toDp} from '../../../../utils/ScreenUtils';
-import strings from '../../../../strings';
+import strings from '../../../../lang/strings';
 import LanguageSelector from '../../../components/LanguageSelector';
+import FastImage from 'react-native-fast-image'
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -61,11 +62,11 @@ class HomeScreen extends BaseComponent {
 
   renderSliderItem = (image, index) => {
     return(
-      <Image
+      <FastImage
         key={index}
         style={styles.imageStyle}
         source={{uri: image}}
-        resizeMode={'cover'}/>
+        resizeMode={FastImage.resizeMode.cover}/>
     )
   };
 

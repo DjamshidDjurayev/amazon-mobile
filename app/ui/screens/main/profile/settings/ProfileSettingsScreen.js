@@ -1,7 +1,7 @@
 import React from 'react'
 import BaseComponent from '../../../../base/BaseComponent';
 import Toolbar from '../../../../components/Toolbar';
-import strings from '../../../../../strings';
+import strings from '../../../../../lang/strings';
 import {
   ScrollView,
   StatusBar,
@@ -13,7 +13,7 @@ import {
 import colors from '../../../../../colors';
 import styles from './style';
 import {SafeAreaView} from "react-navigation";
-import * as NavigationService from '../../../../../navigation/NavigationService'
+import NavigationService from '../../../../../navigation/NavigationService'
 import {connect} from 'react-redux';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import {toDp} from '../../../../../utils/ScreenUtils';
@@ -116,7 +116,7 @@ class ProfileSettingsScreen extends BaseComponent {
     return(
       <View style={styles.settingsHeaderContainer}>
         <View style={styles.imageContainer}>
-          {user.image ? this.renderAvatar(user.image) : this.renderAvatarPlaceHolder()}
+          {user && user.image ? this.renderAvatar(user.image) : this.renderAvatarPlaceHolder()}
           <TouchableOpacity
             style={styles.addImageContainer}>
             <View style={styles.addImage}>
@@ -177,7 +177,8 @@ class ProfileSettingsScreen extends BaseComponent {
 
   renderBottomSheets = () => {
     return(
-      <BottomSheet inputRef={ref => this.RBSheet = ref} />
+      <BottomSheet
+        inputRef={ref => this.RBSheet = ref} />
     )
   };
 

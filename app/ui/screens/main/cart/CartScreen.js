@@ -6,13 +6,13 @@ import {StatusBar, FlatList, View} from "react-native";
 import colors from '../../../../colors';
 import {connect} from 'react-redux';
 import Toolbar from '../../../components/Toolbar';
-import strings from '../../../../strings';
+import strings from '../../../../lang/strings';
 import CartItem from './CartItem';
 import CheckBox from '../../../components/CheckBox';
 import CustomText from '../../../components/CustomText';
 import CustomButton from '../../../components/CustomButton';
 import {toDp} from '../../../../utils/ScreenUtils';
-import * as NavigationService from '../../../../navigation/NavigationService'
+import NavigationService from '../../../../navigation/NavigationService'
 
 const items = Array.apply(null, Array(20)).map((v, i) => {
   return { id: i, src: 'http://placehold.it/200x200?text=' + (i + 1), title: 'Xiaomi 9 Redmi ' + i, empty: false };

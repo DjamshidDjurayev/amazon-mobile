@@ -11,13 +11,13 @@ import {SafeAreaView} from 'react-navigation';
 import {actions} from '../../../state/actions';
 import colors from '../../../colors';
 import CustomText from '../../components/CustomText';
-import strings from '../../../strings';
+import strings from '../../../lang/strings';
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import {toDp} from '../../../utils/ScreenUtils';
 import CustomButton from '../../components/CustomButton';
 import TextUtils from '../../../utils/TextUtils';
 import CustomInput from '../../components/CustomInput';
-import * as NavigationService from '../../../navigation/NavigationService'
+import NavigationService from '../../../navigation/NavigationService'
 import styles from './style';
 import BaseComponent from '../../base/BaseComponent';
 import Logo from '../../components/Logo';
@@ -62,6 +62,8 @@ class LoginScreen extends BaseComponent {
   }
 
   renderInputs = () => {
+    const {setLocale} = this.props.screenProps;
+
     return(
       <View>
         <CustomInput

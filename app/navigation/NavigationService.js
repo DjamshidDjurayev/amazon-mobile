@@ -1,33 +1,38 @@
 import {NavigationActions, StackActions} from 'react-navigation';
 
-const config = {};
+let _navigator;
 
-export function setTopLevelNavigator(nav) {
-  if (nav) {
-    config.navigator = nav;
-  }
+function setTopLevelNavigator(navigatorRef) {
+  _navigator = navigatorRef;
 }
 
-export function navigate(routeName, params) {
-  if (config.navigator && routeName) {
+function navigate(routeName, params) {
+  if (_navigator && routeName) {
     let action = NavigationActions.navigate({ routeName, params });
-    config.navigator.dispatch(action);
+    _navigator.dispatch(action);
   }
 }
 
-export function navigateWithReset(routeName, params) {
-  if (config.navigator && routeName) {
+function navigateWithReset(routeName, params) {
+  if (_navigator && routeName) {
     const resetAction = StackActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName, params })],
     });
-    config.navigator.dispatch(resetAction);
+    _navigator.dispatch(resetAction);
   }
 }
 
-export function goBack() {
-  if (config.navigator) {
+function goBack() {
+  if (_navigator) {
     let action = NavigationActions.back({});
-    config.navigator.dispatch(action);
+    _navigator.dispatch(action);
   }
+}
+
+export default {
+  setTopLevelNavigator,
+  navigate,
+  navigateWithReset,
+  goBack,
 }

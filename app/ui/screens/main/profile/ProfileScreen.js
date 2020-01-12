@@ -2,18 +2,26 @@ import React from 'react'
 import BaseComponent from '../../../base/BaseComponent';
 import {SafeAreaView} from "react-navigation";
 import styles from './style';
-import {ScrollView, StatusBar, View, Image, TouchableOpacity} from 'react-native';
+import {
+  ScrollView,
+  StatusBar,
+  View,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import colors from '../../../../colors';
 import {connect} from 'react-redux';
 import Toolbar from '../../../components/Toolbar';
-import strings from '../../../../strings';
+import strings from '../../../../lang/strings';
 import CustomText from '../../../components/CustomText';
 import Entypo from 'react-native-vector-icons/Entypo'
 import {toDp} from '../../../../utils/ScreenUtils';
 import MenuItem from '../../../components/MenuItem';
 import Divider from '../../../components/Divider';
-import * as NavigationService from '../../../../navigation/NavigationService'
+import NavigationService from '../../../../navigation/NavigationService'
 import TextUtils from '../../../../utils/TextUtils';
+import LanguageHelper from '../../../../utils/LanguageHelper';
+import ActionSheetDialog from '../../../dialogs/ActionSheetDialog';
 
 class ProfileScreen extends BaseComponent {
   static navigationOptions = {
@@ -22,11 +30,16 @@ class ProfileScreen extends BaseComponent {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      showModal: false,
+    };
   }
 
   render() {
     return(
       <SafeAreaView style={styles.rootView}>
+        {this.renderModals()}
         {this.renderStatusBar()}
         {this.renderToolbar()}
         <ScrollView keyboardShouldPersistTaps={'always'}>
@@ -39,7 +52,31 @@ class ProfileScreen extends BaseComponent {
     )
   }
 
+  renderModals = () => {
+    const {locale, setLocale} = this.props.screenProps;
+    return(
+      <View>
+        <ActionSheetDialog
+          items={[
+            { label: 'Русский', value: 'ru', selected: locale === 'ru' },
+            { label: 'English', value: 'en', selected: locale === 'en', },
+          ]}
+          onValueChange={(item, index) => {
+            setLocale(item.value)
+          }}
+          onCancel={() => {
+            this.setState({
+              showModal: false
+            })
+          }}
+          visibility={this.state.showModal}/>
+      </View>
+    )
+  };
+
   renderProfileSettings = () => {
+    const {locale, setLocale} = this.props.screenProps;
+
     return(
       <View style={styles.profileSettingsContainer}>
         <MenuItem
@@ -55,10 +92,10 @@ class ProfileScreen extends BaseComponent {
           title={strings.client_support}/>
         <Divider />
         <MenuItem
-          onClick={() => this.onProfileItemClicked('app_lang')}
+          onClick={() => this.onChangeLanguageClicked()}
           topBorder={false}
           bottomBorder={true}
-          rightText={'Русский'}
+          rightText={LanguageHelper.getFullLanguage(locale)}
           title={strings.app_language}/>
       </View>
     )
@@ -72,9 +109,7 @@ class ProfileScreen extends BaseComponent {
           topBorder={true}
           bottomBorder={false}
           title={strings.orders}/>
-
         <Divider />
-
         <MenuItem
           onClick={() => this.onProfileItemClicked('favourites')}
           topBorder={false}
@@ -190,11 +225,19 @@ class ProfileScreen extends BaseComponent {
         break;
     }
   };
+
+  onChangeLanguageClicked = () => {
+    const {setLocale} = this.props.screenProps;
+
+    this.setState({
+      showModal: !this.state.showModal
+    })
+  };
 }
 
 export default connect(
   (state, props) => ({
-    user: state.profile.user
+    user: state.profile.user,
   }),
   dispatch => ({
   }),

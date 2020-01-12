@@ -1,8 +1,8 @@
 import {put, cancelled, call, take, race, takeLatest} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
-import * as NavigationService from '../navigation/NavigationService'
-import * as Api from "../network/Api"
+import NavigationService from '../navigation/NavigationService'
+import Api from "../network/Api"
 import BaseApi from '../network/BaseApi';
 import codes from '../codes';
 

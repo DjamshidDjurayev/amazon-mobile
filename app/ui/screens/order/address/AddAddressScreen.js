@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 import {SafeAreaView} from 'react-navigation';
-import strings from '../../../../strings';
+import strings from '../../../../lang/strings';
 import colors from '../../../../colors';
 import styles from './style';
 import {connect} from 'react-redux';

@@ -1,11 +1,12 @@
 import * as types from '../actionTypes';
+import LanguageHelper from '../../utils/LanguageHelper';
 
 const initialState = {
   userLogin: null,
   user: null,
   error: null,
   isLoggingOut: false,
-  appLang: 'ru'
+  appLang: LanguageHelper.getDefaultLanguage()
 };
 
 export default function profile(state = initialState, action = {}) {
@@ -54,6 +55,13 @@ export default function profile(state = initialState, action = {}) {
       return {
         ...state,
         error: action.error,
+      };
+
+
+    case types.APP_LANGUAGE_SET_ACTION:
+      return {
+        ...state,
+        appLang: action.data
       };
 
     default:

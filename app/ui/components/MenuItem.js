@@ -25,6 +25,7 @@ class MenuItem extends Component {
     subTitleColor: PropTypes.string,
     subTitleSize: PropTypes.number,
     rightIconEnabled: PropTypes.bool,
+    opacity: PropTypes.number,
   };
 
   static defaultProps = {
@@ -39,6 +40,7 @@ class MenuItem extends Component {
     subTitleColor: colors.light_gray,
     subTitleSize: 13,
     rightIconEnabled: true,
+    opacity: 0.9,
   };
 
   constructor(props) {
@@ -52,10 +54,11 @@ class MenuItem extends Component {
       iconColor, textColor, topBorder,
       bottomBorder, borderRadius, rightText,
       rightTextColor, subTitle, subTitleColor,
-      subTitleSize, rightIconEnabled} = this.props;
+      subTitleSize, rightIconEnabled, opacity} = this.props;
 
     return(
       <TouchableOpacity
+        opacity={opacity}
         onPress={onClick}
         style={[styles.rootView, {
           borderTopLeftRadius: topBorder ? toDp(borderRadius) : 0,

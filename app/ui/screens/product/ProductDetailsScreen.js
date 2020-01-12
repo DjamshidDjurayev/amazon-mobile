@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 import CustomText from '../../components/CustomText';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
-import * as NavigationService from '../../../navigation/NavigationService'
+import NavigationService from '../../../navigation/NavigationService'
 
 class ProductDetailsScreen extends BaseComponent {
   static navigationOptions = {

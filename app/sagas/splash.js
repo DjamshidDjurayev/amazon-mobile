@@ -1,7 +1,7 @@
 import {put, takeEvery, delay, cancelled, call, take, race, select} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
-import * as NavigationService from '../navigation/NavigationService'
+import NavigationService from '../navigation/NavigationService'
 import {getUser} from './selectors/selectors'
 
 function* splashTimeoutStartAsync() {

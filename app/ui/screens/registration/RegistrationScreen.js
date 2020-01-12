@@ -11,7 +11,7 @@ import {SafeAreaView} from 'react-navigation'
 import {actions} from '../../../state/actions';
 import colors from '../../../colors';
 import CustomText from '../../components/CustomText';
-import strings from '../../../strings';
+import strings from '../../../lang/strings';
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import {toDp} from '../../../utils/ScreenUtils';
 import CustomButton from '../../components/CustomButton';
