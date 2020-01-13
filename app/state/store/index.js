@@ -18,7 +18,7 @@ if (__DEV__) {
 const persistConfig = {
   key: 'primary',
   storage: AsyncStorage,
-  whitelist: ['profile']
+  whitelist: ['profile', 'favourites']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

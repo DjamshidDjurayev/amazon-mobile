@@ -13,7 +13,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Materialicon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {toDp} from '../../../../../utils/ScreenUtils';
 import MainSearchView from '../../../../components/MainSearchView';
-import strings from '../../../../../lang/strings';
+import strings from '../../../../../locales/strings';
 import CustomText from '../../../../components/CustomText';
 import NavigationService from '../../../../../navigation/NavigationService'
 import MenuItem from '../../../../components/MenuItem';

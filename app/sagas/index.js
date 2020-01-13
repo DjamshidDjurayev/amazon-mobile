@@ -3,6 +3,7 @@ import {watchSplashTimeout} from './splash';
 import {watchLoginPerform} from './login';
 import {watchRegistrationPerform} from './registration';
 import {watchUserLogout} from './profile';
+import {watchCategories} from './categories';
 
 export default function* rootSaga() {
   yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga() {
     fork(watchLoginPerform),
     fork(watchRegistrationPerform),
     fork(watchUserLogout),
+    fork(watchCategories),
   ]);
 }

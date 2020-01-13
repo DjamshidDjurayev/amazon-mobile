@@ -5,6 +5,7 @@ import CustomText from '../../../components/CustomText';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../../../colors';
 import {getDeviceWidth, toDp} from '../../../../utils/ScreenUtils';
+import TextUtils from '../../../../utils/TextUtils';
 
 class CatalogItem extends Component {
   static propTypes = {
@@ -59,17 +60,22 @@ class CatalogItem extends Component {
           marginLeft: toDp(18),
           marginRight: this.state.cardMarginRight
         }]}>
-        <Image
+        <View
           style={[styles.cardImage, {
             width: '100%',
             height: this.state.size,
-          }]}
-          source={{uri: "https://source.unsplash.com/1024x768/?nature"}}
-          resizeMode={'cover'}/>
+          }]}>
+          <CustomText
+            size={26}
+            title={TextUtils.getInitialLetter(item.name)}/>
+        </View>
 
         <CustomText
+          ellipsizeMode={'tail'}
           style={styles.cardTitle}
-          title={item.title}/>
+          title={item.name}
+          numberOfLines={2}
+        />
       </TouchableOpacity>
     )
   }
@@ -84,13 +90,15 @@ const styles = EStyleSheet.create({
   cardImage: {
     borderTopLeftRadius: '12rem',
     borderTopRightRadius: '12rem',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   cardTitle: {
     marginTop: '6rem',
     marginLeft: '6rem',
     marginRight: '6rem',
     marginBottom: '6rem',
-  }
+  },
 });
 
 export default CatalogItem

@@ -1,7 +1,6 @@
 import React from 'react'
 import {
   StatusBar,
-  View,
   FlatList,
 } from 'react-native';
 import BaseComponent from '../../../base/BaseComponent';
@@ -11,25 +10,10 @@ import colors from '../../../../colors';
 import {connect} from 'react-redux';
 import CatalogItem from './CatalogItem';
 import CustomText from '../../../components/CustomText';
-import strings from '../../../../lang/strings';
+import strings from '../../../../locales/strings';
 import Toolbar from '../../../components/Toolbar';
 import NavigationService from '../../../../navigation/NavigationService'
-
-const items = Array.apply(null, Array(20)).map((v, i) => {
-  return { id: i, src: 'http://placehold.it/200x200?text=' + (i + 1), title: 'title ' + i, empty: false };
-});
-
-const formatData = (data, numColumns) => {
-  const numberOfFullRows = Math.floor(data.length / numColumns);
-
-  let numberOfElementsLastRow = data.length - (numberOfFullRows * numColumns);
-  while (numberOfElementsLastRow !== numColumns && numberOfElementsLastRow !== 0) {
-    data.push({ title: `blank-${numberOfElementsLastRow}`, empty: true });
-    numberOfElementsLastRow++;
-  }
-
-  return data;
-};
+import {actions} from '../../../../state/actions';
 
 class CatalogScreen extends BaseComponent {
   constructor(props) {
@@ -37,6 +21,13 @@ class CatalogScreen extends BaseComponent {
   }
 
   componentDidMount(): void {
+    this.props.getCategories();
+  }
+
+  componentWillUnmount(): void {
+    if (this.props.isLoading) {
+      this.props.cancelGetCategories()
+    }
   }
 
   render() {
@@ -70,11 +61,13 @@ class CatalogScreen extends BaseComponent {
   };
 
   renderGridView = () => {
+    const {categories} = this.props;
+
     return (
       <FlatList
         style={{flex: 1}}
         columnWrapperStyle={styles.gridColumn}
-        data={formatData(items, 3)}
+        data={categories}
         renderItem={({ index, item }) => this.renderCategoryItem(index, item)}
         keyExtractor={item => item.id}
         ListHeaderComponentStyle={styles.headerTitle}
@@ -119,7 +112,11 @@ class CatalogScreen extends BaseComponent {
 
 export default connect(
   (state, props) => ({
+    categories: state.categories.categories,
+    isLoading: state.categories.isLoading,
   }),
   dispatch => ({
+    getCategories: () => dispatch(actions.getCategories()),
+    cancelGetCategories: () => dispatch(actions.getCategoriesCancel())
   }),
 )(CatalogScreen);

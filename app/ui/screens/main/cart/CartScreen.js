@@ -6,7 +6,7 @@ import {StatusBar, FlatList, View} from "react-native";
 import colors from '../../../../colors';
 import {connect} from 'react-redux';
 import Toolbar from '../../../components/Toolbar';
-import strings from '../../../../lang/strings';
+import strings from '../../../../locales/strings';
 import CartItem from './CartItem';
 import CheckBox from '../../../components/CheckBox';
 import CustomText from '../../../components/CustomText';

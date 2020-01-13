@@ -12,7 +12,7 @@ import {
 import colors from '../../../../colors';
 import {connect} from 'react-redux';
 import Toolbar from '../../../components/Toolbar';
-import strings from '../../../../lang/strings';
+import strings from '../../../../locales/strings';
 import CustomText from '../../../components/CustomText';
 import Entypo from 'react-native-vector-icons/Entypo'
 import {toDp} from '../../../../utils/ScreenUtils';
@@ -105,13 +105,13 @@ class ProfileScreen extends BaseComponent {
     return(
       <View style={styles.ordersAndFavoritesContainer}>
         <MenuItem
-          onClick={() => this.onProfileItemClicked('orders')}
+          onClick={() => this.onOrdersClicked()}
           topBorder={true}
           bottomBorder={false}
           title={strings.orders}/>
         <Divider />
         <MenuItem
-          onClick={() => this.onProfileItemClicked('favourites')}
+          onClick={() => this.onFavouritesClicked()}
           topBorder={false}
           bottomBorder={true}
           title={strings.favorites}/>
@@ -123,7 +123,7 @@ class ProfileScreen extends BaseComponent {
     return(
       <MenuItem
         containerStyle={styles.myCouponsContainer}
-        onClick={() => this.onProfileItemClicked('coupons')}
+        onClick={() => this.onCouponsClicked()}
         title={strings.my_coupons}/>
     )
   };
@@ -227,11 +227,21 @@ class ProfileScreen extends BaseComponent {
   };
 
   onChangeLanguageClicked = () => {
-    const {setLocale} = this.props.screenProps;
-
     this.setState({
       showModal: !this.state.showModal
     })
+  };
+
+  onOrdersClicked = () => {
+    NavigationService.navigate('Orders')
+  };
+
+  onFavouritesClicked = () => {
+    NavigationService.navigate('Favourites')
+  };
+
+  onCouponsClicked = () => {
+    NavigationService.navigate('Coupons')
   };
 }
 

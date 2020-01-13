@@ -7,15 +7,15 @@ import Api from '../network/Api';
 import codes from '../codes';
 
 function* userLogoutAsync(action) {
-  const config = { headers: {'accessToken' : action.data}};
+  const config = { headers: {'Authorization' : action.data}};
   try {
-    // const response = yield call(() => BaseApi.post(Api.userLogout(), {}, config));
-    // if (response && response.status === codes.STATUS_204) {
-    //   yield put(actions.userLogoutSuccess(response.data));
-    //   NavigationService.navigateWithReset('Login');
-    // }
-    yield put(actions.userLogoutSuccess({}));
-    NavigationService.navigateWithReset('Login');
+    const response = yield call(() => BaseApi.post(Api.userLogout(), {}, config));
+    if (response && response.status === codes.STATUS_204) {
+      yield put(actions.userLogoutSuccess(response.data));
+      NavigationService.navigateWithReset('Login');
+    }
+    // yield put(actions.userLogoutSuccess({}));
+    // NavigationService.navigateWithReset('Login');
   } catch (e) {
     yield put(actions.userLogoutError(e));
   }
@@ -32,7 +32,19 @@ function* userGetDetailsAsync(action) {
   }
 }
 
+function* userUpdateAsync(action) {
+  try {
+    const response = yield call(() => BaseApi.get(Api.userGetDetails(action.data), null));
+    if (response && response.status === codes.STATUS_200) {
+      yield put(actions.userUpdateNamesSuccess(response.data))
+    }
+  } catch (e) {
+    yield put(actions.userUpdateNamesError(e));
+  }
+}
+
 export function* watchUserLogout() {
   yield takeLatest(types.USER_LOG_OUT_ACTION, userLogoutAsync);
   yield takeLatest(types.USER_GET_DETAILS_ACTION, userGetDetailsAsync)
+  yield takeLatest(types.USER_UPDATE_NAMES, userUpdateAsync)
 }

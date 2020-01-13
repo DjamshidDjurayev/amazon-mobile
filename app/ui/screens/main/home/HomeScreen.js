@@ -9,7 +9,7 @@ import CustomText from '../../../components/CustomText';
 import MainSearchView from '../../../components/MainSearchView';
 import Swiper from '../../../../libs/Swiper'
 import {toDp} from '../../../../utils/ScreenUtils';
-import strings from '../../../../lang/strings';
+import strings from '../../../../locales/strings';
 import LanguageSelector from '../../../components/LanguageSelector';
 import FastImage from 'react-native-fast-image'
 

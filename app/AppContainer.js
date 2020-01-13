@@ -4,7 +4,7 @@ import AppNavigator from './navigation/AppNavigator';
 import NavigationService from './navigation/NavigationService';
 import {connect} from 'react-redux';
 import {actions} from './state/actions';
-import strings from './lang/strings';
+import strings from './locales/strings';
 
 class AppContainer extends BaseComponent {
   constructor(props) {

@@ -82,7 +82,6 @@ class Toolbar extends Component {
 
   renderBackButton = () => {
     const {onBackButtonClick} = this.props;
-
     return(
       <TouchableOpacity
         style={styles.backButtonContainer}
@@ -111,14 +110,20 @@ const styles = EStyleSheet.create({
     elevation: toDp(10),
   },
   searchContainer: {
-    marginRight: '14rem',
+    height: '100%',
+    width: '48rem',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   titleContainer: {
     flex: 1,
-    marginLeft: '36rem',
+    marginLeft: '30rem',
   },
   backButtonContainer: {
-    marginLeft: '14rem',
+    height: '100%',
+    width: '48rem',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });
 

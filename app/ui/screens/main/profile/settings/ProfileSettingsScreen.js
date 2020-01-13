@@ -1,7 +1,7 @@
 import React from 'react'
 import BaseComponent from '../../../../base/BaseComponent';
 import Toolbar from '../../../../components/Toolbar';
-import strings from '../../../../../lang/strings';
+import strings from '../../../../../locales/strings';
 import {
   ScrollView,
   StatusBar,
@@ -22,8 +22,6 @@ import MenuItem from '../../../../components/MenuItem';
 import Divider from '../../../../components/Divider';
 import {actions} from '../../../../../state/actions';
 import TextUtils from '../../../../../utils/TextUtils';
-import RBSheet from "react-native-raw-bottom-sheet";
-import CustomButton from '../../../../components/CustomButton';
 import BottomSheet from '../../../../dialogs/BottomSheet';
 
 class ProfileSettingsScreen extends BaseComponent {
@@ -44,8 +42,8 @@ class ProfileSettingsScreen extends BaseComponent {
           {this.renderSettingsHeader()}
           {this.renderPersonalData()}
           {this.renderChangePasswordAndExit()}
-          {this.renderBottomSheets()}
         </ScrollView>
+        {this.renderBottomSheets()}
       </SafeAreaView>
     )
   }
@@ -178,7 +176,11 @@ class ProfileSettingsScreen extends BaseComponent {
   renderBottomSheets = () => {
     return(
       <BottomSheet
-        inputRef={ref => this.RBSheet = ref} />
+        onCancelClick={() => this.NameDialog.close()}
+        onSaveClick={(name, lastName) => {
+          console.warn(lastName)
+        }}
+        inputRef={ref => this.NameDialog = ref} />
     )
   };
 
@@ -201,10 +203,7 @@ class ProfileSettingsScreen extends BaseComponent {
   };
 
   logOut = () => {
-    let body = {
-      accessToken: this.props.userLogin.id
-    };
-    this.props.userLogout(body);
+    this.props.userLogout(this.props.userLogin.id);
   };
 
   onChangePasswordClicked = () => {
@@ -212,8 +211,8 @@ class ProfileSettingsScreen extends BaseComponent {
   };
 
   onEditNameClicked = () => {
-    if (this.RBSheet) {
-      this.RBSheet.open()
+    if (this.NameDialog) {
+      this.NameDialog.open()
     }
   };
 }
@@ -225,5 +224,6 @@ export default connect(
   }),
   dispatch => ({
     userLogout: (data) => dispatch(actions.userLogout(data)),
+    updateUserName: (data) => dispatch(actions.userUpdateNames(data))
   }),
 )(ProfileSettingsScreen);

@@ -6,7 +6,8 @@ const initialState = {
   user: null,
   error: null,
   isLoggingOut: false,
-  appLang: LanguageHelper.getDefaultLanguage()
+  appLang: LanguageHelper.getDefaultLanguage(),
+  userUpdating: false,
 };
 
 export default function profile(state = initialState, action = {}) {
@@ -57,11 +58,28 @@ export default function profile(state = initialState, action = {}) {
         error: action.error,
       };
 
-
     case types.APP_LANGUAGE_SET_ACTION:
       return {
         ...state,
         appLang: action.data
+      };
+
+    case types.USER_UPDATE_NAMES:
+      return {
+        ...state,
+        userUpdating: true,
+      };
+
+    case types.USER_UPDATE_NAMES_SUCCESS:
+      return {
+        ...state,
+        userUpdating: false,
+      };
+
+    case types.USER_UPDATE_NAMES_ERROR:
+      return {
+        ...state,
+        userUpdating: false,
       };
 
     default:
