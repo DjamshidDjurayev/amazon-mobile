@@ -12,6 +12,7 @@ import {toDp} from '../../../../utils/ScreenUtils';
 import strings from '../../../../locales/strings';
 import LanguageSelector from '../../../components/LanguageSelector';
 import FastImage from 'react-native-fast-image'
+import SliderItem from './SliderItem';
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -21,12 +22,17 @@ class HomeScreen extends BaseComponent {
     super(props);
 
     this.state = {
-      images: [
-        "https://source.unsplash.com/1024x768/?nature",
-        "https://source.unsplash.com/1024x768/?water",
-        "https://source.unsplash.com/1024x768/?girl",
-        "https://source.unsplash.com/1024x768/?tree",
-      ]
+      images: [ {
+        brand: require('../../../../assets/images/armani.png'),
+        img: require('../../../../assets/images/offerArmani.png'),
+        title: 'Reliability, quality, style - in this watch',
+        subTitle: 'ARMANI - Watches',
+      }, {
+        brand: require('../../../../assets/images/beats.png'),
+        img: require('../../../../assets/images/offerBeats.png'),
+        title: 'Feeling new emotion with Beats headphones',
+        subTitle: 'Beats - Solo3 Wireless',
+      }]
     };
   }
 
@@ -54,19 +60,21 @@ class HomeScreen extends BaseComponent {
           autoplay
           autoplayTimeout={10}
           loop>
-          {this.state.images.map((image, index) => this.renderSliderItem(image, index))}
+          {this.state.images.map((item, index) => this.renderSliderItem(item, index))}
         </Swiper>
       </View>
     )
   };
 
-  renderSliderItem = (image, index) => {
+  renderSliderItem = (item, index) => {
     return(
-      <FastImage
-        key={index}
-        style={styles.imageStyle}
-        source={{uri: image}}
-        resizeMode={FastImage.resizeMode.cover}/>
+      <View style={styles.imageStyle}>
+        <SliderItem
+          img={item.img}
+          brand={item.brand}
+          subTitle={item.subTitle}
+          title={item.title}/>
+      </View>
     )
   };
 
@@ -86,6 +94,7 @@ class HomeScreen extends BaseComponent {
 
         {/* main search view */}
         <MainSearchView
+          onChange={value => console.warn(value)}
           title={strings.search}
           style={styles.mainSearchView}/>
       </View>

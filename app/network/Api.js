@@ -5,6 +5,7 @@ const userGetDetails = id => '/api/users/' + id;
 const getCategories = () => '/api/categories';
 const getCart = () => '/api/users/me/cart';
 const getMyOrders = () => '/api/users/me/myorders';
+const getProducts = query => '/api/products/getProducts?query' + query;
 
 export default {
   userLogin,
@@ -13,5 +14,6 @@ export default {
   userGetDetails,
   getCategories,
   getCart,
-  getMyOrders
+  getMyOrders,
+  getProducts
 }

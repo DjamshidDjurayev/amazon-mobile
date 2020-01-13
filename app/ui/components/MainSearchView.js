@@ -15,6 +15,7 @@ class MainSearchView extends Component {
     fontSize: PropTypes.number,
     autoFocus: PropTypes.bool,
     font: PropTypes.string,
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -31,7 +32,7 @@ class MainSearchView extends Component {
   }
 
   render() {
-    const {style, inputRef, title, fontSize, autoFocus, font} = this.props;
+    const {style, inputRef, title, fontSize, autoFocus, font, onChange} = this.props;
     return(
       <View style={[styles.rootView, style]}>
         <Feather
@@ -43,6 +44,7 @@ class MainSearchView extends Component {
         <TextInput
           ref={inputRef}
           onChangeText={(inputValue) => {
+            onChange(inputValue);
             this.setState({inputValue})
           }}
           autoFocus={autoFocus}
