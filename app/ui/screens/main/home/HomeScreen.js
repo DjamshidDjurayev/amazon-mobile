@@ -13,6 +13,8 @@ import strings from '../../../../locales/strings';
 import LanguageSelector from '../../../components/LanguageSelector';
 import FastImage from 'react-native-fast-image'
 import SliderItem from './SliderItem';
+import {actions} from '../../../../state/actions';
+import TextUtils from '../../../../utils/TextUtils';
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -94,7 +96,11 @@ class HomeScreen extends BaseComponent {
 
         {/* main search view */}
         <MainSearchView
-          onChange={value => console.warn(value)}
+          onChange={value => {
+            if (!TextUtils.isEmpty(value)) {
+              this.props.searchProduct(value)
+            }
+          }}
           title={strings.search}
           style={styles.mainSearchView}/>
       </View>
@@ -127,5 +133,6 @@ export default connect(
   (state, props) => ({
   }),
   dispatch => ({
+    searchProduct: data => dispatch(actions.searchProducts(data))
   }),
 )(HomeScreen);

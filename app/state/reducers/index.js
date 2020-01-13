@@ -8,6 +8,7 @@ import favourites from './favourites'
 import categories from './categories';
 import cart from './cart';
 import myOrders from './myOrders';
+import home from './home';
 
 const rootReducer = combineReducers({
   splash,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   categories,
   cart,
   myOrders,
+  home,
   form: formReducer
 });
 
