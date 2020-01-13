@@ -13,14 +13,22 @@ import CustomText from '../../../components/CustomText';
 import CustomButton from '../../../components/CustomButton';
 import {toDp} from '../../../../utils/ScreenUtils';
 import NavigationService from '../../../../navigation/NavigationService'
-
-const items = Array.apply(null, Array(20)).map((v, i) => {
-  return { id: i, src: 'http://placehold.it/200x200?text=' + (i + 1), title: 'Xiaomi 9 Redmi ' + i, empty: false };
-});
+import {actions} from '../../../../state/actions';
 
 class CartScreen extends BaseComponent {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount(): void {
+    const {getCart, userLogin} = this.props;
+    getCart(userLogin.id)
+  }
+
+  componentWillUnmount(): void {
+    if (this.props.isLoading) {
+      this.props.cancelGetCart()
+    }
   }
 
   render() {
@@ -34,14 +42,20 @@ class CartScreen extends BaseComponent {
   }
 
   renderBucketList = () => {
+    const {cart, isLoading} = this.props;
+
+    if (isLoading) {
+      return this.renderLoadingView();
+    }
+
     return(
       <FlatList
         style={{flex: 1}}
-        data={items}
-        contentContainerStyle={items.length > 0 ? {} : {flex:1, paddingBottom: 50}}
+        data={cart}
+        contentContainerStyle={cart.length > 0 ? {} : {flex:1, paddingBottom: 50}}
         renderItem={this.renderBucketItem}
         keyExtractor={item => item.id.toString()}
-        ListHeaderComponentStyle={items.length > 0 ? styles.headerContainer : {}}
+        ListHeaderComponentStyle={cart.length > 0 ? styles.headerContainer : {}}
         ListHeaderComponent={this.renderHeaderContainer}
         ListEmptyComponent={this.renderEmptyView}
         ListFooterComponent={this.renderFooter}
@@ -50,7 +64,21 @@ class CartScreen extends BaseComponent {
     )
   };
 
+  renderLoadingView = () => {
+    return(
+      <View>
+
+      </View>
+    )
+  };
+
   renderFooter = () => {
+    const {isLoading, cart} = this.props;
+
+    if (isLoading || cart.length === 0) {
+      return null;
+    }
+
     return(
       <CustomButton
         disabledColor={colors.button_disabled}
@@ -74,18 +102,16 @@ class CartScreen extends BaseComponent {
     )
   };
 
-  renderHeader = () => {
+  renderHeaderContainer = () => {
+    const {cart, isLoading} = this.props;
+
+    if (isLoading || cart.length === 0) {
+      return null;
+    }
+
     return(
       <CheckBox
         title={strings.select_all} />
-    )
-  };
-
-  renderHeaderContainer = () => {
-    return(
-      <View style={{flex: 1}}>
-        {items.length > 0 ? this.renderHeader() : null}
-      </View>
     )
   };
 
@@ -128,8 +154,13 @@ class CartScreen extends BaseComponent {
 
 export default connect(
   (state, props) => ({
+    cart: state.cart.cart,
+    isLoading: state.cart.isLoading,
+    userLogin: state.profile.userLogin,
   }),
   dispatch => ({
+    getCart: (data) => dispatch(actions.getCart(data)),
+    cancelGetCart: () => dispatch(actions.getCartCancel())
   }),
 )(CartScreen);
 

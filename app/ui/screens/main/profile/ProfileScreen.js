@@ -233,7 +233,7 @@ class ProfileScreen extends BaseComponent {
   };
 
   onOrdersClicked = () => {
-    NavigationService.navigate('Orders')
+    NavigationService.navigate('MyOrders')
   };
 
   onFavouritesClicked = () => {

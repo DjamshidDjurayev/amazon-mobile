@@ -6,6 +6,8 @@ import registration from './registration';
 import profile from './profile';
 import favourites from './favourites'
 import categories from './categories';
+import cart from './cart';
+import myOrders from './myOrders';
 
 const rootReducer = combineReducers({
   splash,
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
   profile,
   favourites,
   categories,
+  cart,
+  myOrders,
   form: formReducer
 });
 

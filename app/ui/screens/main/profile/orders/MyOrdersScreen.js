@@ -8,14 +8,25 @@ import strings from '../../../../../locales/strings';
 import colors from '../../../../../colors';
 import NavigationService from '../../../../../navigation/NavigationService';
 import {connect} from 'react-redux';
+import {actions} from '../../../../../state/actions';
 
-class OrdersScreen extends BaseComponent {
+class MyOrdersScreen extends BaseComponent {
   static navigationOptions = {
     header: null
   };
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount(): void {
+    this.props.getMyOrders(this.props.userLogin.id)
+  }
+
+  componentWillUnmount(): void {
+    if (this.props.isLoading) {
+      this.props.cancelGetMyOrders()
+    }
   }
 
   render() {
@@ -54,7 +65,12 @@ class OrdersScreen extends BaseComponent {
 export default connect(
   (state, props) => ({
     user: state.profile.user,
+    userLogin: state.profile.userLogin,
+    orders: state.myOrders.orders,
+    isLoading: state.myOrders.isLoading,
   }),
   dispatch => ({
+    getMyOrders: (data) => dispatch(actions.getMyOrders(data)),
+    cancelGetMyOrders: () => dispatch(actions.getMyOrdersCancel())
   }),
-)(OrdersScreen);
+)(MyOrdersScreen);

@@ -18,7 +18,7 @@ import CatalogScreen from '../ui/screens/main/catalog/CatalogScreen';
 import CartScreen from '../ui/screens/main/cart/CartScreen';
 import CatalogSearchScreen from '../ui/screens/main/catalog/search/CatalogSearchScreen';
 import ProductDetailsScreen from '../ui/screens/product/ProductDetailsScreen';
-import OrdersScreen from '../ui/screens/main/profile/orders/OrdersScreen';
+import MyOrdersScreen from '../ui/screens/main/profile/orders/MyOrdersScreen';
 import FavouritesScreen from '../ui/screens/main/profile/favourites/FavouritesScreen';
 import CouponsScreen from '../ui/screens/main/profile/coupons/CouponsScreen';
 
@@ -89,7 +89,7 @@ export const MainNavigator = createStackNavigator({
   CatalogSearch: {screen: CatalogSearchScreen},
   ProfileSettings: {screen: ProfileSettingsScreen},
   ProductDetails: {screen: ProductDetailsScreen},
-  Orders: {screen: OrdersScreen},
+  MyOrders: {screen: MyOrdersScreen},
   Favourites: {screen: FavouritesScreen},
   Coupons: {screen: CouponsScreen}
 });

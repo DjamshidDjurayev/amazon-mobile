@@ -4,6 +4,8 @@ import * as registrationActions from './registration';
 import * as profileActions from './profile'
 import * as favouritesActions from './favourites'
 import * as categoriesActions from './categories'
+import * as cartActions from './cart'
+import * as myOrdersActions from './myOrders'
 
 const actions = {
   ...splashActions,
@@ -12,6 +14,8 @@ const actions = {
   ...profileActions,
   ...favouritesActions,
   ...categoriesActions,
+  ...cartActions,
+  ...myOrdersActions,
 };
 
 export {actions};

@@ -40,6 +40,7 @@ target 'AmazonMobile' do
 
   pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
 
+
   target 'AmazonMobileTests' do
     inherit! :search_paths
     # Pods for testing

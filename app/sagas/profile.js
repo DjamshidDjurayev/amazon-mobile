@@ -14,8 +14,6 @@ function* userLogoutAsync(action) {
       yield put(actions.userLogoutSuccess(response.data));
       NavigationService.navigateWithReset('Login');
     }
-    // yield put(actions.userLogoutSuccess({}));
-    // NavigationService.navigateWithReset('Login');
   } catch (e) {
     yield put(actions.userLogoutError(e));
   }

@@ -4,6 +4,8 @@ import {watchLoginPerform} from './login';
 import {watchRegistrationPerform} from './registration';
 import {watchUserLogout} from './profile';
 import {watchCategories} from './categories';
+import {watchCart} from './cart';
+import {watchGetMyOrders} from './myOrders';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +14,7 @@ export default function* rootSaga() {
     fork(watchRegistrationPerform),
     fork(watchUserLogout),
     fork(watchCategories),
+    fork(watchCart),
+    fork(watchGetMyOrders),
   ]);
 }
