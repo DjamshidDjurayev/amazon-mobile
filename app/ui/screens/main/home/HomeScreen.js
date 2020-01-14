@@ -11,10 +11,10 @@ import Swiper from '../../../../libs/Swiper'
 import {toDp} from '../../../../utils/ScreenUtils';
 import strings from '../../../../locales/strings';
 import LanguageSelector from '../../../components/LanguageSelector';
-import FastImage from 'react-native-fast-image'
 import SliderItem from './SliderItem';
 import {actions} from '../../../../state/actions';
 import TextUtils from '../../../../utils/TextUtils';
+import NavigationService from '../../../../navigation/NavigationService';
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -96,11 +96,10 @@ class HomeScreen extends BaseComponent {
 
         {/* main search view */}
         <MainSearchView
-          onChange={value => {
-            if (!TextUtils.isEmpty(value)) {
-              this.props.searchProduct(value)
-            }
+          onClick={() => {
+            NavigationService.navigate('HomeSearch')
           }}
+          editable={false}
           title={strings.search}
           style={styles.mainSearchView}/>
       </View>

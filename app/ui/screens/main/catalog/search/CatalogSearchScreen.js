@@ -122,7 +122,6 @@ class CatalogSearchScreen extends BaseComponent {
             fontSize={toDp(16)}
             title={strings.what_to_find} />
         </View>
-
       </View>
     )
   };

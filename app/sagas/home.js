@@ -1,4 +1,4 @@
-import {put, call, debounce} from 'redux-saga/effects';
+import {put, takeLatest, cancelled, call, take, race, delay} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
 import BaseApi from '../network/BaseApi';
@@ -7,16 +7,26 @@ import codes from '../codes';
 
 function* searchProductsAsync(action) {
   try {
-    const response = yield call(() => BaseApi.get(Api.getProducts(action.data), null));
+    yield delay(800);
+    const response = yield call(() => BaseApi.get(Api.searchProducts(action.data), null));
     if (response && response.status === codes.STATUS_200) {
-      console.warn(response.data);
+      console.log(response.data);
       yield put(actions.searchProductsSuccess(response.data))
     }
   } catch (e) {
     yield put(actions.searchProductsError(e))
+  } finally {
+    if (yield cancelled()) {
+      yield put(actions.searchProductsCancelled());
+    }
   }
 }
 
 export function* watchSearchProducts() {
-  yield debounce(600, types.SEARCH_PRODUCT, searchProductsAsync)
+  yield takeLatest(types.SEARCH_PRODUCT, function* (...args) {
+    yield race({
+      task: call(searchProductsAsync, ...args),
+      cancel: take(types.SEARCH_PRODUCT_CANCEL),
+    });
+  });
 }

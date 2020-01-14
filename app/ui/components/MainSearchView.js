@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, TextInput} from 'react-native'
+import {View, TextInput, TouchableWithoutFeedback, ActivityIndicator} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../colors';
 import Feather from 'react-native-vector-icons/Feather'
@@ -16,12 +16,17 @@ class MainSearchView extends Component {
     autoFocus: PropTypes.bool,
     font: PropTypes.string,
     onChange: PropTypes.func,
+    onClick: PropTypes.func,
+    isLoading: PropTypes.bool,
+    loadingColor: PropTypes.string,
   };
 
   static defaultProps = {
     fontSize: 13,
     autoFocus: false,
-    font: fontHelper.fontDefault
+    font: fontHelper.fontDefault,
+    isLoading: false,
+    loadingColor: colors.green,
   };
 
   constructor(props) {
@@ -32,32 +37,50 @@ class MainSearchView extends Component {
   }
 
   render() {
-    const {style, inputRef, title, fontSize, autoFocus, font, onChange} = this.props;
+    const {
+      style, inputRef, title, fontSize, isLoading,
+      autoFocus, font, onChange, onClick, ...otherProps} = this.props;
     return(
-      <View style={[styles.rootView, style]}>
-        <Feather
-          style={styles.searchIcon}
-          name={'search'}
-          size={toDp(28)}
-          color={colors.gray_D6}/>
+      <TouchableWithoutFeedback onPress={onClick}>
+        <View style={[styles.rootView, style]}>
+          <Feather
+            style={styles.searchIcon}
+            name={'search'}
+            size={toDp(28)}
+            color={colors.gray_D6}/>
 
-        <TextInput
-          ref={inputRef}
-          onChangeText={(inputValue) => {
-            onChange(inputValue);
-            this.setState({inputValue})
-          }}
-          autoFocus={autoFocus}
-          value={this.state.inputValue}
-          placeholderTextColor={colors.gray_D6}
-          placeholder={title}
-          style={[styles.input, {
-            fontSize: toDp(fontSize),
-            fontFamily: font,
-          }]}/>
-      </View>
+          <TextInput
+            ref={inputRef}
+            onChangeText={(inputValue) => {
+              onChange(inputValue);
+              this.setState({inputValue})
+            }}
+            autoFocus={autoFocus}
+            value={this.state.inputValue}
+            placeholderTextColor={colors.gray_D6}
+            placeholder={title}
+            style={[styles.input, {
+              fontSize: toDp(fontSize),
+              fontFamily: font,
+            }]}
+            {...otherProps}
+          />
+
+          {isLoading ? this.renderLoadingView() : null}
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
+
+  renderLoadingView = () => {
+    const {loadingColor} = this.props;
+
+    return(
+      <ActivityIndicator
+        style={styles.loading}
+        color={loadingColor}/>
+    )
+  };
 }
 
 const styles = EStyleSheet.create({
@@ -75,7 +98,10 @@ const styles = EStyleSheet.create({
   searchIcon: {
     marginLeft: '13rem',
     marginRight: '10rem',
-  }
+  },
+  loading: {
+    marginRight: '6rem'
+  },
 });
 
 export default MainSearchView
