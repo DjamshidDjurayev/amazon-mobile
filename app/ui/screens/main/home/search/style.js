@@ -25,6 +25,11 @@ const styles = EStyleSheet.create({
     marginLeft: '16rem',
     marginRight: '16rem',
   },
+  emptyViewContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default styles

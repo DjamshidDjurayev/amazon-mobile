@@ -22,6 +22,11 @@ class CustomButton extends React.Component {
     font: PropTypes.string,
     disabledColor: PropTypes.string,
     disabled: PropTypes.bool,
+    bordered: PropTypes.bool,
+    borderedBackgroundColor: PropTypes.string,
+    borderedDisabledBackgroundColor: PropTypes.string,
+    borderedWidth: PropTypes.number,
+    borderColor: PropTypes.string,
   };
 
   static defaultProps = {
@@ -32,21 +37,31 @@ class CustomButton extends React.Component {
     textColor: colors.white,
     font: '',
     textSize: 14,
+    bordered: false,
+    borderedBackgroundColor: colors.transparent,
+    borderedDisabledBackgroundColor: colors.gray_F4,
+    borderedWidth: 2,
+    borderColor: colors.green,
   };
 
   render() {
     const {
-      style, isLoading, buttonColor,
-      textColor, title, font, onClick, textSize, textStyle,
-      disabledColor, disabled, ...otherProps} = this.props;
+      style, isLoading, buttonColor, bordered, borderedBackgroundColor, borderedDisabledBackgroundColor,
+      textColor, title, font, onClick, textSize, textStyle, borderedWidth,
+      disabledColor, disabled, borderColor, ...otherProps} = this.props;
 
     return (
       <TouchableOpacity
         disabled={disabled || isLoading}
         activeOpacity={.6}
         onPress={onClick}
-        style={[style, styles.button, {
-            backgroundColor: (isLoading || disabled) ? disabledColor : buttonColor}
+        style={[styles.button, style, {
+          backgroundColor: (isLoading || disabled)
+            ? (bordered ? borderedDisabledBackgroundColor : disabledColor)
+            : (bordered ? borderedBackgroundColor : buttonColor),
+          borderWidth: bordered ? toDp(borderedWidth) : null,
+          borderColor: bordered ? borderColor : null
+        },
         ]}>
         <CustomText
           textColor={isLoading ? disabledColor : textColor}

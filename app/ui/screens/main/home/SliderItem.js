@@ -4,6 +4,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types'
 import CustomText from '../../../components/CustomText';
 import CustomButton from '../../../components/CustomButton';
+import colors from '../../../../colors';
 
 class SliderItem extends Component {
   static propTypes = {
@@ -18,7 +19,8 @@ class SliderItem extends Component {
   render() {
     const {title, subTitle, brand, url, img} = this.props;
     return(
-      <View style={styles.rootView}>
+      <View
+        style={styles.rootView}>
         <Image
           resizeMode={'cover'}
           style={styles.image}
@@ -37,6 +39,16 @@ class SliderItem extends Component {
             style={styles.subTitle}
             size={10}
             title={subTitle}/>
+
+          <CustomButton
+            style={styles.detailsButton}
+            textStyle={styles.detailsButtonText}
+            textSize={12}
+            textColor={colors.black}
+            bordered
+            title={'Details'}/>
+          <View>
+          </View>
         </View>
       </View>
     )
@@ -70,6 +82,17 @@ const styles = EStyleSheet.create({
   },
   title: {
   },
+  detailsButton: {
+    alignSelf: 'flex-start',
+    marginLeft: 0,
+    marginTop: '8rem',
+  },
+  detailsButtonText: {
+    marginLeft: '24rem',
+    marginRight: '24rem',
+    marginTop: '4rem',
+    marginBottom: '4rem',
+  }
 });
 
 export default SliderItem

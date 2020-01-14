@@ -17,4 +17,5 @@ export default {
   button_disabled: '#BAEEEB',
   blue: '#2A2279',
   red: '#BD0000',
+  transparent: 'transparent',
 };

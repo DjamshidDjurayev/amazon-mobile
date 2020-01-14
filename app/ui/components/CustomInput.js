@@ -76,7 +76,7 @@ class CustomInput extends React.Component {
         <View>
           <TextInputMask
             style={[{
-              paddingRight: showHidePassword ? toDp(40) : toDp(16),
+              paddingRight: showHidePassword ? toDp(48) : toDp(16),
               paddingLeft: toDp(16),
               paddingTop: toDp(14),
               paddingBottom: toDp(14),
@@ -132,7 +132,7 @@ const styles = EStyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    marginRight: "12rem"
+    width: '48rem'
   },
   errorText: {
     marginLeft: '5rem',

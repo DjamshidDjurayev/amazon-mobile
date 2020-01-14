@@ -44,6 +44,7 @@ const ruLocale = {
   sure_to_logout: 'Вы действительно хотите выйти?',
   cancel: 'Отмена',
   yes: 'Да',
+  empty: 'Пусто',
 };
 
 export default ruLocale

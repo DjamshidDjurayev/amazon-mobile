@@ -44,6 +44,7 @@ const uzLocale = {
   sure_to_logout: 'Are you sure you want to log out?',
   cancel: 'Cancel',
   yes: 'Yes',
+  empty: 'Empty',
 };
 
 export default uzLocale

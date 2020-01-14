@@ -28,7 +28,9 @@ class HomeSearchScreen extends BaseComponent {
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
         {this.renderSearchView()}
-        <ScrollView keyboardShouldPersistTaps={'always'}>
+        <ScrollView
+          contentContainerStyle={{flex: 1}}
+          keyboardShouldPersistTaps={'always'}>
           {this.renderSearchProducts()}
         </ScrollView>
       </SafeAreaView>
@@ -66,13 +68,29 @@ class HomeSearchScreen extends BaseComponent {
   };
 
   renderSearchProducts = () => {
-    const {products} = this.props;
+    const {products, isLoading} = this.props;
 
+    if (!isLoading) {
+      if (products && products.length === 0) {
+        return this.renderEmptyView()
+      } else {
+        return(
+          <View style={{flex: 1}}>
+            {products && products.map((product, index) => {
+              return this.renderProductItem(product, index)
+            })}
+          </View>
+        )
+      }
+    }
+
+    return null
+  };
+
+  renderEmptyView = () => {
     return(
-      <View style={{flex: 1}}>
-        {products && products.map((product, index) => {
-          return this.renderProductItem(product, index)
-        })}
+      <View style={styles.emptyViewContainer}>
+        <CustomText title={strings.empty}/>
       </View>
     )
   };

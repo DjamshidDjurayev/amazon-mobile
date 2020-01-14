@@ -12,7 +12,6 @@ import {actions} from '../../../state/actions';
 import colors from '../../../colors';
 import CustomText from '../../components/CustomText';
 import strings from '../../../locales/strings';
-import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import {toDp} from '../../../utils/ScreenUtils';
 import CustomButton from '../../components/CustomButton';
 import TextUtils from '../../../utils/TextUtils';

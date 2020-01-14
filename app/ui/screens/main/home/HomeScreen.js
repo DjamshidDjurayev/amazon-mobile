@@ -15,6 +15,7 @@ import SliderItem from './SliderItem';
 import {actions} from '../../../../state/actions';
 import TextUtils from '../../../../utils/TextUtils';
 import NavigationService from '../../../../navigation/NavigationService';
+import CustomButton from '../../../components/CustomButton';
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -70,8 +71,11 @@ class HomeScreen extends BaseComponent {
 
   renderSliderItem = (item, index) => {
     return(
-      <View style={styles.imageStyle}>
+      <View
+        key={index}
+        style={styles.imageStyle}>
         <SliderItem
+          index={index}
           img={item.img}
           brand={item.brand}
           subTitle={item.subTitle}
