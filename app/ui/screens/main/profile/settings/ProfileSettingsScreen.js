@@ -23,6 +23,7 @@ import Divider from '../../../../components/Divider';
 import {actions} from '../../../../../state/actions';
 import TextUtils from '../../../../../utils/TextUtils';
 import BottomSheet from '../../../../dialogs/BottomSheet';
+import LoadingDialog from '../../../../dialogs/LoadingDialog';
 
 class ProfileSettingsScreen extends BaseComponent {
   static navigationOptions = {
@@ -36,6 +37,7 @@ class ProfileSettingsScreen extends BaseComponent {
   render() {
     return(
       <SafeAreaView style={styles.rootView}>
+        {this.renderModals()}
         {this.renderStatusBar()}
         {this.renderToolbar()}
         <ScrollView keyboardShouldPersistTaps={'always'}>
@@ -47,6 +49,12 @@ class ProfileSettingsScreen extends BaseComponent {
       </SafeAreaView>
     )
   }
+
+  renderModals = () => {
+    return(
+      <LoadingDialog visibility={this.props.isLoggingOut}/>
+    )
+  };
 
   renderChangePasswordAndExit = () => {
     return(
@@ -220,7 +228,8 @@ class ProfileSettingsScreen extends BaseComponent {
 export default connect(
   (state, props) => ({
     user: state.profile.user,
-    userLogin: state.profile.userLogin
+    userLogin: state.profile.userLogin,
+    isLoggingOut: state.profile.isLoggingOut
   }),
   dispatch => ({
     userLogout: (data) => dispatch(actions.userLogout(data)),

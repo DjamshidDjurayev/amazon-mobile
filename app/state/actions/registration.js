@@ -6,5 +6,9 @@ export const registrationSuccess = data => ({ type: types.REGISTRATION_ACTION_SU
 
 export const registrationCancel = () => ({ type: types.REGISTRATION_ACTION_CANCEL });
 
+export const registrationCancelled = () => ({ type: types.REGISTRATION_ACTION_CANCELLED });
+
+export const registrationErrorClear = () => ({ type: types.REGISTRATION_ACTION_ERROR_CLEAR });
+
 export const registrationError = error => ({ type: types.REGISTRATION_ACTION_ERROR, error });
 

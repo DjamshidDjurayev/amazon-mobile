@@ -5,7 +5,6 @@ const styles = EStyleSheet.create({
   rootView: {
     flex: 1,
     backgroundColor: colors.ultra_light_gray,
-    paddingBottom: '50rem'
   },
   container: {
     flex: 1,
@@ -29,6 +28,7 @@ const styles = EStyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: '50rem'
   },
 });
 

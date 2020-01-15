@@ -37,7 +37,14 @@ export default function home(state = initialState, action = {}) {
     case types.SEARCH_PRODUCT_CANCELLED:
       return {
         ...state,
-        isCancelled: true
+        isCancelled: true,
+      };
+
+    case types.SEARCH_LIST_CLEAR:
+      return {
+        ...state,
+        isLoading: false,
+        searchProducts: [],
       };
 
     default:

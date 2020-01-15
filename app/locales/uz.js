@@ -45,6 +45,7 @@ const uzLocale = {
   cancel: 'Cancel',
   yes: 'Yes',
   empty: 'Empty',
+  ok: 'Ok',
 };
 
 export default uzLocale

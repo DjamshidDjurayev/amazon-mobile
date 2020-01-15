@@ -45,6 +45,7 @@ const ruLocale = {
   cancel: 'Отмена',
   yes: 'Да',
   empty: 'Пусто',
+  ok: 'Ок',
 };
 
 export default ruLocale

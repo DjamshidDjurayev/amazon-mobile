@@ -14,12 +14,14 @@ export default function login(state = initialState, action = {}) {
         ...state,
         isLoading: true,
         isCancelled: false,
+        error: null,
       };
 
     case types.LOGIN_ACTION_SUCCESS:
       return {
         ...state,
         data: action.data,
+        error: null,
         isLoading: false,
         isCancelled: false,
         isFinished: true,
@@ -31,6 +33,7 @@ export default function login(state = initialState, action = {}) {
         isLoading: false,
         isCancelled: true,
         isFinished: false,
+        error: null,
       };
 
     case types.LOGIN_ACTION_ERROR:
@@ -39,6 +42,12 @@ export default function login(state = initialState, action = {}) {
         error: action.error,
         isLoading: false,
         isCancelled: false,
+      };
+
+    case types.LOGIN_ACTION_ERROR_CLEAR:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;

@@ -4,7 +4,7 @@ import {
   StatusBar,
   TouchableOpacity,
   KeyboardAvoidingView,
-  ScrollView,
+  ScrollView, Alert,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {SafeAreaView} from 'react-navigation'
@@ -12,7 +12,6 @@ import {actions} from '../../../state/actions';
 import colors from '../../../colors';
 import CustomText from '../../components/CustomText';
 import strings from '../../../locales/strings';
-import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import {toDp} from '../../../utils/ScreenUtils';
 import CustomButton from '../../components/CustomButton';
 import TextUtils from '../../../utils/TextUtils';
@@ -38,6 +37,30 @@ class RegistrationScreen extends BaseComponent {
       phoneInputValue: "",
       passwordInputValue: "",
       emailInputValue: "",
+    }
+  }
+
+  componentWillUnmount(): void {
+    if (this.props.isLoading) {
+      this.props.cancelRegistration()
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.error !== this.props.error) {
+      if (this.props.error) {
+        Alert.alert(null, this.props.error.message, [
+          {
+            text: strings.ok,
+            onPress: () => {
+              // clear registration error
+              this.props.registrationErrorClear()
+            },
+          }
+        ], {
+          cancelable: false
+        })
+      }
     }
   }
 
@@ -242,7 +265,8 @@ class RegistrationScreen extends BaseComponent {
       lastNameInputValue,
       phoneInputValue,
       passwordInputValue,
-      emailInputValue} = this.state;
+      emailInputValue
+    } = this.state;
 
     let body = {
       name: nameInputValue,
@@ -259,10 +283,11 @@ export default connect(
   (state, props) => ({
     isLoading: state.registration.isLoading,
     isCancelled: state.registration.isCancelled,
-    response: state.registration.response,
+    error: state.registration.error,
   }),
   dispatch => ({
     performRegistration: (data) => dispatch(actions.registrationPerform(data)),
     cancelRegistration: () => dispatch(actions.registrationCancel()),
+    registrationErrorClear: () => dispatch(actions.registrationErrorClear())
   }),
 )(RegistrationScreen);

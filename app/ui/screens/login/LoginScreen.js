@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   ScrollView,
+  Alert
 } from 'react-native';
 import {connect} from 'react-redux';
 import {SafeAreaView} from 'react-navigation';
@@ -39,6 +40,24 @@ class LoginScreen extends BaseComponent {
     };
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.error !== this.props.error) {
+      if (this.props.error) {
+        Alert.alert(null, this.props.error.message, [
+          {
+            text: strings.ok,
+            onPress: () => {
+              // clear login error
+              this.props.loginErrorClear()
+            },
+          }
+        ], {
+          cancelable: false
+        })
+      }
+    }
+  }
+
   componentWillUnmount(): void {
     if (this.props.isLoading) {
       this.props.cancelLogin()
@@ -61,8 +80,6 @@ class LoginScreen extends BaseComponent {
   }
 
   renderInputs = () => {
-    const {setLocale} = this.props.screenProps;
-
     return(
       <View>
         <CustomInput
@@ -249,9 +266,11 @@ export default connect(
   (state, props) => ({
     isLoading: state.login.isLoading,
     isCancelled: state.login.isCancelled,
+    error: state.login.error,
   }),
   dispatch => ({
     performLogin: (body) => dispatch(actions.loginPerform(body)),
     cancelLogin: () => dispatch(actions.loginCancel()),
+    loginErrorClear: () => dispatch(actions.loginErrorClear())
   }),
 )(LoginScreen);

@@ -17,7 +17,7 @@ function* registrationPerformAsync(action) {
     yield put(actions.registrationError(e));
   } finally {
     if (yield cancelled()) {
-      yield put(actions.registrationCancel());
+      yield put(actions.registrationCancelled());
     }
   }
 }

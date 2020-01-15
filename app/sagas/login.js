@@ -18,7 +18,8 @@ function* loginPerformAsync(action) {
       NavigationService.navigateWithReset('Main')
     }
   } catch (e) {
-    yield put(actions.loginError(e));
+    const error = e.response.data;
+    yield put(actions.loginError(error.error));
   } finally {
     if (yield cancelled()) {
       yield put(actions.loginCancel());

@@ -28,17 +28,25 @@ class HomeSearchScreen extends BaseComponent {
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
         {this.renderSearchView()}
-        <ScrollView
-          contentContainerStyle={{flex: 1}}
-          keyboardShouldPersistTaps={'always'}>
+        <ScrollView keyboardShouldPersistTaps={'always'}>
           {this.renderSearchProducts()}
         </ScrollView>
       </SafeAreaView>
     )
   }
 
+  componentWillUnmount(): void {
+    const {isLoading, searchProductsCancel, searchListClear} = this.props;
+
+    if (isLoading) {
+      searchProductsCancel();
+    }
+
+    searchListClear();
+  }
+
   renderSearchView = () => {
-    const {isLoading} = this.props;
+    const {isLoading, searchProducts, searchProductsCancel, searchListClear} = this.props;
 
     return(
       <View style={styles.headerContainer}>
@@ -56,7 +64,12 @@ class HomeSearchScreen extends BaseComponent {
             isLoading={isLoading}
             onChange={value => {
               if (!TextUtils.isEmpty(value)) {
-                this.props.searchProducts(value)
+                searchProducts(value)
+              } else {
+                if (isLoading) {
+                  searchProductsCancel();
+                  searchListClear();
+                }
               }
             }}
             autoFocus
@@ -75,7 +88,7 @@ class HomeSearchScreen extends BaseComponent {
         return this.renderEmptyView()
       } else {
         return(
-          <View style={{flex: 1}}>
+          <View>
             {products && products.map((product, index) => {
               return this.renderProductItem(product, index)
             })}
@@ -97,13 +110,15 @@ class HomeSearchScreen extends BaseComponent {
 
   renderProductItem = (product, index) => {
     return(
-      <View style={{
-        backgroundColor: colors.white,
-        borderRadius: toDp(14),
-        marginTop: toDp(10),
-        marginLeft: toDp(8),
-        marginRight: toDp(8),
-        padding: toDp(10),
+      <View
+        key={index}
+        style={{
+          backgroundColor: colors.white,
+          borderRadius: toDp(14),
+          marginTop: toDp(10),
+          marginLeft: toDp(8),
+          marginRight: toDp(8),
+          padding: toDp(10),
       }}>
         <Image
           style={{width: null, height: 60}}
@@ -135,7 +150,9 @@ export default connect(
     isLoading: state.home.isLoading,
   }),
   dispatch => ({
-    searchProducts: data => dispatch(actions.searchProducts(data))
+    searchProducts: data => dispatch(actions.searchProducts(data)),
+    searchProductsCancel: () => dispatch(actions.searchProductsCancel()),
+    searchListClear: () => dispatch(actions.searchListClear())
   }),
 )(HomeSearchScreen);
 

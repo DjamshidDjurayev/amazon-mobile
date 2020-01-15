@@ -8,4 +8,6 @@ export const searchProductsError = error => ({ type: types.SEARCH_PRODUCT_ERROR,
 
 export const searchProductsCancel = () => ({ type: types.SEARCH_PRODUCT_CANCEL });
 
+export const searchListClear = () => ({ type: types.SEARCH_LIST_CLEAR });
+
 export const searchProductsCancelled = () => ({ type: types.SEARCH_PRODUCT_CANCELLED });
