@@ -1,5 +1,10 @@
 import React from 'react'
-import {ScrollView, StatusBar, TouchableOpacity, View, Image} from 'react-native';
+import {
+  StatusBar,
+  TouchableOpacity,
+  View,
+  FlatList
+} from 'react-native';
 import BaseComponent from '../../../../base/BaseComponent';
 import styles from './style';
 import colors from '../../../../../colors';
@@ -13,6 +18,7 @@ import MainSearchView from '../../../../components/MainSearchView';
 import NavigationService from '../../../../../navigation/NavigationService';
 import TextUtils from '../../../../../utils/TextUtils';
 import CustomText from '../../../../components/CustomText';
+import HomeProductSearchItem from './HomeProductSearchItem';
 
 class HomeSearchScreen extends BaseComponent {
   static navigationOptions = {
@@ -23,30 +29,40 @@ class HomeSearchScreen extends BaseComponent {
     super(props);
   }
 
+  componentDidMount(): void {
+    const {navigation, searchProducts} = this.props;
+    const query = navigation.getParam('query', null);
+
+    if (query) {
+      searchProducts(query)
+    }
+  }
+
   render() {
     return(
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
         {this.renderSearchView()}
-        <ScrollView keyboardShouldPersistTaps={'always'}>
-          {this.renderSearchProducts()}
-        </ScrollView>
+        {this.renderSearchProducts()}
       </SafeAreaView>
     )
   }
 
   componentWillUnmount(): void {
-    const {isLoading, searchProductsCancel, searchListClear} = this.props;
+    const {products, isLoading, searchProductsCancel, searchListClear} = this.props;
 
     if (isLoading) {
       searchProductsCancel();
     }
 
-    searchListClear();
+    if (products.length > 0) {
+      searchListClear();
+    }
   }
 
   renderSearchView = () => {
-    const {isLoading, searchProducts, searchProductsCancel, searchListClear} = this.props;
+    const {isLoading, searchProducts, searchProductsCancel, searchListClear, navigation} = this.props;
+    const query = navigation.getParam('query', null);
 
     return(
       <View style={styles.headerContainer}>
@@ -54,6 +70,7 @@ class HomeSearchScreen extends BaseComponent {
           onPress={() => this.onBackButtonClicked()}
           style={styles.backButtonContainer}>
           <Entypo
+            style={styles.backButton}
             name={'chevron-thin-left'}
             size={toDp(20)}
             color={colors.black}/>
@@ -63,7 +80,7 @@ class HomeSearchScreen extends BaseComponent {
           <MainSearchView
             isLoading={isLoading}
             onChange={value => {
-              if (!TextUtils.isEmpty(value)) {
+              if (!TextUtils.isEmpty(value.trim())) {
                 searchProducts(value)
               } else {
                 if (isLoading) {
@@ -73,6 +90,7 @@ class HomeSearchScreen extends BaseComponent {
               }
             }}
             autoFocus
+            defaultValue={query || ''}
             fontSize={toDp(16)}
             title={strings.what_to_find} />
         </View>
@@ -88,11 +106,13 @@ class HomeSearchScreen extends BaseComponent {
         return this.renderEmptyView()
       } else {
         return(
-          <View>
-            {products && products.map((product, index) => {
-              return this.renderProductItem(product, index)
-            })}
-          </View>
+          <FlatList
+            horizontal={false}
+            numColumns={2}
+            style={{flex: 1}}
+            data={products}
+            keyExtractor={item => item.id}
+            renderItem={({ index, item }) => this.renderProductItem(item, index)}/>
         )
       }
     }
@@ -110,23 +130,12 @@ class HomeSearchScreen extends BaseComponent {
 
   renderProductItem = (product, index) => {
     return(
-      <View
-        key={index}
-        style={{
-          backgroundColor: colors.white,
-          borderRadius: toDp(14),
-          marginTop: toDp(10),
-          marginLeft: toDp(8),
-          marginRight: toDp(8),
-          padding: toDp(10),
-      }}>
-        <Image
-          style={{width: null, height: 60}}
-          resizeMode={'contain'}
-          source={{ uri: product.image}}/>
-        <CustomText title={product.title}/>
-        <CustomText title={product.price}/>
-      </View>
+      <HomeProductSearchItem
+        index={index}
+        product={product}
+        onClick={() => {
+          NavigationService.navigate('ProductDetails', {product})
+      }}/>
     )
   };
 

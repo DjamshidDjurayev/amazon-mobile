@@ -11,6 +11,7 @@ import CustomText from '../../components/CustomText';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import NavigationService from '../../../navigation/NavigationService'
+import {actions} from '../../../state/actions';
 
 class ProductDetailsScreen extends BaseComponent {
   static navigationOptions = {
@@ -29,6 +30,11 @@ class ProductDetailsScreen extends BaseComponent {
         "https://source.unsplash.com/1024x768/?tree",
       ]
     };
+  }
+
+  componentDidMount(): void {
+    const {navigation, getProduct} = this.props;
+    getProduct(navigation.getParam('product', {}).url)
   }
 
   render() {
@@ -203,8 +209,11 @@ class ProductDetailsScreen extends BaseComponent {
 
 export default connect(
   (state, props) => ({
+    product: state.product.product,
+    isLoading: state.product.isLoading,
   }),
   dispatch => ({
+    getProduct: (query) => dispatch(actions.getProductDetails(query))
   }),
 )(ProductDetailsScreen);
 

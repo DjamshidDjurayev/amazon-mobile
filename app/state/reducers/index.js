@@ -9,6 +9,8 @@ import categories from './categories';
 import cart from './cart';
 import myOrders from './myOrders';
 import home from './home';
+import product from './product';
+import homeProducts from './homeProducts';
 
 const rootReducer = combineReducers({
   splash,
@@ -20,6 +22,8 @@ const rootReducer = combineReducers({
   cart,
   myOrders,
   home,
+  product,
+  homeProducts,
   form: formReducer
 });
 

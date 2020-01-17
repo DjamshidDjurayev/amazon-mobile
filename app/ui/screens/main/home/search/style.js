@@ -13,19 +13,22 @@ const styles = EStyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: '18rem',
-    marginBottom: '18rem',
+    marginTop: '12rem',
+    marginBottom: '12rem',
   },
   backButtonContainer: {
-    marginLeft: '16rem',
+  },
+  backButton: {
+    paddingLeft: '16rem',
+    paddingRight: '16rem',
+    paddingTop: '10rem',
+    paddingBottom: '10rem',
   },
   searchContainer: {
     flex: 1,
-    marginLeft: '16rem',
     marginRight: '16rem',
   },
   emptyViewContainer: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '50rem'

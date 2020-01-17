@@ -32,6 +32,7 @@ class SliderItem extends Component {
             style={styles.brandImage}
             source={brand}/>
           <CustomText
+            fontStyle={'bold'}
             style={styles.title}
             size={17}
             title={title}/>
@@ -40,13 +41,13 @@ class SliderItem extends Component {
             size={10}
             title={subTitle}/>
 
-          <CustomButton
-            style={styles.detailsButton}
-            textStyle={styles.detailsButtonText}
-            textSize={12}
-            textColor={colors.black}
-            bordered
-            title={'Details'}/>
+          {/*<CustomButton*/}
+          {/*  style={styles.detailsButton}*/}
+          {/*  textStyle={styles.detailsButtonText}*/}
+          {/*  textSize={12}*/}
+          {/*  textColor={colors.black}*/}
+          {/*  bordered*/}
+          {/*  title={'Details'}/>*/}
           <View>
           </View>
         </View>

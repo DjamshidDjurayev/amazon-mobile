@@ -60,21 +60,26 @@ class CatalogItem extends Component {
           marginLeft: toDp(18),
           marginRight: this.state.cardMarginRight
         }]}>
-        <View
-          style={[styles.cardImage, {
-            width: '100%',
-            height: this.state.size,
-          }]}>
-          <CustomText
-            size={26}
-            title={TextUtils.getInitialLetter(item.name)}/>
+        <View style={[styles.content, {
+          backgroundColor: TextUtils.getRandomColor(item.name || 'D')
+        }]}>
+          <View
+            style={[styles.cardImage, {
+              width: this.state.size,
+              height: this.state.size,
+            }]}>
+            <CustomText
+              textColor={colors.white}
+              size={26}
+              title={TextUtils.getInitialLetter(item.name)}/>
+          </View>
         </View>
 
         <CustomText
           ellipsizeMode={'tail'}
           style={styles.cardTitle}
           title={item.name}
-          numberOfLines={2}
+          numberOfLines={1}
         />
       </TouchableOpacity>
     )
@@ -83,9 +88,11 @@ class CatalogItem extends Component {
 
 const styles = EStyleSheet.create({
   rootView: {
-    backgroundColor: colors.white,
-    borderRadius: '12rem',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  content: {
+    borderRadius: '150rem',
   },
   cardImage: {
     borderTopLeftRadius: '12rem',
@@ -98,6 +105,7 @@ const styles = EStyleSheet.create({
     marginLeft: '6rem',
     marginRight: '6rem',
     marginBottom: '6rem',
+    textAlign: 'center',
   },
 });
 

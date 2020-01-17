@@ -46,6 +46,7 @@ const ruLocale = {
   yes: 'Да',
   empty: 'Пусто',
   ok: 'Ок',
+  see_all: 'Посмотреть все',
 };
 
 export default ruLocale

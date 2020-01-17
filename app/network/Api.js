@@ -6,6 +6,8 @@ const getCategories = () => '/api/categories';
 const getCart = () => '/api/users/me/cart';
 const getMyOrders = () => '/api/users/me/myorders';
 const searchProducts = query => '/api/products/getProducts?query=' + query;
+const getProductDetails = query => '/api/products/getAmazonProduct?query=' + encodeURIComponent(query);
+const getHomeProducts = () => '/api/products/main';
 
 export default {
   userLogin,
@@ -15,5 +17,7 @@ export default {
   getCategories,
   getCart,
   getMyOrders,
-  searchProducts
+  searchProducts,
+  getProductDetails,
+  getHomeProducts
 }

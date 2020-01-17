@@ -13,7 +13,10 @@ const styles = EStyleSheet.create({
   },
   headerContainer: {
     backgroundColor: colors.green,
-    padding: '16rem',
+    paddingLeft: '16rem',
+    paddingRight: '16rem',
+    paddingTop: '12rem',
+    paddingBottom: '12rem',
   },
   logoContainer: {
     flex: 1,
@@ -58,6 +61,16 @@ const styles = EStyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
+  },
+  productsTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    margin: 16,
+  },
+  loadingView: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

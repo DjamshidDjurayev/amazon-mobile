@@ -46,6 +46,7 @@ const enLocale = {
   yes: 'Yes',
   empty: 'Empty',
   ok: 'Ok',
+  see_all: 'See all',
 };
 
 export default enLocale

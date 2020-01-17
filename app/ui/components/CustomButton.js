@@ -36,7 +36,7 @@ class CustomButton extends React.Component {
     disabledColor: colors.light_gray,
     textColor: colors.white,
     font: '',
-    textSize: 14,
+    textSize: 15,
     bordered: false,
     borderedBackgroundColor: colors.transparent,
     borderedDisabledBackgroundColor: colors.gray_F4,
@@ -46,9 +46,10 @@ class CustomButton extends React.Component {
 
   render() {
     const {
-      style, isLoading, buttonColor, bordered, borderedBackgroundColor, borderedDisabledBackgroundColor,
-      textColor, title, font, onClick, textSize, textStyle, borderedWidth,
-      disabledColor, disabled, borderColor, ...otherProps} = this.props;
+      style, isLoading, buttonColor, bordered, borderedBackgroundColor,
+      borderedDisabledBackgroundColor, textColor, title, font, onClick,
+      textSize, textStyle, borderedWidth, disabledColor, disabled,
+      borderColor, ...otherProps} = this.props;
 
     return (
       <TouchableOpacity
@@ -88,7 +89,7 @@ const styles = EStyleSheet.create({
     marginRight: '16rem',
   },
   buttonText: {
-    margin: "12rem",
+    margin: "14rem",
     fontSize: "16rem"
   },
   indicator: {

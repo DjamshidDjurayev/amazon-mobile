@@ -56,7 +56,6 @@ class MainSearchView extends Component {
               this.setState({inputValue})
             }}
             autoFocus={autoFocus}
-            value={this.state.inputValue}
             placeholderTextColor={colors.gray_D6}
             placeholder={title}
             style={[styles.input, {

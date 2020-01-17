@@ -7,6 +7,8 @@ import * as categoriesActions from './categories'
 import * as cartActions from './cart'
 import * as myOrdersActions from './myOrders'
 import * as homeActions from './home'
+import * as productActions from './product'
+import * as homeProductsActions from './homeProducts'
 
 const actions = {
   ...splashActions,
@@ -18,6 +20,8 @@ const actions = {
   ...cartActions,
   ...myOrdersActions,
   ...homeActions,
+  ...productActions,
+  ...homeProductsActions,
 };
 
 export {actions};
