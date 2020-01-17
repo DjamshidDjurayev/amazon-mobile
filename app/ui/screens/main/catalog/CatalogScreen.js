@@ -3,6 +3,7 @@ import {
   StatusBar,
   FlatList,
   View,
+  ActivityIndicator
 } from 'react-native';
 import BaseComponent from '../../../base/BaseComponent';
 import {SafeAreaView} from "react-navigation";
@@ -15,7 +16,7 @@ import strings from '../../../../locales/strings';
 import Toolbar from '../../../components/Toolbar';
 import NavigationService from '../../../../navigation/NavigationService'
 import {actions} from '../../../../state/actions';
-import ContentLoader, { Rect, Circle } from 'react-content-loader/native'
+import {toDp} from '../../../../utils/ScreenUtils';
 
 class CatalogScreen extends BaseComponent {
   constructor(props) {
@@ -33,8 +34,6 @@ class CatalogScreen extends BaseComponent {
   }
 
   render() {
-    const {isLoading} = this.props;
-
     return(
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
@@ -46,12 +45,8 @@ class CatalogScreen extends BaseComponent {
 
   renderLoadingView = () => {
     return(
-      <View style={{alignItems: 'center', justifyContent: 'center', flex: 1, marginLeft: 30}}>
-        <ContentLoader>
-          <Circle cx="30" cy="30" r="30" />
-          <Rect x="80" y="17" rx="4" ry="4" width="65%" height="13" />
-          <Rect x="80" y="40" rx="3" ry="3" width="60%" height="10" />
-        </ContentLoader>
+      <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+        <ActivityIndicator color={colors.black} size={toDp(30)}/>
       </View>
     )
   };

@@ -31,11 +31,13 @@ class HomeScreen extends BaseComponent {
         img: require('../../../../assets/images/offerArmani.png'),
         title: 'Reliability, quality, style - in this watch',
         subTitle: 'ARMANI - Watches',
+        url: "watches"
       }, {
         brand: require('../../../../assets/images/beats.png'),
         img: require('../../../../assets/images/offerBeats.png'),
         title: 'Feeling new emotion with Beats headphones',
         subTitle: 'Beats - Solo3 Wireless',
+        url: "wireless+headphone"
       }]
     };
   }
@@ -135,11 +137,8 @@ class HomeScreen extends BaseComponent {
         key={index}
         style={styles.imageStyle}>
         <SliderItem
-          index={index}
-          img={item.img}
-          brand={item.brand}
-          subTitle={item.subTitle}
-          title={item.title}/>
+          onClick={() => this.onHomeProductItemClicked(item.url)}
+          item={item}/>
       </View>
     )
   };

@@ -92,6 +92,7 @@ class HomeSearchScreen extends BaseComponent {
             autoFocus
             defaultValue={query || ''}
             fontSize={toDp(16)}
+            onSubmitEditing={() => this.onSubmitButtonClicked()}
             title={strings.what_to_find} />
         </View>
       </View>
@@ -150,6 +151,9 @@ class HomeSearchScreen extends BaseComponent {
 
   onBackButtonClicked = () => {
     NavigationService.goBack()
+  };
+
+  onSubmitButtonClicked = () => {
   };
 }
 

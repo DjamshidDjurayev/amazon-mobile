@@ -1,57 +1,45 @@
 import React, {Component} from 'react'
-import {View, Image} from 'react-native'
+import {View, Image, TouchableOpacity} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types'
 import CustomText from '../../../components/CustomText';
-import CustomButton from '../../../components/CustomButton';
-import colors from '../../../../colors';
 
 class SliderItem extends Component {
   static propTypes = {
-    title: PropTypes.string,
-    subTitle: PropTypes.string,
-    brand: PropTypes.number,
-    url: PropTypes.string,
-    img: PropTypes.number,
+    item: PropTypes.object,
+    onClick: PropTypes.func,
   };
   static defaultProps = {};
 
   render() {
-    const {title, subTitle, brand, url, img} = this.props;
+    const {item, onClick} = this.props;
     return(
-      <View
+      <TouchableOpacity
+        onPress={onClick}
         style={styles.rootView}>
         <Image
           resizeMode={'cover'}
           style={styles.image}
-          source={img}/>
+          source={item.img}/>
 
         <View style={styles.brandContainer}>
           <Image
             resizeMode={'cover'}
             style={styles.brandImage}
-            source={brand}/>
+            source={item.brand}/>
           <CustomText
             fontStyle={'bold'}
             style={styles.title}
             size={17}
-            title={title}/>
+            title={item.title}/>
           <CustomText
             style={styles.subTitle}
             size={10}
-            title={subTitle}/>
-
-          {/*<CustomButton*/}
-          {/*  style={styles.detailsButton}*/}
-          {/*  textStyle={styles.detailsButtonText}*/}
-          {/*  textSize={12}*/}
-          {/*  textColor={colors.black}*/}
-          {/*  bordered*/}
-          {/*  title={'Details'}/>*/}
+            title={item.subTitle}/>
           <View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 }

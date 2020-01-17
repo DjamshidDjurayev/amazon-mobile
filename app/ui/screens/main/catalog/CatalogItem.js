@@ -43,12 +43,14 @@ class CatalogItem extends Component {
     const {numColumns, onClick, item} = this.props;
 
     if (item.empty === true) {
-      return <View style={{
-        marginLeft: toDp(18),
-        marginRight: this.state.cardMarginRight,
-        flex: 1 / numColumns
-      }
-      }/>
+      return(
+        <View style={{
+          marginLeft: toDp(18),
+          marginRight: this.state.cardMarginRight,
+          flex: 1 / numColumns
+        }
+        }/>
+      )
     }
 
     return(

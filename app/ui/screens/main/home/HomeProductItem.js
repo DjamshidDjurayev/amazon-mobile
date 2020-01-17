@@ -35,7 +35,7 @@ class HomeProductItem extends Component {
             title={item.price}/>
           <CustomText
             textColor={colors.blue}
-            title={item.age}/>
+            title={item.age.toString()}/>
         </View>
       </TouchableOpacity>
     )
