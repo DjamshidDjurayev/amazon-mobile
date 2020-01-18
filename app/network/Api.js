@@ -1,23 +1,23 @@
-const userLogin = () => '/api/users/login';
-const userLogout = () => '/api/users/logout';
-const userRegistration = () => '/api/users';
-const userGetDetails = id => '/api/users/' + id;
-const getCategories = () => '/api/categories';
-const getCart = () => '/api/users/me/cart';
-const getMyOrders = () => '/api/users/me/myorders';
-const searchProducts = query => '/api/products/getProducts?query=' + query;
-const getProductDetails = query => '/api/products/getAmazonProduct?query=' + encodeURIComponent(query);
-const getHomeProducts = () => '/api/products/main';
+import buildUrl from 'build-url'
 
 export default {
-  userLogin,
-  userLogout,
-  userRegistration,
-  userGetDetails,
-  getCategories,
-  getCart,
-  getMyOrders,
-  searchProducts,
-  getProductDetails,
-  getHomeProducts
+  userLogin: () => buildUrl('/api/users/login'),
+  userLogout: () => buildUrl('/api/users/logout'),
+  userRegistration: () => buildUrl('/api/users'),
+  userGetDetails: id => buildUrl('/api/users', {path: id}),
+  getCategories: () => buildUrl('/api/categories'),
+  getCart: () => buildUrl('/api/users/me/cart'),
+  getMyOrders: () => buildUrl('/api/users/me/myorders'),
+  searchProducts: data => buildUrl('/api/products/getProducts', {
+    queryParams: {
+      query: data.query,
+      category: data.category
+    }
+  }),
+  getProductDetails: id => buildUrl('/api/products/getAmazonProduct', {
+    queryParams: {
+      query: 'http://amazon.com/dp/' + id
+    }
+  }),
+  getHomeProducts: () => buildUrl('/api/products/main')
 }

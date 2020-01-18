@@ -10,7 +10,7 @@ function* getProductDetailsAsync(action) {
   try {
     const response = yield call(() => BaseApi.get(Api.getProductDetails(query), null));
     if (response && response.status === codes.STATUS_200) {
-      yield put(actions.getProductDetailsSuccess(response.data.cart.products))
+      yield put(actions.getProductDetailsSuccess(response.data))
     }
   } catch (e) {
     yield put(actions.getProductDetailsError(e))

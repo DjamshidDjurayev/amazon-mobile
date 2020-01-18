@@ -48,6 +48,7 @@ const ruLocale = {
   ok: 'Ок',
   see_all: 'Посмотреть все',
   no_results: 'Нет результатов',
+  category: 'Категория',
 };
 
 export default ruLocale

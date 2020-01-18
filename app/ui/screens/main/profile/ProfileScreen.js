@@ -75,7 +75,7 @@ class ProfileScreen extends BaseComponent {
   };
 
   renderProfileSettings = () => {
-    const {locale, setLocale} = this.props.screenProps;
+    const {locale} = this.props.screenProps;
 
     return(
       <View style={styles.profileSettingsContainer}>
@@ -140,12 +140,13 @@ class ProfileScreen extends BaseComponent {
 
         <View style={styles.nameContainer}>
           <CustomText
-            size={15}
+            size={16}
             title={user && user.name}/>
 
           <CustomText
+            style={{marginTop: toDp(4)}}
             textColor={colors.light_gray}
-            size={13}
+            size={14}
             title={user && user.surname}/>
         </View>
 
@@ -163,6 +164,7 @@ class ProfileScreen extends BaseComponent {
     return(
       <View style={styles.avatarPlaceholder}>
         <CustomText
+          textColor={colors.white}
           size={20}
           title={TextUtils.getInitialLetter(user && user.name)}/>
       </View>

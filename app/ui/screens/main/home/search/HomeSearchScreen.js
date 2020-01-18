@@ -32,7 +32,7 @@ class HomeSearchScreen extends BaseComponent {
     const category = navigation.getParam('category', null);
 
     if (query) {
-      searchProducts(query)
+      searchProducts({query, category})
     }
   }
 
@@ -80,7 +80,7 @@ class HomeSearchScreen extends BaseComponent {
             isLoading={isLoading}
             onChange={value => {
               if (!TextUtils.isEmpty(value.trim())) {
-                searchProducts(value)
+                searchProducts({query: value, category})
               } else {
                 if (isLoading) {
                   searchProductsCancel();
@@ -93,7 +93,22 @@ class HomeSearchScreen extends BaseComponent {
             fontSize={toDp(16)}
             onSubmitEditing={() => this.onSubmitButtonClicked()}
             title={strings.what_to_find} />
+
+          {category ? this.renderCategoryTitle(category) : null}
         </View>
+      </View>
+    )
+  };
+
+  renderCategoryTitle = category => {
+    return(
+      <View style={styles.categoryTitleContainer}>
+        <CustomText
+          fontStyle={'bold'}
+          title={strings.category + ': '} />
+
+        <CustomText
+          title={category} />
       </View>
     )
   };

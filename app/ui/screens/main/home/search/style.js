@@ -12,7 +12,6 @@ const styles = EStyleSheet.create({
   },
   headerContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
     marginTop: '12rem',
     marginBottom: '12rem',
   },
@@ -33,6 +32,11 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     marginTop: '50rem'
   },
+  categoryTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: '3rem',
+  }
 });
 
 export default styles

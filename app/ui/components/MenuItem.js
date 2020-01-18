@@ -29,7 +29,7 @@ class MenuItem extends Component {
   };
 
   static defaultProps = {
-    textSize: 15,
+    textSize: 16,
     iconSize: 14,
     iconColor: colors.gray_5F,
     textColor: colors.black,
@@ -115,6 +115,7 @@ const styles = EStyleSheet.create({
   title: {
   },
   subTitle: {
+    marginBottom: '5rem'
   },
   rightIcon: {
   },

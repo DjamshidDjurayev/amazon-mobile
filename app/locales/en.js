@@ -48,6 +48,7 @@ const enLocale = {
   ok: 'Ok',
   see_all: 'See all',
   no_results: 'No results',
+  category: 'Category',
 };
 
 export default enLocale

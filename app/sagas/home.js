@@ -8,7 +8,8 @@ import codes from '../codes';
 function* searchProductsAsync(action) {
   try {
     yield delay(800);
-    const response = yield call(() => BaseApi.get(Api.searchProducts(action.data), null));
+    const response = yield call(() =>
+      BaseApi.get(Api.searchProducts(action.data), null));
     if (response && response.status === codes.STATUS_200) {
       yield put(actions.searchProductsSuccess(response.data))
     }

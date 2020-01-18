@@ -34,7 +34,9 @@ class ProductDetailsScreen extends BaseComponent {
 
   componentDidMount(): void {
     const {navigation, getProduct} = this.props;
-    getProduct(navigation.getParam('product', {}).url)
+    const product = navigation.getParam('product', {});
+    console.warn(product.id);
+    getProduct(product.id)
   }
 
   render() {

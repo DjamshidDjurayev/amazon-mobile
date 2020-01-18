@@ -39,7 +39,8 @@ const styles = EStyleSheet.create({
     marginTop: '18rem'
   },
   profileSettingsContainer: {
-    marginTop: '18rem'
+    marginTop: '18rem',
+    marginBottom: '100rem'
   },
   avatarPlaceholder: {
     width: '60rem',
