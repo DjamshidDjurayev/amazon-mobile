@@ -148,6 +148,7 @@ class ProfileSettingsScreen extends BaseComponent {
     return(
       <View style={styles.avatarPlaceholder}>
         <CustomText
+          textColor={colors.white}
           size={20}
           title={TextUtils.getInitialLetter(user && user.name)}/>
       </View>

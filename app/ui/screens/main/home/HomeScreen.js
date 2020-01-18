@@ -167,6 +167,7 @@ class HomeScreen extends BaseComponent {
 
         {/* main search view */}
         <MainSearchView
+          fontSize={16}
           onClick={() => {
             NavigationService.navigate('HomeSearch')
           }}

@@ -125,6 +125,7 @@ class LoginScreen extends BaseComponent {
 
         <View style={styles.signUpContainer}>
           <CustomText
+            size={16}
             title={strings.no_account}
             textColor={colors.light_gray} />
 
@@ -132,12 +133,14 @@ class LoginScreen extends BaseComponent {
             style={styles.signUpText}
             onPress={() => this.onSignUpClicked()}>
             <CustomText
+              size={16}
               title={strings.sign_up}
               textColor={colors.green} />
           </TouchableOpacity>
         </View>
 
         <CustomButton
+          textSize={18}
           isLoading={this.props.isLoading}
           onClick={() => this.onLoginButtonClicked()}
           disabled={this.state.loginButtonDisabled}
@@ -192,7 +195,7 @@ class LoginScreen extends BaseComponent {
           <View style={styles.line}/>
           <CustomText
             title={strings.or}
-            size={toDp(18)}
+            size={18}
             style={styles.orText} />
         </View>
       </View>

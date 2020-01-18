@@ -122,6 +122,7 @@ class HomeSearchScreen extends BaseComponent {
       } else {
         return(
           <FlatList
+            keyboardShouldPersistTaps={'handled'}
             horizontal={false}
             numColumns={2}
             style={{flex: 1}}
@@ -138,7 +139,10 @@ class HomeSearchScreen extends BaseComponent {
   renderEmptyView = () => {
     return(
       <View style={styles.emptyViewContainer}>
-        <CustomText title={strings.no_results}/>
+        <CustomText
+          size={15}
+          textColor={colors.light_gray}
+          title={strings.no_results}/>
       </View>
     )
   };

@@ -175,6 +175,7 @@ class RegistrationScreen extends BaseComponent {
           style={styles.loginInput}/>
 
         <CustomButton
+          textSize={18}
           isLoading={this.props.isLoading}
           onClick={() => this.onSignUpClicked()}
           style={styles.registrationButton}
