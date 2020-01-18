@@ -13,9 +13,7 @@ import strings from '../../../../locales/strings';
 import LanguageSelector from '../../../components/LanguageSelector';
 import SliderItem from './SliderItem';
 import {actions} from '../../../../state/actions';
-import TextUtils from '../../../../utils/TextUtils';
 import NavigationService from '../../../../navigation/NavigationService';
-import CustomButton from '../../../components/CustomButton';
 import HomeProductItem from './HomeProductItem';
 
 class HomeScreen extends BaseComponent {
@@ -43,7 +41,17 @@ class HomeScreen extends BaseComponent {
   }
 
   componentDidMount(): void {
-    this.props.getHomeProducts()
+    const {products, getHomeProducts} = this.props;
+
+    getHomeProducts(products.empty)
+  }
+
+  componentWillUnmount(): void {
+    const {isLoading, cancelFetchingProducts} = this.props;
+
+    if (isLoading) {
+      cancelFetchingProducts()
+    }
   }
 
   render() {
@@ -205,6 +213,7 @@ export default connect(
     isLoading: state.homeProducts.isLoading,
   }),
   dispatch => ({
-    getHomeProducts: () => dispatch(actions.getHomeProducts()),
+    getHomeProducts: loading => dispatch(actions.getHomeProducts(loading)),
+    cancelFetchingProducts: () => dispatch(actions.getHomeProductsCancel())
   }),
 )(HomeScreen);

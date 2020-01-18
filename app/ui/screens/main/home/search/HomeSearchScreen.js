@@ -1,9 +1,6 @@
 import React from 'react'
 import {
-  StatusBar,
-  TouchableOpacity,
-  View,
-  FlatList
+  StatusBar, TouchableOpacity, View, FlatList
 } from 'react-native';
 import BaseComponent from '../../../../base/BaseComponent';
 import styles from './style';
@@ -32,6 +29,7 @@ class HomeSearchScreen extends BaseComponent {
   componentDidMount(): void {
     const {navigation, searchProducts} = this.props;
     const query = navigation.getParam('query', null);
+    const category = navigation.getParam('category', null);
 
     if (query) {
       searchProducts(query)
@@ -63,6 +61,7 @@ class HomeSearchScreen extends BaseComponent {
   renderSearchView = () => {
     const {isLoading, searchProducts, searchProductsCancel, searchListClear, navigation} = this.props;
     const query = navigation.getParam('query', null);
+    const category = navigation.getParam('category', null);
 
     return(
       <View style={styles.headerContainer}>
@@ -124,7 +123,7 @@ class HomeSearchScreen extends BaseComponent {
   renderEmptyView = () => {
     return(
       <View style={styles.emptyViewContainer}>
-        <CustomText title={strings.empty}/>
+        <CustomText title={strings.no_results}/>
       </View>
     )
   };
@@ -154,6 +153,7 @@ class HomeSearchScreen extends BaseComponent {
   };
 
   onSubmitButtonClicked = () => {
+    // to do
   };
 }
 

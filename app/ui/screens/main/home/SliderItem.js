@@ -3,6 +3,7 @@ import {View, Image, TouchableOpacity} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types'
 import CustomText from '../../../components/CustomText';
+import FastImage from 'react-native-fast-image';
 
 class SliderItem extends Component {
   static propTypes = {
@@ -17,14 +18,14 @@ class SliderItem extends Component {
       <TouchableOpacity
         onPress={onClick}
         style={styles.rootView}>
-        <Image
-          resizeMode={'cover'}
+        <FastImage
+          resizeMode={FastImage.resizeMode.cover}
           style={styles.image}
           source={item.img}/>
 
         <View style={styles.brandContainer}>
-          <Image
-            resizeMode={'cover'}
+          <FastImage
+            resizeMode={FastImage.resizeMode.cover}
             style={styles.brandImage}
             source={item.brand}/>
           <CustomText

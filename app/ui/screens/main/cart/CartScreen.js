@@ -2,7 +2,7 @@ import React from 'react'
 import BaseComponent from '../../../base/BaseComponent';
 import {SafeAreaView} from "react-navigation";
 import styles from './style';
-import {StatusBar, FlatList, View} from "react-native";
+import {StatusBar, FlatList, View, ActivityIndicator} from "react-native";
 import colors from '../../../../colors';
 import {connect} from 'react-redux';
 import Toolbar from '../../../components/Toolbar';
@@ -66,8 +66,8 @@ class CartScreen extends BaseComponent {
 
   renderLoadingView = () => {
     return(
-      <View>
-
+      <View style={styles.loadingViewContainer}>
+        <ActivityIndicator color={colors.black} size={toDp(30)}/>
       </View>
     )
   };
@@ -148,7 +148,7 @@ class CartScreen extends BaseComponent {
   };
 
   onProductItemClicked = ({item, index}) => {
-    NavigationService.navigate('ProductDetails')
+    NavigationService.navigate('ProductDetails', {product: item})
   };
 }
 

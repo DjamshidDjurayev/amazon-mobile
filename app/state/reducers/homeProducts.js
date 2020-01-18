@@ -2,6 +2,7 @@ import * as types from '../actionTypes';
 
 const initialState = {
   homeProducts: {
+    empty: true,
     products1: {},
     products2: {},
     products3: {},
@@ -16,7 +17,7 @@ export default function homeProducts(state = initialState, action = {}) {
     case types.GET_HOME_PRODUCTS:
       return {
         ...state,
-        isLoading: true,
+        isLoading: action.loading,
         error: null,
       };
 

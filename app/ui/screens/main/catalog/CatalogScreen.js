@@ -45,7 +45,7 @@ class CatalogScreen extends BaseComponent {
 
   renderLoadingView = () => {
     return(
-      <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+      <View style={styles.loadingViewContainer}>
         <ActivityIndicator color={colors.black} size={toDp(30)}/>
       </View>
     )
@@ -58,7 +58,7 @@ class CatalogScreen extends BaseComponent {
         backButtonEnabled
         searchEnabled
         onBackButtonClick={() => this.onBackButtonClicked()}
-        onSearchClick={() => this.onSearchClicked()}
+        onSearchClick={() => this.onSearchClicked(null)}
       />
     )
   };
@@ -86,7 +86,7 @@ class CatalogScreen extends BaseComponent {
 
     return (
       <FlatList
-        style={{flex: 1}}
+        style={styles.gridView}
         columnWrapperStyle={styles.gridColumn}
         data={categories}
         renderItem={({ index, item }) => this.renderCategoryItem(index, item)}
@@ -103,7 +103,7 @@ class CatalogScreen extends BaseComponent {
   renderEmptyView = () => {
     return(
       <View style={styles.emptyViewContainer}>
-        <CustomText title={"Empty"}/>
+        <CustomText title={strings.empty}/>
       </View>
     )
   };
@@ -111,7 +111,9 @@ class CatalogScreen extends BaseComponent {
   renderCategoryItem = (index, item) => {
     return(
       <CatalogItem
-        onClick={() => this.onCategoryItemClicked(item)}
+        onClick={() => {
+          this.onSearchClicked(item.name)
+        }}
         id={index}
         item={item}
         numColumns={3} />
@@ -127,16 +129,12 @@ class CatalogScreen extends BaseComponent {
     )
   };
 
-  onCategoryItemClicked = item => {
-
-  };
-
   onBackButtonClicked = () => {
     NavigationService.goBack()
   };
 
-  onSearchClicked = () => {
-    NavigationService.navigate('CatalogSearch')
+  onSearchClicked = query => {
+    NavigationService.navigate('HomeSearch', {category: query})
   };
 }
 

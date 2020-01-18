@@ -4,6 +4,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types'
 import CustomText from '../../../components/CustomText';
 import colors from '../../../../colors';
+import FastImage from 'react-native-fast-image';
 
 class HomeProductItem extends Component {
   static propTypes = {
@@ -18,8 +19,8 @@ class HomeProductItem extends Component {
       <TouchableOpacity
         onPress={onClick}
         style={styles.rootView}>
-        <Image
-          resizeMode={'contain'}
+        <FastImage
+          resizeMode={FastImage.resizeMode.contain}
           source={{uri: item.img}}
           style={styles.image}/>
 

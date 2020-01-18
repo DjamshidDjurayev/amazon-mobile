@@ -17,6 +17,9 @@ const styles = EStyleSheet.create({
     marginTop: '14rem',
     marginBottom: '6rem',
   },
+  gridView: {
+    flex: 1
+  },
   gridColumn: {
     marginTop: '6rem',
     marginBottom: '6rem',
@@ -26,6 +29,11 @@ const styles = EStyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  loadingViewContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1
   },
 });
 
