@@ -120,6 +120,10 @@ export default {
     return executeRequest('post', pathname, data, config);
   },
 
+  patch(pathname, data, config) {
+    return executeRequest('patch', pathname, data, config);
+  },
+
   put(pathname, data, config) {
     return executeRequest('put', pathname, data, config);
   },

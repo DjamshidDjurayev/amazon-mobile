@@ -49,6 +49,9 @@ const enLocale = {
   see_all: 'See all',
   no_results: 'No results',
   category: 'Category',
+  profile_edit: 'Edit profile',
+  old_password: 'Old password',
+  new_password: 'New password',
 };
 
 export default enLocale

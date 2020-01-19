@@ -30,11 +30,14 @@ function* userGetDetailsAsync(action) {
   }
 }
 
-function* userUpdateAsync(action) {
+function* userUpdateNamesAsync(action) {
+  const config = { headers: {'Authorization' : action.data.auth}};
   try {
-    const response = yield call(() => BaseApi.get(Api.userGetDetails(action.data), null));
+    const response = yield call(() => BaseApi.patch(Api.updateUserNames(action.data.id), action.data.data, config));
     if (response && response.status === codes.STATUS_200) {
-      yield put(actions.userUpdateNamesSuccess(response.data))
+      yield put(actions.userUpdateNamesSuccess(response.data));
+      yield put(actions.userGetDetailsSuccess(response.data));
+      NavigationService.goBack();
     }
   } catch (e) {
     yield put(actions.userUpdateNamesError(e));
@@ -43,6 +46,6 @@ function* userUpdateAsync(action) {
 
 export function* watchUserLogout() {
   yield takeLatest(types.USER_LOG_OUT_ACTION, userLogoutAsync);
-  yield takeLatest(types.USER_GET_DETAILS_ACTION, userGetDetailsAsync)
-  yield takeLatest(types.USER_UPDATE_NAMES, userUpdateAsync)
+  yield takeLatest(types.USER_GET_DETAILS_ACTION, userGetDetailsAsync);
+  yield takeLatest(types.USER_UPDATE_NAMES, userUpdateNamesAsync);
 }

@@ -45,7 +45,6 @@ class ProfileSettingsScreen extends BaseComponent {
           {this.renderPersonalData()}
           {this.renderChangePasswordAndExit()}
         </ScrollView>
-        {this.renderBottomSheets()}
       </SafeAreaView>
     )
   }
@@ -94,6 +93,7 @@ class ProfileSettingsScreen extends BaseComponent {
         <Divider />
 
         <MenuItem
+          onClick={() => this.onEmailEditClicked()}
           topBorder={false}
           bottomBorder={false}
           subTitle={strings.email}
@@ -101,6 +101,7 @@ class ProfileSettingsScreen extends BaseComponent {
         <Divider />
 
         <MenuItem
+          onClick={() => this.onPhoneEditClicked()}
           topBorder={false}
           bottomBorder={false}
           subTitle={strings.phone}
@@ -187,7 +188,17 @@ class ProfileSettingsScreen extends BaseComponent {
       <BottomSheet
         onCancelClick={() => this.NameDialog.close()}
         onSaveClick={(name, lastName) => {
-          console.warn(lastName)
+          const {updateUserNames, userLogin} = this.props;
+          const body = {
+            name,
+            surname: lastName
+          };
+          const payload = {
+            id: userLogin.userId,
+            auth: userLogin.id,
+            data: body
+          };
+          updateUserNames(payload)
         }}
         inputRef={ref => this.NameDialog = ref} />
     )
@@ -212,7 +223,8 @@ class ProfileSettingsScreen extends BaseComponent {
   };
 
   logOut = () => {
-    this.props.userLogout(this.props.userLogin.id);
+    const {userLogout, userLogin} = this.props;
+    userLogout(userLogin.id);
   };
 
   onChangePasswordClicked = () => {
@@ -220,9 +232,15 @@ class ProfileSettingsScreen extends BaseComponent {
   };
 
   onEditNameClicked = () => {
-    if (this.NameDialog) {
-      this.NameDialog.open()
-    }
+    NavigationService.navigate('ProfileEdit', {mode: 'names'})
+  };
+
+  onEmailEditClicked = () => {
+    NavigationService.navigate('ProfileEdit', {mode: 'email'})
+  };
+
+  onPhoneEditClicked = () => {
+    NavigationService.navigate('ProfileEdit', {mode: 'phone'})
   };
 }
 
@@ -233,7 +251,7 @@ export default connect(
     isLoggingOut: state.profile.isLoggingOut
   }),
   dispatch => ({
-    userLogout: (data) => dispatch(actions.userLogout(data)),
-    updateUserName: (data) => dispatch(actions.userUpdateNames(data))
+    userLogout: data => dispatch(actions.userLogout(data)),
+    updateUserNames: payload => dispatch(actions.userUpdateNames(payload))
   }),
 )(ProfileSettingsScreen);

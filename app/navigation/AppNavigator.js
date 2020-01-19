@@ -22,6 +22,7 @@ import MyOrdersScreen from '../ui/screens/main/profile/orders/MyOrdersScreen';
 import FavouritesScreen from '../ui/screens/main/profile/favourites/FavouritesScreen';
 import CouponsScreen from '../ui/screens/main/profile/coupons/CouponsScreen';
 import HomeSearchScreen from '../ui/screens/main/home/search/HomeSearchScreen';
+import ProfileEditScreen from '../ui/screens/main/profile/edit/ProfileEditScreen';
 
 const TabBarComponent = (props) => (<BottomTabBar {...props} />);
 
@@ -93,7 +94,8 @@ export const MainNavigator = createStackNavigator({
   MyOrders: {screen: MyOrdersScreen},
   Favourites: {screen: FavouritesScreen},
   Coupons: {screen: CouponsScreen},
-  HomeSearch: {screen: HomeSearchScreen}
+  HomeSearch: {screen: HomeSearchScreen},
+  ProfileEdit: {screen: ProfileEditScreen}
 });
 
 const styles = EStyleSheet.create({

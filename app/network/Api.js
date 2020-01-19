@@ -19,5 +19,8 @@ export default {
       query: 'http://amazon.com/dp/' + id
     }
   }),
-  getHomeProducts: () => buildUrl('/api/products/main')
+  getHomeProducts: () => buildUrl('/api/products/main'),
+  updateUserNames: id => buildUrl('/api/users', {
+    path: id,
+  })
 }

@@ -49,6 +49,9 @@ const ruLocale = {
   see_all: 'Посмотреть все',
   no_results: 'Нет результатов',
   category: 'Категория',
+  profile_edit: 'Редактирование профиля',
+  old_password: 'Старый пароль',
+  new_password: 'Новый пароль',
 };
 
 export default ruLocale
