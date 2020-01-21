@@ -8,7 +8,7 @@ import fontHelper from '../../fontHelper';
 
 class CustomText extends React.Component {
   static propTypes = {
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     textColor: PropTypes.string,
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     font: PropTypes.string,

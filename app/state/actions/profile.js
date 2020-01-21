@@ -21,3 +21,9 @@ export const userUpdateNamesSuccess = data => ({ type: types.USER_UPDATE_NAMES_S
 export const userUpdateNamesError = error => ({ type: types.USER_UPDATE_NAMES_ERROR, error });
 
 export const appLanguageSet = data => ({ type: types.APP_LANGUAGE_SET_ACTION, data });
+
+export const userChangePassword = data => ({ type: types.USER_CHANGE_PASSWORD, data });
+
+export const userChangePasswordSuccess = data => ({ type: types.USER_CHANGE_PASSWORD_SUCCESS, data });
+
+export const userChangePasswordError = error => ({ type: types.USER_CHANGE_PASSWORD_ERROR, error });

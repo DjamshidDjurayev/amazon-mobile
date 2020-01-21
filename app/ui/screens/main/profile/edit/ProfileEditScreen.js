@@ -72,7 +72,6 @@ class ProfileEditScreen extends BaseComponent {
           inputRef={r => this.inputs['phone_input_id'] = r}
           numberOfLines={1}
           multiline={false}
-          blurOnSubmit={false}
           onChangeText={(value, extractedValue) => {
             this.setState({
               phoneValue: extractedValue,
@@ -103,7 +102,6 @@ class ProfileEditScreen extends BaseComponent {
           inputRef={r => this.inputs['email_input_id'] = r}
           numberOfLines={1}
           multiline={false}
-          blurOnSubmit={false}
           onChangeText={(value) => {
             this.setState({
               emailValue: value,
@@ -155,7 +153,6 @@ class ProfileEditScreen extends BaseComponent {
           inputRef={r => this.inputs['surname_input_id'] = r}
           numberOfLines={1}
           multiline={false}
-          blurOnSubmit={false}
           onChangeText={(value) => {
             this.setState({
               lastNameValue: value,
@@ -169,6 +166,7 @@ class ProfileEditScreen extends BaseComponent {
           placeholder={strings.lastName}
           placeholderTextColor={colors.light_gray}
           autoCapitalize="none"
+          onSubmitEditing={() => this.onSubmitButtonClicked()}
           style={styles.input}/>
       </View>
     )
@@ -266,6 +264,10 @@ class ProfileEditScreen extends BaseComponent {
 
   focusNextField = id => {
     this.inputs[id].focus();
+  };
+
+  onSubmitButtonClicked = () => {
+    // to do
   };
 }
 

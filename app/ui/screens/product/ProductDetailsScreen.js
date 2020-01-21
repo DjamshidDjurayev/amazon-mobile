@@ -12,6 +12,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import NavigationService from '../../../navigation/NavigationService'
 import {actions} from '../../../state/actions';
+import StarRating from 'react-native-star-rating';
 
 class ProductDetailsScreen extends BaseComponent {
   static navigationOptions = {
@@ -23,19 +24,14 @@ class ProductDetailsScreen extends BaseComponent {
     this.state = {
       images: [
         "https://source.unsplash.com/1024x768/?nature",
-        "https://source.unsplash.com/1024x768/?water",
-        "https://source.unsplash.com/1024x768/?girl",
-        "https://source.unsplash.com/1024x768/?tree",
-        "https://source.unsplash.com/1024x768/?tree",
-        "https://source.unsplash.com/1024x768/?tree",
-      ]
+      ],
+      starCount: 0,
     };
   }
 
   componentDidMount(): void {
     const {navigation, getProduct} = this.props;
     const product = navigation.getParam('product', {});
-    console.warn(product.id);
     getProduct(product.id)
   }
 
@@ -45,10 +41,50 @@ class ProductDetailsScreen extends BaseComponent {
         {this.renderStatusBar()}
         <ScrollView keyboardShouldPersistTaps={'always'}>
           {this.renderSlider()}
+          {this.renderProductDescription()}
         </ScrollView>
       </SafeAreaView>
     )
   }
+
+  renderProductDescription = () => {
+    const {product} = this.props;
+
+    return(
+      <View style={styles.productDescriptionContainer}>
+        <CustomText
+          size={20}
+          fontStyle={'bold'}
+          title={product && product.price}/>
+
+        <CustomText
+          size={20}
+          fontStyle={'bold'}
+          title={product.title} />
+
+        <View>
+          <StarRating
+            buttonStyle={{marginRight: 10}}
+            starSize={26}
+            starColor={colors.green}
+            emptyStarColor={'#E4E4E4'}
+            disabled={false}
+            maxStars={5}
+            rating={this.state.starCount}
+            fullStar={'star'}
+            halfStar={'star-half'}
+            emptyStar={'star-o'}
+            iconSet={'FontAwesome'}
+            selectedStar={(rating) => {
+              this.setState({
+                starCount: rating
+              });
+            }}
+          />
+        </View>
+      </View>
+    )
+  };
 
   renderSlider = () => {
     return(
@@ -215,7 +251,7 @@ export default connect(
     isLoading: state.product.isLoading,
   }),
   dispatch => ({
-    getProduct: (query) => dispatch(actions.getProductDetails(query))
+    getProduct: query => dispatch(actions.getProductDetails(query))
   }),
 )(ProductDetailsScreen);
 

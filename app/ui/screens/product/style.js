@@ -75,6 +75,10 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: '12rem',
+  },
+  productDescriptionContainer: {
+    backgroundColor: colors.white,
+    padding: '14rem',
   }
 });
 

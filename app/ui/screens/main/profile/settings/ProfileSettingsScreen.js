@@ -109,6 +109,7 @@ class ProfileSettingsScreen extends BaseComponent {
         <Divider />
 
         <MenuItem
+          onClick={() => this.onAddDeliveryAddressClicked()}
           topBorder={false}
           bottomBorder={true}
           subTitle={strings.delivery_address}
@@ -204,10 +205,6 @@ class ProfileSettingsScreen extends BaseComponent {
     )
   };
 
-  onBackButtonClicked = () => {
-    NavigationService.goBack()
-  };
-
   onLogoutClicked = () => {
     Alert.alert(null, strings.sure_to_logout, [{
       text: strings.cancel,
@@ -228,7 +225,7 @@ class ProfileSettingsScreen extends BaseComponent {
   };
 
   onChangePasswordClicked = () => {
-
+    NavigationService.navigate('PasswordChange')
   };
 
   onEditNameClicked = () => {
@@ -241,6 +238,14 @@ class ProfileSettingsScreen extends BaseComponent {
 
   onPhoneEditClicked = () => {
     NavigationService.navigate('ProfileEdit', {mode: 'phone'})
+  };
+
+  onAddDeliveryAddressClicked = () => {
+
+  };
+
+  onBackButtonClicked = () => {
+    NavigationService.goBack()
   };
 }
 

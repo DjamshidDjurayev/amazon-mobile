@@ -8,6 +8,8 @@ const initialState = {
   isLoggingOut: false,
   appLang: LanguageHelper.getDefaultLanguage(),
   userUpdating: false,
+  passwordError: null,
+  passwordUpdating: false,
 };
 
 export default function profile(state = initialState, action = {}) {
@@ -80,6 +82,25 @@ export default function profile(state = initialState, action = {}) {
       return {
         ...state,
         userUpdating: false,
+      };
+
+    case types.USER_CHANGE_PASSWORD:
+      return {
+        ...state,
+        passwordUpdating: true,
+      };
+
+    case types.USER_CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        passwordUpdating: false,
+      };
+
+    case types.USER_CHANGE_PASSWORD_ERROR:
+      return {
+        ...state,
+        passwordUpdating: false,
+        passwordError: action.error,
       };
 
     default:

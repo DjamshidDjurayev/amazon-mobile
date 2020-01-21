@@ -22,5 +22,7 @@ export default {
   getHomeProducts: () => buildUrl('/api/products/main'),
   updateUserNames: id => buildUrl('/api/users', {
     path: id,
-  })
+  }),
+  changePassword: () => buildUrl('/api/users/change-password'),
+  resetPassword: () => buildUrl('/api/users/reset-password'),
 }

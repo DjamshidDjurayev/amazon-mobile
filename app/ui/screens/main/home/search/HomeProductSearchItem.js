@@ -23,7 +23,7 @@ class HomeProductSearchItem extends Component {
 
         <Image
           style={styles.image}
-          resizeMode={'contain'}
+          resizeMode={'cover'}
           source={{ uri: product.image}}/>
 
         <View style={styles.titleContainer}>
@@ -31,6 +31,7 @@ class HomeProductSearchItem extends Component {
             style={styles.title}
             title={product.title}/>
           <CustomText
+            fontStyle={'bold'}
             style={styles.price}
             title={product.price}/>
         </View>
@@ -50,8 +51,9 @@ const styles = EStyleSheet.create({
   },
   image: {
     width: null,
-    height: '100rem',
-    borderRadius: '14rem',
+    height: '140rem',
+    borderTopLeftRadius: '14rem',
+    borderTopRightRadius: '14rem',
   },
   titleContainer: {
     padding: '10rem',

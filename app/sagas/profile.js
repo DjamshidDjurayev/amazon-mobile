@@ -44,8 +44,22 @@ function* userUpdateNamesAsync(action) {
   }
 }
 
+function* userChangePasswordAsync(action) {
+  const config = { headers: {'Authorization' : action.data.auth}};
+  try {
+    const response = yield call(() => BaseApi.post(Api.changePassword(), action.data.data, config));
+    if (response && response.status === codes.STATUS_204) {
+      yield put(actions.userChangePasswordSuccess(response.data));
+      NavigationService.goBack();
+    }
+  } catch (e) {
+    yield put(actions.userChangePasswordError(e));
+  }
+}
+
 export function* watchUserLogout() {
   yield takeLatest(types.USER_LOG_OUT_ACTION, userLogoutAsync);
   yield takeLatest(types.USER_GET_DETAILS_ACTION, userGetDetailsAsync);
   yield takeLatest(types.USER_UPDATE_NAMES, userUpdateNamesAsync);
+  yield takeLatest(types.USER_CHANGE_PASSWORD, userChangePasswordAsync);
 }

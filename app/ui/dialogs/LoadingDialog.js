@@ -24,7 +24,8 @@ class LoadingDialog extends Component {
         animationType={'fade'}
         visible={visibility}
         transparent={true}>
-        <TouchableWithoutFeedback onPress={cancelable ? null : onCancel}>
+        <TouchableWithoutFeedback
+          onPress={cancelable ? null : onCancel}>
           <View style={styles.rootView}>
             <TouchableWithoutFeedback onPress={null}>
               <ActivityIndicator

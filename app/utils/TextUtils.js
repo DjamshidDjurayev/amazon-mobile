@@ -2,7 +2,7 @@ import Masker from '../libs/Masker'
 import colors from '../colors';
 
 export default {
-  validateEmail: (text) => {
+  validateEmail: (text: string) => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
     return reg.test(text);
   },
