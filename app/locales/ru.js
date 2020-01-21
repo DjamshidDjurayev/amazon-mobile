@@ -52,6 +52,10 @@ const ruLocale = {
   profile_edit: 'Редактирование профиля',
   old_password: 'Старый пароль',
   new_password: 'Новый пароль',
+  specifications: 'Характеристики',
+  details: 'Детали',
+  payment_method: 'Способ оплаты',
+  checkout: 'Оформить',
 };
 
 export default ruLocale

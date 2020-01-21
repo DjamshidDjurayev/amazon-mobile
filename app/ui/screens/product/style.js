@@ -79,6 +79,22 @@ const styles = EStyleSheet.create({
   productDescriptionContainer: {
     backgroundColor: colors.white,
     padding: '14rem',
+    borderBottomLeftRadius: '16rem',
+    borderBottomRightRadius: '16rem',
+  },
+  productDetailsContainer: {
+    marginTop: '16rem',
+    marginBottom: '16rem',
+  },
+  deliveryInfoContainer: {
+    marginBottom: '16rem',
+  },
+  relatedProductsContainer: {
+    marginBottom: '16rem',
+  },
+  checkoutButton: {
+    marginTop: '16rem',
+    marginBottom: '16rem',
   }
 });
 

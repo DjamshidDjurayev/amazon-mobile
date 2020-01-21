@@ -13,6 +13,10 @@ import Feather from 'react-native-vector-icons/Feather';
 import NavigationService from '../../../navigation/NavigationService'
 import {actions} from '../../../state/actions';
 import StarRating from 'react-native-star-rating';
+import Collapsible from 'react-native-collapsible';
+import MenuItem from '../../components/MenuItem';
+import strings from '../../../locales/strings';
+import CustomButton from '../../components/CustomButton';
 
 class ProductDetailsScreen extends BaseComponent {
   static navigationOptions = {
@@ -22,10 +26,8 @@ class ProductDetailsScreen extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
-      images: [
-        "https://source.unsplash.com/1024x768/?nature",
-      ],
       starCount: 0,
+      collapsed: false,
     };
   }
 
@@ -36,20 +38,94 @@ class ProductDetailsScreen extends BaseComponent {
   }
 
   render() {
+    const {navigation} = this.props;
+    const product = navigation.getParam('product', {});
+
     return(
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
         <ScrollView keyboardShouldPersistTaps={'always'}>
-          {this.renderSlider()}
-          {this.renderProductDescription()}
+          {this.renderSlider(product)}
+          {this.renderProductDescription(product)}
+          {this.renderProductDetails(product)}
+          {this.renderDeliveryInfo()}
+          {this.renderRelatedProducts()}
+          {this.renderCheckoutButton()}
         </ScrollView>
       </SafeAreaView>
     )
   }
 
-  renderProductDescription = () => {
-    const {product} = this.props;
+  renderCheckoutButton = () => {
+    return(
+      <CustomButton
+        style={styles.checkoutButton}
+        title={strings.checkout}/>
+    )
+  };
 
+  renderRelatedProducts = () => {
+    return(
+      <View style={styles.relatedProductsContainer}>
+
+      </View>
+    )
+  };
+
+  renderDeliveryInfo = () => {
+    return(
+      <View style={styles.deliveryInfoContainer}>
+        <MenuItem
+          subTitleSize={14}
+          textSize={12}
+          textColor={colors.light_gray}
+          subTitleColor={colors.black}
+          title={'Бесплатно, стандартная доставка 15-45 д.'}
+          subTitle={strings.delivery} />
+      </View>
+    )
+  };
+
+  renderProductDetails = product => {
+    return(
+      <View style={styles.productDetailsContainer}>
+        <MenuItem
+          onClick={() => {}}
+          collapsible
+          bottomBorder={false}
+          title={strings.specifications}>
+          <View style={{backgroundColor: colors.white, padding: 14}}>
+            <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
+            <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
+          </View>
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => {}}
+          collapsible
+          topBorder={false}
+          bottomBorder={false}
+          title={strings.details}>
+          <View style={{backgroundColor: colors.black, padding: 14}}>
+            <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
+          </View>
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => {}}
+          collapsible
+          topBorder={false}
+          bottomBorder={true}
+          title={strings.payment_method}>
+          <View style={{backgroundColor: colors.white, padding: 4}}>
+            <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
+          </View>
+        </MenuItem>
+      </View>
+    )
+  };
+
+  renderProductDescription = product => {
     return(
       <View style={styles.productDescriptionContainer}>
         <CustomText
@@ -86,7 +162,9 @@ class ProductDetailsScreen extends BaseComponent {
     )
   };
 
-  renderSlider = () => {
+  renderSlider = product => {
+    let array = [product.image];
+
     return(
       <View style={styles.sliderContainer}>
         <Swiper
@@ -96,7 +174,7 @@ class ProductDetailsScreen extends BaseComponent {
           autoplayTimeout={10}
           renderPagination={this.renderPagination}
           loop>
-          {this.state.images.map((image, index) => this.renderSliderItem(image, index))}
+          {array.map((image, index) => this.renderSliderItem(image, index))}
         </Swiper>
 
         {this.renderTopHeader()}

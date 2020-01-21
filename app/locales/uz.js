@@ -52,6 +52,10 @@ const uzLocale = {
   profile_edit: 'Edit profile',
   old_password: 'Old password',
   new_password: 'New password',
+  specifications: 'Specifications',
+  details: 'Details',
+  payment_method: 'Payment method',
+  checkout: 'Checkout',
 };
 
 export default uzLocale

@@ -6,6 +6,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {toDp} from '../../utils/ScreenUtils';
 import colors from '../../colors';
 import PropTypes from 'prop-types'
+import Collapsible from 'react-native-collapsible';
 
 class MenuItem extends Component {
   static propTypes = {
@@ -26,6 +27,8 @@ class MenuItem extends Component {
     subTitleSize: PropTypes.number,
     rightIconEnabled: PropTypes.bool,
     opacity: PropTypes.number,
+    collapsed: PropTypes.bool,
+    collapsible: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -41,71 +44,94 @@ class MenuItem extends Component {
     subTitleSize: 13,
     rightIconEnabled: true,
     opacity: 0.9,
+    collapsible: false,
   };
 
   constructor(props) {
     super(props);
+    this.state = {
+      collapsed: false,
+    };
   }
 
   render() {
     const {
-      onClick, title, textSize,
-      containerStyle, iconSize,
-      iconColor, textColor, topBorder,
-      bottomBorder, borderRadius, rightText,
-      rightTextColor, subTitle, subTitleColor,
-      subTitleSize, rightIconEnabled, opacity} = this.props;
+      onClick, title, textSize, containerStyle, iconSize,
+      iconColor, textColor, topBorder, bottomBorder, borderRadius, rightText,
+      rightTextColor, subTitle, subTitleColor, subTitleSize,
+      rightIconEnabled, opacity, collapsed, collapsible, children} = this.props;
 
     return(
-      <TouchableOpacity
-        opacity={opacity}
-        onPress={onClick}
-        style={[styles.rootView, {
-          borderTopLeftRadius: topBorder ? toDp(borderRadius) : 0,
-          borderTopRightRadius: topBorder ? toDp(borderRadius)  : 0,
-          borderBottomLeftRadius: bottomBorder ? toDp(borderRadius)  : 0,
-          borderBottomRightRadius: bottomBorder ? toDp(borderRadius)  : 0,
-        }, containerStyle]}>
+      <View style={[styles.rootView, {
+        borderTopLeftRadius: topBorder ? toDp(borderRadius) : 0,
+        borderTopRightRadius: topBorder ? toDp(borderRadius)  : 0,
+        borderBottomLeftRadius: bottomBorder ? toDp(borderRadius)  : 0,
+        borderBottomRightRadius: bottomBorder ? toDp(borderRadius)  : 0,
+        paddingTop: collapsible ? toDp(4) : 0,
+        paddingBottom: collapsible ? toDp(4) : 0,
+      }]}>
+        <TouchableOpacity
+          opacity={opacity}
+          onPress={() => {
+            if (collapsible) {
+              this.setState({
+                collapsed: !this.state.collapsed
+              }, () => {
+                onClick()
+              })
+            } else {
+              onClick()
+            }
+          }}
+          style={[styles.container, containerStyle]}>
 
-        <View style={styles.titleContainer}>
-          {subTitle ?
-            <CustomText
-              size={subTitleSize}
-              style={styles.subTitle}
-              title={subTitle}
-              textColor={subTitleColor}/>
-              : null}
-          <CustomText
-            textColor={textColor}
-            size={textSize}
-            style={styles.title}
-            title={title}/>
-        </View>
-
-        {rightIconEnabled ?
-          <View style={styles.rightContainer}>
-            {rightText ?
+          <View style={styles.titleContainer}>
+            {subTitle ?
               <CustomText
-                title={rightText}
-                style={styles.rightText}
-                textColor={rightTextColor}/> : null}
-            <Entypo
-              style={styles.rightIcon}
-              name={'chevron-thin-right'}
-              size={toDp(iconSize)}
-              color={iconColor}/>
-          </View> : null
-        }
-      </TouchableOpacity>
+                size={subTitleSize}
+                style={styles.subTitle}
+                title={subTitle}
+                textColor={subTitleColor}/>
+              : null}
+            <CustomText
+              textColor={textColor}
+              size={textSize}
+              style={styles.title}
+              title={title}/>
+          </View>
+
+          {rightIconEnabled ?
+            <View style={styles.rightContainer}>
+              {rightText ?
+                <CustomText
+                  title={rightText}
+                  style={styles.rightText}
+                  textColor={rightTextColor}/> : null}
+              <Entypo
+                style={styles.rightIcon}
+                name={collapsible ? (this.state.collapsed ? 'chevron-thin-down' : 'chevron-thin-right') : 'chevron-thin-right'}
+                size={toDp(iconSize)}
+                color={iconColor}/>
+            </View> : null}
+        </TouchableOpacity>
+
+        <View>
+          <Collapsible collapsed={!this.state.collapsed}>
+            {children}
+          </Collapsible>
+        </View>
+      </View>
     )
   }
 }
 
 const styles = EStyleSheet.create({
   rootView: {
+    backgroundColor: colors.white,
+  },
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.white,
     padding: '14rem',
   },
   titleContainer: {

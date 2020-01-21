@@ -37,7 +37,6 @@ class ProfileEditScreen extends BaseComponent {
         {this.renderToolbar()}
         <ScrollView keyboardShouldPersistTaps={'always'}>
           {this.renderContent()}
-          {/*{this.renderModals()}*/}
         </ScrollView>
       </SafeAreaView>
       )
@@ -123,12 +122,6 @@ class ProfileEditScreen extends BaseComponent {
         disabledColor={colors.button_disabled}
         buttonColor={colors.green}
         title={strings.save}/>
-    )
-  };
-
-  renderModals = () => {
-    return(
-      <LoadingDialog visibility={this.props.updating}/>
     )
   };
 
