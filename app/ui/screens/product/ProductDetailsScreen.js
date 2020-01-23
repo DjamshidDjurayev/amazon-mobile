@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import BaseComponent from '../../base/BaseComponent';
 import styles from './style';
-import {SafeAreaView} from "react-navigation";
+import {SafeAreaView} from 'react-navigation';
 import {Image, ScrollView, StatusBar, View, TouchableOpacity, Share} from 'react-native';
 import colors from '../../../colors';
 import Swiper from '../../../libs/Swiper';
@@ -10,13 +10,13 @@ import {connect} from 'react-redux';
 import CustomText from '../../components/CustomText';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
-import NavigationService from '../../../navigation/NavigationService'
+import NavigationService from '../../../navigation/NavigationService';
 import {actions} from '../../../state/actions';
 import StarRating from 'react-native-star-rating';
-import Collapsible from 'react-native-collapsible';
 import MenuItem from '../../components/MenuItem';
 import strings from '../../../locales/strings';
 import CustomButton from '../../components/CustomButton';
+import Divider from '../../components/Divider';
 
 class ProductDetailsScreen extends BaseComponent {
   static navigationOptions = {
@@ -27,53 +27,50 @@ class ProductDetailsScreen extends BaseComponent {
     super(props);
     this.state = {
       starCount: 0,
-      collapsed: false,
     };
   }
 
   componentDidMount(): void {
     const {navigation, getProduct} = this.props;
     const product = navigation.getParam('product', {});
-    getProduct(product.id)
+    console.log(product);
+    getProduct(product.id);
   }
 
   render() {
-    const {navigation} = this.props;
-    const product = navigation.getParam('product', {});
-
-    return(
+    return (
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
         <ScrollView keyboardShouldPersistTaps={'always'}>
-          {this.renderSlider(product)}
-          {this.renderProductDescription(product)}
-          {this.renderProductDetails(product)}
+          {this.renderSlider()}
+          {this.renderProductDescription()}
+          {this.renderProductDetails()}
           {this.renderDeliveryInfo()}
           {this.renderRelatedProducts()}
           {this.renderCheckoutButton()}
         </ScrollView>
       </SafeAreaView>
-    )
+    );
   }
 
   renderCheckoutButton = () => {
-    return(
+    return (
       <CustomButton
         style={styles.checkoutButton}
         title={strings.checkout}/>
-    )
+    );
   };
 
   renderRelatedProducts = () => {
-    return(
+    return (
       <View style={styles.relatedProductsContainer}>
 
       </View>
-    )
+    );
   };
 
   renderDeliveryInfo = () => {
-    return(
+    return (
       <View style={styles.deliveryInfoContainer}>
         <MenuItem
           subTitleSize={14}
@@ -81,64 +78,134 @@ class ProductDetailsScreen extends BaseComponent {
           textColor={colors.light_gray}
           subTitleColor={colors.black}
           title={'Бесплатно, стандартная доставка 15-45 д.'}
-          subTitle={strings.delivery} />
+          subTitle={strings.delivery}/>
       </View>
-    )
+    );
   };
 
-  renderProductDetails = product => {
-    return(
-      <View style={styles.productDetailsContainer}>
-        <MenuItem
-          onClick={() => {}}
-          collapsible
-          bottomBorder={false}
-          title={strings.specifications}>
-          <View style={{backgroundColor: colors.white, padding: 14}}>
-            <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
-            <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
-          </View>
-        </MenuItem>
+  renderProductDetails = () => {
+    const {product} = this.props;
 
-        <MenuItem
-          onClick={() => {}}
-          collapsible
-          topBorder={false}
-          bottomBorder={false}
-          title={strings.details}>
-          <View style={{backgroundColor: colors.black, padding: 14}}>
-            <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
-          </View>
-        </MenuItem>
+    if (product) {
+      return (
+        <View style={styles.productDetailsContainer}>
+          <MenuItem
+            collapsible
+            bottomBorder={false}
+            title={strings.specifications}>
+            <View style={{backgroundColor: colors.white, padding: 14}}>
+              {product.table && product.table
+                .filter(t => t.key && t.value)
+                .map(t => {
+                  return (
+                    <View style={styles.tableRowContainer}>
+                      <View style={styles.tableKeyContainer}>
+                        <CustomText title={t.key} style={styles.tableKey} />
+                        <View style={styles.dottedView}/>
+                      </View>
 
-        <MenuItem
-          onClick={() => {}}
-          collapsible
-          topBorder={false}
-          bottomBorder={true}
-          title={strings.payment_method}>
-          <View style={{backgroundColor: colors.white, padding: 4}}>
-            <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
-          </View>
-        </MenuItem>
-      </View>
-    )
+                      <View style={styles.tableValueContainer}>
+                        <View style={styles.dottedView}/>
+                        <CustomText title={t.value} style={styles.tableValue}/>
+                      </View>
+                    </View>
+                  );
+                })}
+
+              <View style={{marginTop: toDp(20)}}>
+                {product.twister && product.twister.map(twister => {
+                  if (twister.id === 'variation_size_name') {
+                    return (
+                      <View>
+                        <CustomText title={twister.variationTitle}/>
+                        {twister.data.map(size => {
+                          return <CustomText title={size.title}/>;
+                        })}
+                      </View>
+                    );
+                  } else if (twister.id === 'variation_color_name') {
+                    return (
+                      <View>
+                        <CustomText title={twister.variationTitle}/>
+                        {twister.data.map(size => {
+                          return (
+                            <Image
+                              style={styles.twisterImage}
+                              source={{uri: size.src}}/>
+                          );
+                        })}
+                      </View>
+                    );
+                  }
+                })}
+              </View>
+            </View>
+          </MenuItem>
+          <Divider/>
+
+          <MenuItem
+            onClick={() => {
+            }}
+            collapsible
+            topBorder={false}
+            bottomBorder={false}
+            title={strings.details}>
+            <View style={{backgroundColor: colors.white, padding: 14}}>
+              {product.features && product.features.map(item => {
+                return(
+                  <View style={{flexDirection: 'row'}}>
+                    <View style={{
+                      width: toDp(5),
+                      height: toDp(5),
+                      borderRadius: toDp(10),
+                      backgroundColor: colors.black,
+                      marginRight: toDp(6),
+                    }}/>
+                    <CustomText title={item} style={{
+                      includeFontPadding: false,
+                      textAlignVertical: 'center',
+                    }}/>
+                  </View>
+                );
+              })}
+            </View>
+          </MenuItem>
+          <Divider/>
+
+          <MenuItem
+            onClick={() => {
+            }}
+            collapsible
+            topBorder={false}
+            bottomBorder={true}
+            title={strings.payment_method}>
+            <View style={{backgroundColor: colors.white, padding: 14}}>
+              <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
+            </View>
+          </MenuItem>
+        </View>
+      );
+    } else {
+      return null;
+    }
   };
 
-  renderProductDescription = product => {
-    return(
+  renderProductDescription = () => {
+    const {product} = this.props;
+
+    return (
       <View style={styles.productDescriptionContainer}>
         <CustomText
           size={20}
           fontStyle={'bold'}
-          title={product && product.price}/>
+          title={product && (product.price || product.price_placeholder)}/>
 
         <CustomText
           size={20}
           fontStyle={'bold'}
-          title={product.title} />
+          title={product && product.title}/>
 
-        <View>
+        <View style={{marginTop: 10}}>
           <StarRating
             buttonStyle={{marginRight: 10}}
             starSize={26}
@@ -153,19 +220,24 @@ class ProductDetailsScreen extends BaseComponent {
             iconSet={'FontAwesome'}
             selectedStar={(rating) => {
               this.setState({
-                starCount: rating
+                starCount: rating,
               });
             }}
           />
         </View>
       </View>
-    )
+    );
   };
 
-  renderSlider = product => {
-    let array = [product.image];
+  renderSlider = () => {
+    const {product} = this.props;
+    let array = [];
 
-    return(
+    if (product && product.images) {
+      array.push(product.images.mainImage);
+    }
+
+    return (
       <View style={styles.sliderContainer}>
         <Swiper
           height={toDp(280)}
@@ -179,27 +251,28 @@ class ProductDetailsScreen extends BaseComponent {
 
         {this.renderTopHeader()}
       </View>
-    )
+    );
   };
 
   renderTopHeader = () => {
-    return(
+    return (
       <View style={styles.topHeaderContainer}>
-          <View style={{flex: 1,}}>
-            <TouchableOpacity
-              style={styles.iconStyle}
-              onPress={() => this.onBackButtonClicked()}>
-              <Entypo
-                name={'chevron-thin-left'}
-                size={toDp(24)}
-                color={colors.white}/>
-            </TouchableOpacity>
-          </View>
+        <View style={{flex: 1}}>
+          <TouchableOpacity
+            style={styles.iconStyle}
+            onPress={() => this.onBackButtonClicked()}>
+            <Entypo
+              name={'chevron-thin-left'}
+              size={toDp(24)}
+              color={colors.white}/>
+          </TouchableOpacity>
+        </View>
 
         <View style={{flexDirection: 'row'}}>
           <TouchableOpacity
             style={styles.iconStyle}
-            onPress={() => {}}>
+            onPress={() => {
+            }}>
             <Entypo
               name={'heart-outlined'}
               size={toDp(24)}
@@ -217,7 +290,8 @@ class ProductDetailsScreen extends BaseComponent {
 
           <TouchableOpacity
             style={[styles.iconStyle, {marginRight: 0}]}
-            onPress={() => {}}>
+            onPress={() => {
+            }}>
             <Entypo
               name={'dots-three-vertical'}
               size={toDp(24)}
@@ -225,31 +299,31 @@ class ProductDetailsScreen extends BaseComponent {
           </TouchableOpacity>
         </View>
       </View>
-    )
+    );
   };
 
   renderDotsPagination = (index, total) => {
     let dots = [];
     for (let i = 0; i < total; i++) {
-      dots.push(i === index ? this.renderActiveDot(i) : this.renderInactiveDot(i))
+      dots.push(i === index ? this.renderActiveDot(i) : this.renderInactiveDot(i));
     }
-    return(
+    return (
       <View
         style={styles.dotsPaginationStyle}>
         {dots}
       </View>
-    )
+    );
   };
 
   renderNumberPagination = (index, total) => {
-    return(
+    return (
       <View style={styles.numberPaginationStyle}>
         <CustomText
           textColor={colors.white}
           size={12}
           title={`${index + 1}/${total}`}/>
       </View>
-    )
+    );
   };
 
   renderPagination = (index, total, context) => {
@@ -258,17 +332,17 @@ class ProductDetailsScreen extends BaseComponent {
         {this.renderDotsPagination(index, total)}
         {this.renderNumberPagination(index, total)}
       </View>
-    )
+    );
   };
 
   renderSliderItem = (image, index) => {
-    return(
+    return (
       <Image
         key={index}
         style={styles.imageStyle}
         source={{uri: image}}
-        resizeMode={'cover'} />
-    )
+        resizeMode={'contain'}/>
+    );
   };
 
   renderInactiveDot = index => {
@@ -276,7 +350,7 @@ class ProductDetailsScreen extends BaseComponent {
       <View
         key={index}
         style={styles.inactiveDot}/>
-    )
+    );
   };
 
   renderActiveDot = index => {
@@ -284,21 +358,21 @@ class ProductDetailsScreen extends BaseComponent {
       <View
         key={index}
         style={styles.activeDot}/>
-    )
+    );
   };
 
   renderStatusBar = () => {
-    return(
+    return (
       <StatusBar
         translucent
         backgroundColor={'#DFDFDF80'}
         hidden={false}
-        barStyle={'light-content'} />
-    )
+        barStyle={'light-content'}/>
+    );
   };
 
   onBackButtonClicked = () => {
-    NavigationService.goBack()
+    NavigationService.goBack();
   };
 
   onShare = async () => {
@@ -323,13 +397,21 @@ class ProductDetailsScreen extends BaseComponent {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    getProduct: id => dispatch(actions.getProductDetails(id)),
+  };
+}
+
+function mapStateToProps(state, props) {
+  const product = props.navigation.getParam('product', {});
+  return {
+    product: state.product.product[product.id],
+  };
+}
+
 export default connect(
-  (state, props) => ({
-    product: state.product.product,
-    isLoading: state.product.isLoading,
-  }),
-  dispatch => ({
-    getProduct: query => dispatch(actions.getProductDetails(query))
-  }),
+  mapStateToProps,
+  mapDispatchToProps,
 )(ProductDetailsScreen);
 

@@ -15,6 +15,7 @@ import SliderItem from './SliderItem';
 import {actions} from '../../../../state/actions';
 import NavigationService from '../../../../navigation/NavigationService';
 import HomeProductItem from './HomeProductItem';
+import BrandItem from './BrandItem';
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -55,7 +56,10 @@ class HomeScreen extends BaseComponent {
   }
 
   render() {
-    const {products} = this.props;
+    const {products, phones} = this.props;
+
+    console.log(products.products3.newProducts)
+    console.log(phones)
 
     return(
       <SafeAreaView style={styles.rootView}>
@@ -65,11 +69,40 @@ class HomeScreen extends BaseComponent {
           {this.renderSlider()}
           {this.renderProducts('Accessors', products.products1.accessors)}
           {this.renderProducts('Kross', products.products2.kross)}
-          {this.renderProducts('New products', products.products3.newProducts)}
+          {this.renderProducts('New Products', products.products3.newProducts)}
+          {this.renderProducts('New Cellphones', phones)}
+          {this.renderPopularBrands()}
         </ScrollView>
       </SafeAreaView>
     )
   }
+
+  renderPopularBrands = () => {
+    const {brands} = this.props;
+
+    return(
+      <View style={styles.popularBrandsContainer}>
+        <CustomText
+          fontStyle={'bold'}
+          size={18}
+          style={styles.popularBrandsTitle}
+          title={strings.popularBrands}/>
+
+        <ScrollView horizontal={true}>
+          {brands && brands.map((item, index) => {
+            return(
+              <View key={index}>
+                <BrandItem
+                  onClick={() => this.onHomeProductItemClicked(item.title)}
+                  index={index}
+                  item={item}/>
+              </View>
+            )
+          })}
+        </ScrollView>
+      </View>
+    )
+  };
 
   renderProducts = (title, products) => {
     const {isLoading} = this.props;
@@ -211,7 +244,9 @@ class HomeScreen extends BaseComponent {
 export default connect(
   (state, props) => ({
     products: state.homeProducts.homeProducts,
+    phones: state.product.phones,
     isLoading: state.homeProducts.isLoading,
+    brands: state.product.brands,
   }),
   dispatch => ({
     getHomeProducts: loading => dispatch(actions.getHomeProducts(loading)),

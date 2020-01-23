@@ -6,11 +6,11 @@ import Api from '../network/Api';
 import codes from '../codes';
 
 function* getProductDetailsAsync(action) {
-  const query = action.data;
+  const id = action.id;
   try {
-    const response = yield call(() => BaseApi.get(Api.getProductDetails(query), null));
+    const response = yield call(() => BaseApi.get(Api.getProductDetails(id), null));
     if (response && response.status === codes.STATUS_200) {
-      yield put(actions.getProductDetailsSuccess(response.data))
+      yield put(actions.getProductDetailsSuccess(response.data, id))
     }
   } catch (e) {
     yield put(actions.getProductDetailsError(e))

@@ -6,7 +6,7 @@ import CustomText from '../../../components/CustomText';
 import colors from '../../../../colors';
 import FastImage from 'react-native-fast-image';
 
-class HomeProductItem extends Component {
+class BrandItem extends Component {
   static propTypes = {
     item: PropTypes.object,
     onClick: PropTypes.func,
@@ -21,23 +21,8 @@ class HomeProductItem extends Component {
         style={styles.rootView}>
         <FastImage
           resizeMode={FastImage.resizeMode.contain}
-          source={{uri: item.img}}
+          source={item.image}
           style={styles.image}/>
-
-        <View style={styles.contentContainer}>
-          <CustomText
-            fontStyle={'bold'}
-            title={item.name}/>
-          <CustomText
-            fontStyle={'bold'}
-            title={item.title}/>
-          <CustomText
-            textColor={colors.red}
-            title={item.price}/>
-          <CustomText
-            textColor={colors.blue}
-            title={item.age}/>
-        </View>
       </TouchableOpacity>
     )
   }
@@ -48,7 +33,11 @@ const styles = EStyleSheet.create({
     backgroundColor: colors.white,
     marginLeft: '10rem',
     borderRadius: '16rem',
-    width: '180rem'
+    width: '180rem',
+    borderColor: colors.light_gray,
+    borderWidth: 0.5,
+    paddingLeft: '10rem',
+    paddingRight: '10rem',
   },
   contentContainer: {
     padding: '10rem',
@@ -61,4 +50,4 @@ const styles = EStyleSheet.create({
   }
 });
 
-export default HomeProductItem
+export default BrandItem

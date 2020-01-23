@@ -1,8 +1,8 @@
 import * as types from '../actionTypes';
 
-export const getProductDetails = data => ({ type: types.GET_PRODUCT_DETAILS, data });
+export const getProductDetails = id => ({ type: types.GET_PRODUCT_DETAILS, id });
 
-export const getProductDetailsSuccess = data => ({ type: types.GET_PRODUCT_DETAILS_SUCCESS, data });
+export const getProductDetailsSuccess = (data, id) => ({ type: types.GET_PRODUCT_DETAILS_SUCCESS, data, id });
 
 export const getProductDetailsError = error => ({ type: types.GET_PRODUCT_DETAILS_ERROR, error });
 

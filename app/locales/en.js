@@ -56,6 +56,7 @@ const enLocale = {
   details: 'Details',
   payment_method: 'Payment method',
   checkout: 'Checkout',
+  popularBrands: 'Popular brands',
 };
 
 export default enLocale

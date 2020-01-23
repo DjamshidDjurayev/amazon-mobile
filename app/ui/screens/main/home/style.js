@@ -72,6 +72,14 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  popularBrandsContainer: {
+    marginTop: '20rem',
+    marginBottom: '20rem',
+  },
+  popularBrandsTitle: {
+    alignSelf: 'center',
+    margin: '12rem',
+  },
 });
 
 export default styles

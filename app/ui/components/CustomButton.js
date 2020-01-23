@@ -72,7 +72,7 @@ class CustomButton extends React.Component {
           {...otherProps} />
         {isLoading ?
           <ActivityIndicator
-            color={textColor ? textColor : colors.white}
+            color={textColor}
             style={styles.indicator}
             size={toDp(22)}/> : null}
       </TouchableOpacity>

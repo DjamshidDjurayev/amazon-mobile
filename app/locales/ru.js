@@ -56,6 +56,7 @@ const ruLocale = {
   details: 'Детали',
   payment_method: 'Способ оплаты',
   checkout: 'Оформить',
+  popularBrands: 'Популярные бренды',
 };
 
 export default ruLocale

@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../../colors';
+import {toDp} from '../../../utils/ScreenUtils';
 
 const styles = EStyleSheet.create({
   rootView: {
@@ -95,7 +96,46 @@ const styles = EStyleSheet.create({
   checkoutButton: {
     marginTop: '16rem',
     marginBottom: '16rem',
-  }
+  },
+  twisterImage: {
+    height: '40rem',
+    width: '40rem',
+  },
+  tableColumnContainer: {
+    flexDirection: 'row',
+    marginBottom: '6rem',
+  },
+  tableKeyContainer: {
+    flex: 0.5,
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  tableKey: {
+    marginRight: '5rem',
+    includeFontPadding: false,
+    textAlign: 'left',
+    textAlignVertical: 'center',
+  },
+  dottedView: {
+    flex: 1,
+    width: '100%',
+    borderStyle: 'dotted',
+    borderBottomColor: colors.gray_F4,
+    borderBottomWidth: '1rem',
+    borderRadius: '2rem',
+  },
+  tableValueContainer: {
+    flex: 0.5,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  tableValue: {
+    includeFontPadding: false,
+    textAlign: 'right',
+    alignSelf: 'stretch',
+    textAlignVertical: 'center',
+    marginLeft: '5rem'
+  },
 });
 
 export default styles

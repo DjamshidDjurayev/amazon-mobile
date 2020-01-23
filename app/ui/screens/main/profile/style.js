@@ -14,6 +14,7 @@ const styles = EStyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: '18rem',
+    marginBottom: '18rem',
     backgroundColor: colors.white,
     paddingLeft: '14rem',
     paddingTop: '14rem',
@@ -33,7 +34,6 @@ const styles = EStyleSheet.create({
     marginRight: '14rem',
   },
   myCouponsContainer: {
-    marginTop: '18rem'
   },
   ordersAndFavoritesContainer: {
     marginTop: '18rem'

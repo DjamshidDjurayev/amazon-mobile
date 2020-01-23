@@ -77,10 +77,10 @@ class MenuItem extends Component {
               this.setState({
                 collapsed: !this.state.collapsed
               }, () => {
-                onClick()
+                if (onClick) onClick()
               })
             } else {
-              onClick()
+              if (onClick) onClick()
             }
           }}
           style={[styles.container, containerStyle]}>
