@@ -17,6 +17,7 @@ import Toolbar from '../../../components/Toolbar';
 import NavigationService from '../../../../navigation/NavigationService'
 import {actions} from '../../../../state/actions';
 import {toDp} from '../../../../utils/ScreenUtils';
+import fontHelper from '../../../../utils/fontHelper';
 
 class CatalogScreen extends BaseComponent {
   constructor(props) {
@@ -72,7 +73,8 @@ class CatalogScreen extends BaseComponent {
 
     return(
       <CustomText
-        size={16}
+        font={fontHelper.Lato_Bold}
+        size={18}
         title={strings.all_categories}/>
     );
   };
@@ -111,6 +113,7 @@ class CatalogScreen extends BaseComponent {
   renderCategoryItem = (index, item) => {
     return(
       <CatalogItem
+        icon={'aws'}
         onClick={() => {
           this.onSearchClicked(item.name)
         }}

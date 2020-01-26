@@ -8,6 +8,8 @@ export default {
   },
 
   isEmpty: (text: string) => {
+    if (!text) return true;
+
     return text.trim() === ""
   },
 
@@ -35,5 +37,5 @@ export default {
     ];
 
     return colors[sumChars % colors.length]
-  }
+  },
 }

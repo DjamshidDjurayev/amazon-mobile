@@ -11,7 +11,11 @@ function* searchProductsAsync(action) {
     const response = yield call(() =>
       BaseApi.get(Api.searchProducts(action.data), null));
     if (response && response.status === codes.STATUS_200) {
-      yield put(actions.searchProductsSuccess(response.data))
+      if (response.data && response.data.length > 0) {
+        yield put(actions.searchProductsSuccess(response.data))
+      } else {
+        yield put(actions.searchProducts(action.data))
+      }
     }
   } catch (e) {
     yield put(actions.searchProductsError(e))
@@ -40,6 +44,5 @@ export function* watchSearchProducts() {
       cancel: take(types.SEARCH_PRODUCT_CANCEL),
     });
   });
-
   yield takeLatest(types.GET_HOME_PRODUCTS, getHomeProductsAsync)
 }

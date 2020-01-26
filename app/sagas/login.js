@@ -12,7 +12,7 @@ function* loginPerformAsync(action) {
     if (response && response.status === codes.STATUS_200) {
       // save user data
       yield put(actions.loginSuccess(response.data));
-      yield put(actions.userLoginSuccess(response.data));
+      yield put(actions.userSave(response.data));
       // get user details
       yield put(actions.userGetDetails(response.data.userId));
       NavigationService.navigateWithReset('Main')

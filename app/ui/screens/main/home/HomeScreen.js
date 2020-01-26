@@ -16,6 +16,7 @@ import {actions} from '../../../../state/actions';
 import NavigationService from '../../../../navigation/NavigationService';
 import HomeProductItem from './HomeProductItem';
 import BrandItem from './BrandItem';
+import fontHelper from '../../../../utils/fontHelper';
 
 class HomeScreen extends BaseComponent {
   static navigationOptions = {
@@ -111,12 +112,13 @@ class HomeScreen extends BaseComponent {
       <View>
         <View style={styles.productsTitleContainer}>
           <CustomText
-            size={16}
-            fontStyle={'bold'}
+            size={17}
+            font={fontHelper.Lato_Bold}
             title={title}/>
 
           <TouchableOpacity onPress={() => this.onSeeAllClicked()}>
             <CustomText
+              font={fontHelper.Lato_Bold}
               textColor={colors.blue}
               size={14}
               title={strings.see_all}/>

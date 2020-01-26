@@ -1,6 +1,6 @@
 import * as types from '../actionTypes';
 
-export const getCart = data => ({ type: types.GET_CART, data });
+export const getCart = () => ({ type: types.GET_CART });
 
 export const getCartSuccess = data => ({ type: types.GET_CART_SUCCESS, data });
 

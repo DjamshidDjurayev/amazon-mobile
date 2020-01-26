@@ -25,4 +25,5 @@ export default {
   }),
   changePassword: () => buildUrl('/api/users/change-password'),
   resetPassword: () => buildUrl('/api/users/reset-password'),
+  addToCart: () => buildUrl('/api/users/me/addtocart'),
 }

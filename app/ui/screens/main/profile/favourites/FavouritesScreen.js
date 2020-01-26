@@ -54,6 +54,7 @@ class FavouritesScreen extends BaseComponent {
 export default connect(
   (state, props) => ({
     user: state.profile.user,
+    favourites: state.favourites.favourites,
   }),
   dispatch => ({
   }),

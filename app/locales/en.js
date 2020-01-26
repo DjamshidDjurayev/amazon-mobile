@@ -57,6 +57,8 @@ const enLocale = {
   payment_method: 'Payment method',
   checkout: 'Checkout',
   popularBrands: 'Popular brands',
+  addToCart: 'Add to cart',
+  addToFavourites: 'Add to Wishlist',
 };
 
 export default enLocale

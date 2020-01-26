@@ -21,8 +21,7 @@ class CartScreen extends BaseComponent {
   }
 
   componentDidMount(): void {
-    const {getCart, userLogin} = this.props;
-    getCart(userLogin.id)
+    this.props.getCart()
   }
 
   componentWillUnmount(): void {
@@ -159,7 +158,7 @@ export default connect(
     userLogin: state.profile.userLogin,
   }),
   dispatch => ({
-    getCart: (data) => dispatch(actions.getCart(data)),
+    getCart: () => dispatch(actions.getCart()),
     cancelGetCart: () => dispatch(actions.getCartCancel())
   }),
 )(CartScreen);

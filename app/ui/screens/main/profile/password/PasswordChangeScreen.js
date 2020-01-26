@@ -161,7 +161,7 @@ export default connect(
   (state, props) => ({
     user: state.profile.user,
     userLogin: state.profile.userLogin,
-    updating: state.profile.passwordUpdating,
+    updating: state.changePassword.isLoading,
   }),
   dispatch => ({
     changePassword: data => dispatch(actions.userChangePassword(data))

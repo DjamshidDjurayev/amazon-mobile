@@ -52,13 +52,13 @@ class RegistrationScreen extends BaseComponent {
         Alert.alert(null, this.props.error.message, [
           {
             text: strings.ok,
-            onPress: () => {
-              // clear registration error
-              this.props.registrationErrorClear()
-            },
+            onPress: null,
           }
         ], {
-          cancelable: false
+          cancelable: true,
+          onDismiss: () => {
+            this.props.registrationErrorClear()
+          }
         })
       }
     }

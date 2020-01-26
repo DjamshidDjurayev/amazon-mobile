@@ -1,16 +1,22 @@
-import {put, takeLatest, cancelled, call, take, race} from 'redux-saga/effects';
+import {put, takeLatest, cancelled, call, take, race, select} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
 import BaseApi from '../network/BaseApi';
 import Api from '../network/Api';
 import codes from '../network/codes';
+import utils from '../utils/utils';
 
 function* getProductDetailsAsync(action) {
   const id = action.id;
   try {
     const response = yield call(() => BaseApi.get(Api.getProductDetails(id), null));
     if (response && response.status === codes.STATUS_200) {
-      yield put(actions.getProductDetailsSuccess(response.data, id))
+      const data = response.data;
+      if (!utils.isObjectEmpty(data)) {
+        yield put(actions.getProductDetailsSuccess(data, id))
+      } else {
+        yield put(actions.getProductDetailsError({data: "empty"}))
+      }
     }
   } catch (e) {
     yield put(actions.getProductDetailsError(e))

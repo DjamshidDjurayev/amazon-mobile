@@ -93,7 +93,11 @@ const styles = EStyleSheet.create({
   relatedProductsContainer: {
     marginBottom: '16rem',
   },
-  checkoutButton: {
+  addToCartButton: {
+    marginTop: '16rem',
+    marginBottom: '16rem',
+  },
+  addToFavouritesButton: {
     marginTop: '16rem',
     marginBottom: '16rem',
   },

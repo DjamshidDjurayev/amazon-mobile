@@ -57,6 +57,8 @@ const ruLocale = {
   payment_method: 'Способ оплаты',
   checkout: 'Оформить',
   popularBrands: 'Популярные бренды',
+  addToCart: 'Добавить в корзину',
+  addToFavourites: 'Добавить в избранное',
 };
 
 export default ruLocale

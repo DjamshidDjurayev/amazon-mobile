@@ -275,7 +275,7 @@ export default connect(
   (state, props) => ({
     user: state.profile.user,
     userLogin: state.profile.userLogin,
-    userUpdating: state.profile.userUpdating,
+    userUpdating: state.updateNames.isLoading,
   }),
   dispatch => ({
     updateUserNames: payload => dispatch(actions.userUpdateNames(payload))

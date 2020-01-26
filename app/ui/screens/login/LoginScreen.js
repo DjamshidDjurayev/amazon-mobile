@@ -46,13 +46,13 @@ class LoginScreen extends BaseComponent {
         Alert.alert(null, this.props.error.message, [
           {
             text: strings.ok,
-            onPress: () => {
-              // clear login error
-              this.props.loginErrorClear()
-            },
+            onPress: null,
           }
         ], {
-          cancelable: false
+          cancelable: true,
+          onDismiss: () => {
+            this.props.loginErrorClear()
+          }
         })
       }
     }

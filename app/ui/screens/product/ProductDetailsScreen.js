@@ -47,17 +47,25 @@ class ProductDetailsScreen extends BaseComponent {
           {this.renderProductDetails()}
           {this.renderDeliveryInfo()}
           {this.renderRelatedProducts()}
-          {this.renderCheckoutButton()}
+          {this.renderButtons()}
         </ScrollView>
       </SafeAreaView>
     );
   }
 
-  renderCheckoutButton = () => {
+  renderButtons = () => {
     return (
-      <CustomButton
-        style={styles.checkoutButton}
-        title={strings.checkout}/>
+      <View>
+        <CustomButton
+          onClick={() => this.onAddToCartClicked()}
+          style={styles.addToCartButton}
+          title={strings.addToCart}/>
+
+        <CustomButton
+          onClick={() => this.onAddToWishlistClicked()}
+          style={styles.addToFavouritesButton}
+          title={strings.addToFavourites}/>
+      </View>
     );
   };
 
@@ -395,11 +403,29 @@ class ProductDetailsScreen extends BaseComponent {
       alert(error.message);
     }
   };
+
+  onAddToWishlistClicked = () => {
+    const product = this.props.navigation.getParam('product', {});
+
+    if (!this.props.isLoading) {
+      this.props.addToWishList(this.props.product, product.id);
+    }
+  };
+
+  onAddToCartClicked = () => {
+    const product = this.props.navigation.getParam('product', {});
+
+    if (!this.props.isLoading) {
+      this.props.addToCart(this.props.product);
+    }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getProduct: id => dispatch(actions.getProductDetails(id)),
+    addToCart: product => dispatch(actions.addToCart(product)),
+    addToWishList: (product, id) => dispatch(actions.addToFavourites(product, id))
   };
 }
 
@@ -407,6 +433,8 @@ function mapStateToProps(state, props) {
   const product = props.navigation.getParam('product', {});
   return {
     product: state.product.product[product.id],
+    isLoading: state.addToCart.isLoading,
+    error: state.addToCart.error,
   };
 }
 

@@ -5,42 +5,15 @@ const initialState = {
   userLogin: null,
   user: null,
   error: null,
-  isLoggingOut: false,
   appLang: LanguageHelper.getDefaultLanguage(),
-  userUpdating: false,
-  passwordError: null,
-  passwordUpdating: false,
 };
 
 export default function profile(state = initialState, action = {}) {
   switch (action.type) {
-    case types.USER_LOG_IN_ACTION_SUCCESS:
+    case types.USER_SAVE:
       return {
         ...state,
         userLogin: action.data,
-        isLoggingOut: false,
-      };
-
-    case types.USER_LOG_OUT_ACTION:
-      return {
-        ...state,
-        isLoggingOut: true,
-      };
-
-    case types.USER_LOG_OUT_ACTION_SUCCESS:
-      return {
-        ...state,
-        userLogin: null,
-        user: null,
-        error: null,
-        isLoggingOut: false,
-      };
-
-    case types.USER_LOG_OUT_ACTION_ERROR:
-      return {
-        ...state,
-        error: action.error,
-        isLoggingOut: false,
       };
 
     case types.USER_GET_DETAILS_ACTION:
@@ -66,41 +39,12 @@ export default function profile(state = initialState, action = {}) {
         appLang: action.data
       };
 
-    case types.USER_UPDATE_NAMES:
+    case types.USER_CLEAR_DATA:
       return {
         ...state,
-        userUpdating: true,
-      };
-
-    case types.USER_UPDATE_NAMES_SUCCESS:
-      return {
-        ...state,
-        userUpdating: false,
-      };
-
-    case types.USER_UPDATE_NAMES_ERROR:
-      return {
-        ...state,
-        userUpdating: false,
-      };
-
-    case types.USER_CHANGE_PASSWORD:
-      return {
-        ...state,
-        passwordUpdating: true,
-      };
-
-    case types.USER_CHANGE_PASSWORD_SUCCESS:
-      return {
-        ...state,
-        passwordUpdating: false,
-      };
-
-    case types.USER_CHANGE_PASSWORD_ERROR:
-      return {
-        ...state,
-        passwordUpdating: false,
-        passwordError: action.error,
+        userLogin: null,
+        user: null,
+        error: null,
       };
 
     default:

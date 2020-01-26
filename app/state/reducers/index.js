@@ -11,6 +11,10 @@ import myOrders from './myOrders';
 import home from './home';
 import product from './product';
 import homeProducts from './homeProducts';
+import logout from './logout';
+import changePassword from './changePassword';
+import updateNames from './updateNames';
+import addToCart from './addToCart';
 
 const rootReducer = combineReducers({
   splash,
@@ -24,6 +28,10 @@ const rootReducer = combineReducers({
   home,
   product,
   homeProducts,
+  logout,
+  changePassword,
+  updateNames,
+  addToCart,
   form: formReducer
 });
 

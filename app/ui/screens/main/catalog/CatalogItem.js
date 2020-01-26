@@ -6,6 +6,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../../../utils/colors';
 import {getDeviceWidth, toDp} from '../../../../utils/ScreenUtils';
 import TextUtils from '../../../../utils/TextUtils';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 class CatalogItem extends Component {
   static propTypes = {
@@ -13,10 +14,12 @@ class CatalogItem extends Component {
     numColumns: PropTypes.number,
     onClick: PropTypes.func,
     item: PropTypes.object,
+    icon: PropTypes.string,
   };
 
   static defaultProps = {
     numColumns: 3,
+    icon: null,
   };
 
   constructor(props) {
@@ -40,7 +43,7 @@ class CatalogItem extends Component {
   }
 
   render() {
-    const {numColumns, onClick, item} = this.props;
+    const {numColumns, onClick, item, icon} = this.props;
 
     if (item.empty === true) {
       return(
@@ -62,30 +65,43 @@ class CatalogItem extends Component {
           marginLeft: toDp(18),
           marginRight: this.state.cardMarginRight
         }]}>
-        <View style={[styles.content, {
-          backgroundColor: TextUtils.getRandomColor(item.name || 'D')
-        }]}>
+        <View style={[styles.content]}>
           <View
             style={[styles.cardImage, {
               width: this.state.size,
               height: this.state.size,
             }]}>
-            <CustomText
-              textColor={colors.white}
-              size={26}
-              title={TextUtils.getInitialLetter(item.name)}/>
+            {icon ? this.renderIcon() : this.renderInitialLetters(item.name)}
           </View>
-        </View>
 
-        <CustomText
-          ellipsizeMode={'tail'}
-          style={styles.cardTitle}
-          title={item.name}
-          numberOfLines={1}
-        />
+          <CustomText
+            ellipsizeMode={'tail'}
+            style={styles.cardTitle}
+            title={item.name}
+            numberOfLines={2}
+          />
+        </View>
       </TouchableOpacity>
     )
   }
+
+  renderIcon = () => {
+    const {icon} = this.props;
+    return (
+      <View style={styles.iconContainer}>
+        <FontAwesome5 name={icon} color={colors.black}  size={toDp(30)}/>
+      </View>
+    )
+  };
+
+  renderInitialLetters = name => {
+    return (
+      <CustomText
+        textColor={colors.white}
+        size={26}
+        title={TextUtils.getInitialLetter(name)}/>
+    )
+  };
 }
 
 const styles = EStyleSheet.create({
@@ -94,7 +110,13 @@ const styles = EStyleSheet.create({
     alignItems: 'center',
   },
   content: {
-    borderRadius: '150rem',
+    borderRadius: '20rem',
+    backgroundColor: colors.white,
+    elevation: '4rem',
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 1,
+    shadowRadius: '15rem',
   },
   cardImage: {
     borderTopLeftRadius: '12rem',
@@ -104,10 +126,14 @@ const styles = EStyleSheet.create({
   },
   cardTitle: {
     marginTop: '6rem',
-    marginLeft: '6rem',
-    marginRight: '6rem',
-    marginBottom: '6rem',
-    textAlign: 'center',
+    marginLeft: '10rem',
+    marginRight: '12rem',
+    marginBottom: '10rem',
+    height: '36rem',
+  },
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

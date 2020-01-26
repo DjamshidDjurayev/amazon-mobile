@@ -34,6 +34,22 @@ class ProfileSettingsScreen extends BaseComponent {
     super(props);
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.error !== this.props.error) {
+      if (this.props.error) {
+        Alert.alert(null, this.props.error.message, [
+          {
+            text: strings.ok,
+            onPress: null,
+          }
+        ], {
+          cancelable: true,
+          onDismiss: () => {this.props.logoutErrorClear()},
+        })
+      }
+    }
+  }
+
   render() {
     return(
       <SafeAreaView style={styles.rootView}>
@@ -253,10 +269,12 @@ export default connect(
   (state, props) => ({
     user: state.profile.user,
     userLogin: state.profile.userLogin,
-    isLoggingOut: state.profile.isLoggingOut
+    isLoggingOut: state.logout.isLoading,
+    error: state.profile.error,
   }),
   dispatch => ({
     userLogout: data => dispatch(actions.userLogout(data)),
-    updateUserNames: payload => dispatch(actions.userUpdateNames(payload))
+    updateUserNames: payload => dispatch(actions.userUpdateNames(payload)),
+    logoutErrorClear: () => dispatch(actions.userLogoutErrorClear())
   }),
 )(ProfileSettingsScreen);

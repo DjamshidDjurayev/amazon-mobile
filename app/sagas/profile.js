@@ -12,6 +12,7 @@ function* userLogoutAsync(action) {
     const response = yield call(() => BaseApi.post(Api.userLogout(), {}, config));
     if (response && response.status === codes.STATUS_204) {
       yield put(actions.userLogoutSuccess(response.data));
+      yield put(actions.userClearData());
       NavigationService.navigateWithReset('Login');
     }
   } catch (e) {
