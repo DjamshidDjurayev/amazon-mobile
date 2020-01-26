@@ -3,7 +3,7 @@ import BaseComponent from '../../../base/BaseComponent';
 import {SafeAreaView} from "react-navigation";
 import styles from './style';
 import {StatusBar, FlatList, View, ActivityIndicator} from "react-native";
-import colors from '../../../../colors';
+import colors from '../../../../utils/colors';
 import {connect} from 'react-redux';
 import Toolbar from '../../../components/Toolbar';
 import strings from '../../../../locales/strings';

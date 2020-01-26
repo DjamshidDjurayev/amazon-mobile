@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-navigation';
 import strings from '../../../../locales/strings';
-import colors from '../../../../colors';
+import colors from '../../../../utils/colors';
 import styles from './style';
 import {connect} from 'react-redux';
 import CustomText from '../../../components/CustomText';

@@ -3,7 +3,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator, BottomTabBar} from 'react-navigation-tabs';
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import colors from '../colors';
+import colors from '../utils/colors';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import SplashScreen from '../ui/screens/splash/SplashScreen';

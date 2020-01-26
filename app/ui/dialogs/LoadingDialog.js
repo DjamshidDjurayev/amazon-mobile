@@ -3,7 +3,7 @@ import {Modal, TouchableWithoutFeedback, View, ActivityIndicator} from 'react-na
 import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types';
 import {toDp} from '../../utils/ScreenUtils';
-import colors from '../../colors';
+import colors from '../../utils/colors';
 
 class LoadingDialog extends Component {
   static propTypes = {

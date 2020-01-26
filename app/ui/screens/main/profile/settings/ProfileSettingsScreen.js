@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
-import colors from '../../../../../colors';
+import colors from '../../../../../utils/colors';
 import styles from './style';
 import {SafeAreaView} from "react-navigation";
 import NavigationService from '../../../../../navigation/NavigationService'

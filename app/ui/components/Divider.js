@@ -4,7 +4,7 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types'
-import colors from '../../colors';
+import colors from '../../utils/colors';
 
 class Divider extends Component {
   static propTypes = {

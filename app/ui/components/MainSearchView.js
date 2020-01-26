@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {View, TextInput, TouchableWithoutFeedback, ActivityIndicator} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet';
-import colors from '../../colors';
+import colors from '../../utils/colors';
 import Feather from 'react-native-vector-icons/Feather'
 import {toDp} from '../../utils/ScreenUtils';
 import PropTypes from 'prop-types';
-import fontHelper from '../../fontHelper';
+import fontHelper from '../../utils/fontHelper';
 
 class MainSearchView extends Component {
   static propTypes = {

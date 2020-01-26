@@ -9,7 +9,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import colors from '../../../../colors';
+import colors from '../../../../utils/colors';
 import {connect} from 'react-redux';
 import Toolbar from '../../../components/Toolbar';
 import strings from '../../../../locales/strings';

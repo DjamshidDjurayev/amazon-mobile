@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { CANCEL } from 'redux-saga'
-import constants from '../constants';
+import constants from '../utils/constants';
 
 axios.defaults.baseURL = constants.BASE_URL;
 axios.defaults.timeout = 30000;

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import colors from '../../../../../colors';
+import colors from '../../../../../utils/colors';
 import {SafeAreaView} from "react-navigation";
 import Entypo from 'react-native-vector-icons/Entypo';
 import Materialicon from 'react-native-vector-icons/MaterialCommunityIcons';

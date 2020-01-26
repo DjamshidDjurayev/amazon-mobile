@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {View, TouchableOpacity} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types'
-import colors from '../../colors';
+import colors from '../../utils/colors';
 import {toDp} from '../../utils/ScreenUtils';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import CustomText from './CustomText';

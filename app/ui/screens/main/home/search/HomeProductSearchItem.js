@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Image, TouchableOpacity, View} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import colors from '../../../../../colors';
+import colors from '../../../../../utils/colors';
 import CustomText from '../../../../components/CustomText';
 import PropTypes from 'prop-types'
 

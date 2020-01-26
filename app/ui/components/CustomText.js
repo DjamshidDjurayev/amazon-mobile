@@ -1,10 +1,10 @@
 import React from "react";
 import {Text} from "react-native";
-import colors from "../../colors";
+import colors from "../../utils/colors";
 import PropTypes from 'prop-types';
 import {toDp} from "../../utils/ScreenUtils";
 import EStyleSheet from 'react-native-extended-stylesheet';
-import fontHelper from '../../fontHelper';
+import fontHelper from '../../utils/fontHelper';
 
 class CustomText extends React.Component {
   static propTypes = {

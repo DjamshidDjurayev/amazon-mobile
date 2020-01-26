@@ -4,7 +4,7 @@ import {actions} from '../state/actions';
 import NavigationService from '../navigation/NavigationService'
 import BaseApi from '../network/BaseApi';
 import Api from '../network/Api';
-import codes from '../codes';
+import codes from '../network/codes';
 
 function* userLogoutAsync(action) {
   const config = { headers: {'Authorization' : action.data}};

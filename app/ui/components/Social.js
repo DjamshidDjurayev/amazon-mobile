@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {TouchableOpacity, View} from 'react-native';
 import EvilIcon from 'react-native-vector-icons/EvilIcons';
-import colors from '../../colors';
+import colors from '../../utils/colors';
 import {toDp} from '../../utils/ScreenUtils';
 import PropTypes from 'prop-types'
 

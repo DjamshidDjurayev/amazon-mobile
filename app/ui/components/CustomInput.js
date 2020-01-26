@@ -3,7 +3,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import colors from "../../colors";
+import colors from "../../utils/colors";
 import PropTypes from 'prop-types';
 import EStyleSheet from "react-native-extended-stylesheet";
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -11,7 +11,7 @@ import {toDp} from '../../utils/ScreenUtils';
 import TextInputMask from 'react-native-text-input-mask';
 import CustomText from './CustomText';
 import TextUtils from '../../utils/TextUtils';
-import fontHelper from '../../fontHelper';
+import fontHelper from '../../utils/fontHelper';
 
 class CustomInput extends React.Component {
   static propTypes = {

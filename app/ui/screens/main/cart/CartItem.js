@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {TouchableOpacity, Image, View} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import CheckBox from '../../../components/CheckBox';
-import colors from '../../../../colors';
+import colors from '../../../../utils/colors';
 import CustomText from '../../../components/CustomText';
 
 const CartItem = ({index, item, onClick}) => {

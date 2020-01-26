@@ -5,7 +5,7 @@ import styles from './style';
 import {SafeAreaView} from "react-navigation";
 import Toolbar from '../../../../components/Toolbar';
 import strings from '../../../../../locales/strings';
-import colors from '../../../../../colors';
+import colors from '../../../../../utils/colors';
 import NavigationService from '../../../../../navigation/NavigationService';
 import {connect} from 'react-redux';
 

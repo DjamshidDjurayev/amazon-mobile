@@ -6,7 +6,7 @@ import {store, persistor} from '../app/state/store';
 import AppNavigator from '../app/navigation/AppNavigator';
 import NavigationService from './navigation/NavigationService'
 import { PersistGate } from 'redux-persist/integration/react'
-import AppContainer from './AppContainer';
+import AppContainer from './navigation/AppContainer';
 
 EStyleSheet.build({
   $rem: getWidthRatio(),

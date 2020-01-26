@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import colors from '../../../colors';
+import colors from '../../../utils/colors';
 import {toDp} from '../../../utils/ScreenUtils';
 
 const styles = EStyleSheet.create({

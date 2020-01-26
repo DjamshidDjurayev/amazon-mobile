@@ -7,7 +7,7 @@ import {
 
 import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types';
-import colors from '../../colors';
+import colors from '../../utils/colors';
 import Entypo from 'react-native-vector-icons/Entypo'
 import CustomText from './CustomText';
 import Feather from 'react-native-vector-icons/Feather'

@@ -8,7 +8,7 @@ import {
 import {SafeAreaView} from 'react-navigation';
 import {connect} from 'react-redux';
 import styles from './style';
-import colors from '../../../../colors';
+import colors from '../../../../utils/colors';
 import strings from '../../../../locales/strings';
 import Feather from 'react-native-vector-icons/Feather'
 import {toDp} from '../../../../utils/ScreenUtils';

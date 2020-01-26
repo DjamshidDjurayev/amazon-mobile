@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import colors from '../../../colors';
+import colors from '../../../utils/colors';
 
 const styles = EStyleSheet.create({
   rootView: {

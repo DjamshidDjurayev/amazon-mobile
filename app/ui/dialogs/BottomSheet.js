@@ -6,7 +6,7 @@ import CustomButton from '../components/CustomButton';
 import PropTypes from 'prop-types'
 import CustomInput from '../components/CustomInput';
 import strings from '../../locales/strings';
-import colors from '../../colors';
+import colors from '../../utils/colors';
 import {connect} from 'react-redux';
 
 class BottomSheet extends Component {

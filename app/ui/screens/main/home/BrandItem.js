@@ -3,7 +3,7 @@ import {View, TouchableOpacity, Image} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types'
 import CustomText from '../../../components/CustomText';
-import colors from '../../../../colors';
+import colors from '../../../../utils/colors';
 import FastImage from 'react-native-fast-image';
 
 class BrandItem extends Component {

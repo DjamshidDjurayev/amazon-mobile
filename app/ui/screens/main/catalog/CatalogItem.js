@@ -3,7 +3,7 @@ import {Image, TouchableOpacity, View} from 'react-native'
 import PropTypes from 'prop-types';
 import CustomText from '../../../components/CustomText';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import colors from '../../../../colors';
+import colors from '../../../../utils/colors';
 import {getDeviceWidth, toDp} from '../../../../utils/ScreenUtils';
 import TextUtils from '../../../../utils/TextUtils';
 

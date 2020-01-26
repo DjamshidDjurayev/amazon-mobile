@@ -4,7 +4,7 @@ import {TouchableOpacity, View} from 'react-native';
 import CustomText from './CustomText';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {toDp} from '../../utils/ScreenUtils';
-import colors from '../../colors';
+import colors from '../../utils/colors';
 import PropTypes from 'prop-types'
 import Collapsible from 'react-native-collapsible';
 

@@ -3,7 +3,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import colors from "../../colors";
+import colors from "../../utils/colors";
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {toDp} from "../../utils/ScreenUtils";

@@ -3,7 +3,7 @@ import BaseComponent from '../../../base/BaseComponent';
 import {SafeAreaView} from "react-navigation";
 import styles from './style';
 import {ScrollView, StatusBar, View, TouchableOpacity, ActivityIndicator} from 'react-native';
-import colors from '../../../../colors';
+import colors from '../../../../utils/colors';
 import {connect} from 'react-redux';
 import CustomText from '../../../components/CustomText';
 import MainSearchView from '../../../components/MainSearchView';

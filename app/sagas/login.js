@@ -4,7 +4,7 @@ import {actions} from '../state/actions';
 import NavigationService from '../navigation/NavigationService'
 import Api from "../network/Api"
 import BaseApi from '../network/BaseApi';
-import codes from '../codes';
+import codes from '../network/codes';
 
 function* loginPerformAsync(action) {
   try {

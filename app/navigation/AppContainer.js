@@ -1,10 +1,10 @@
 import React from 'react'
-import BaseComponent from './ui/base/BaseComponent';
-import AppNavigator from './navigation/AppNavigator';
-import NavigationService from './navigation/NavigationService';
+import BaseComponent from '../ui/base/BaseComponent';
+import AppNavigator from './AppNavigator';
+import NavigationService from './NavigationService';
 import {connect} from 'react-redux';
-import {actions} from './state/actions';
-import strings from './locales/strings';
+import {actions} from '../state/actions';
+import strings from '../locales/strings';
 
 class AppContainer extends BaseComponent {
   constructor(props) {

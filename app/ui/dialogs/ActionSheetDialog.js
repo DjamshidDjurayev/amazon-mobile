@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Modal, TouchableWithoutFeedback, View} from 'react-native';
 import PropTypes from 'prop-types';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import colors from '../../colors';
+import colors from '../../utils/colors';
 import MenuItem from '../components/MenuItem';
 
 class ActionSheetDialog extends Component {

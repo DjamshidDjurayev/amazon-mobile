@@ -3,7 +3,7 @@ import BaseComponent from '../../base/BaseComponent';
 import styles from './style';
 import {SafeAreaView} from 'react-navigation';
 import {Image, ScrollView, StatusBar, View, TouchableOpacity, Share} from 'react-native';
-import colors from '../../../colors';
+import colors from '../../../utils/colors';
 import Swiper from '../../../libs/Swiper';
 import {toDp} from '../../../utils/ScreenUtils';
 import {connect} from 'react-redux';

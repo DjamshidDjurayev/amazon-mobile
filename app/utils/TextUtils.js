@@ -1,5 +1,5 @@
 import Masker from '../libs/Masker'
-import colors from '../colors';
+import colors from './colors';
 
 export default {
   validateEmail: (text: string) => {

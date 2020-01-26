@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import BaseComponent from '../../../../base/BaseComponent';
 import styles from './style';
-import colors from '../../../../../colors';
+import colors from '../../../../../utils/colors';
 import {SafeAreaView} from "react-navigation";
 import {connect} from 'react-redux';
 import {actions} from '../../../../../state/actions';

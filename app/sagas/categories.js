@@ -3,7 +3,7 @@ import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
 import BaseApi from '../network/BaseApi';
 import Api from '../network/Api';
-import codes from '../codes';
+import codes from '../network/codes';
 
 function* getCategoriesAsync() {
   try {

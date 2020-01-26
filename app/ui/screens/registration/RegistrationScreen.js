@@ -9,7 +9,7 @@ import {
 import {connect} from 'react-redux';
 import {SafeAreaView} from 'react-navigation'
 import {actions} from '../../../state/actions';
-import colors from '../../../colors';
+import colors from '../../../utils/colors';
 import CustomText from '../../components/CustomText';
 import strings from '../../../locales/strings';
 import {toDp} from '../../../utils/ScreenUtils';
