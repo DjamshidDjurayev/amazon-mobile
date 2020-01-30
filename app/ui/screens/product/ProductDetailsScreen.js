@@ -89,7 +89,6 @@ class ProductDetailsScreen extends BaseComponent {
 
   renderSpecifications = () => {
     const {product} = this.props;
-
     return (
       <View>
         {product.table && product.table
@@ -315,8 +314,7 @@ class ProductDetailsScreen extends BaseComponent {
 
           <TouchableOpacity
             style={[styles.iconStyle, {marginRight: 0}]}
-            onPress={() => {
-            }}>
+            onPress={() => {}}>
             <Entypo
               name={'dots-three-vertical'}
               size={toDp(24)}

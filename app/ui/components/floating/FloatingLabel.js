@@ -25,7 +25,7 @@ export default class FloatingLabel extends Component {
     labelLargeSize: 16,
     labelColor: '#919191',
     font: fontHelper.fontDefault,
-    height: 60,
+    height: 65,
   };
 
   constructor(props: Object) {

@@ -12,11 +12,13 @@ const styles = EStyleSheet.create({
     paddingTop: '16rem',
   },
   input: {
-    fontSize: "15rem",
+    fontSize: '15rem',
     fontWeight: 'normal',
     backgroundColor: colors.white,
     borderRadius: '8rem',
-    marginTop: '8rem',
+    marginLeft: '16rem',
+    marginRight: '16rem',
+    marginBottom: '8rem',
   },
   updateButton: {
     marginTop: '20rem'

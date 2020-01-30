@@ -82,7 +82,6 @@ class RegistrationScreen extends BaseComponent {
     return(
       <View>
         <TextInputLayout
-          height={65}
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -99,7 +98,6 @@ class RegistrationScreen extends BaseComponent {
           wrapperStyle={styles.input} />
 
         <TextInputLayout
-          height={65}
           ref="last_name_id"
           numberOfLines={1}
           multiline={false}
@@ -117,7 +115,6 @@ class RegistrationScreen extends BaseComponent {
           wrapperStyle={styles.input} />
 
         <TextInputLayout
-          height={65}
           ref="phone_input_id"
           numberOfLines={1}
           multiline={false}
@@ -138,7 +135,6 @@ class RegistrationScreen extends BaseComponent {
           wrapperStyle={styles.input} />
 
         <TextInputLayout
-          height={65}
           ref="email_input_id"
           numberOfLines={1}
           multiline={false}
@@ -157,7 +153,6 @@ class RegistrationScreen extends BaseComponent {
           wrapperStyle={styles.input} />
 
         <TextInputLayout
-          height={65}
           ref="password_input_id"
           showHidePassword
           numberOfLines={1}

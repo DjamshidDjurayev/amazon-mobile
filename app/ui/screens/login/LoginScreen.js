@@ -85,7 +85,6 @@ class LoginScreen extends BaseComponent {
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
-          height={65}
           wrapperStyle={styles.input}
           onChangeText={(value) => {
             this.setState({
@@ -107,7 +106,6 @@ class LoginScreen extends BaseComponent {
           ref="password_id"
           numberOfLines={1}
           multiline={false}
-          height={65}
           wrapperStyle={styles.input}
           onChangeText={(passwordInputValue) => {
             this.setState({

@@ -45,7 +45,7 @@ export default class TextInputLayout extends Component {
     value: '',
     labelFont: fontHelper.fontDefault,
     textFont: fontHelper.fontDefault,
-    height: 60,
+    height: 65,
     textSize: 16,
     highlightColor: colors.green,
   };

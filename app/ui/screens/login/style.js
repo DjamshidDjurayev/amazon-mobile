@@ -69,7 +69,7 @@ const styles = EStyleSheet.create({
     marginLeft: '16rem',
     marginRight: '16rem',
     marginBottom: '8rem',
-  }
+  },
 });
 
 export default styles

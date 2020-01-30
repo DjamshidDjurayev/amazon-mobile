@@ -9,9 +9,9 @@ import colors from '../../../../../utils/colors';
 import NavigationService from '../../../../../navigation/NavigationService';
 import {connect} from 'react-redux';
 import {actions} from '../../../../../state/actions';
-import CustomInput from '../../../../components/CustomInput';
 import CustomButton from '../../../../components/CustomButton';
 import LoadingDialog from '../../../../dialogs/LoadingDialog';
+import TextInputLayout from '../../../../components/floating/TextInputLayout';
 
 class ProfileEditScreen extends BaseComponent {
   static navigationOptions = {
@@ -68,8 +68,7 @@ class ProfileEditScreen extends BaseComponent {
 
     return(
       <View>
-        <CustomInput
-          inputRef={r => this.inputs['phone_input_id'] = r}
+        <TextInputLayout
           numberOfLines={1}
           multiline={false}
           onChangeText={(value, extractedValue) => {
@@ -85,10 +84,9 @@ class ProfileEditScreen extends BaseComponent {
           errorText={this.state.phoneError}
           defaultValue={user && user.phoneNumber}
           value={this.state.phoneValue}
-          placeholder={strings.phone}
-          placeholderTextColor={colors.light_gray}
+          label={strings.phone}
           autoCapitalize="none"
-          style={styles.input}/>
+          wrapperStyle={styles.input}/>
       </View>
     )
   };
@@ -98,8 +96,7 @@ class ProfileEditScreen extends BaseComponent {
 
     return(
       <View>
-        <CustomInput
-          inputRef={r => this.inputs['email_input_id'] = r}
+        <TextInputLayout
           numberOfLines={1}
           multiline={false}
           onChangeText={(value) => {
@@ -114,10 +111,9 @@ class ProfileEditScreen extends BaseComponent {
           errorText={this.state.emailError}
           defaultValue={user && user.email}
           value={this.state.emailValue}
-          placeholder={strings.email}
-          placeholderTextColor={colors.light_gray}
+          label={strings.email}
           autoCapitalize="none"
-          style={styles.input}/>
+          wrapperStyle={styles.input}/>
       </View>
     )
   };
@@ -127,8 +123,7 @@ class ProfileEditScreen extends BaseComponent {
 
     return(
       <View>
-        <CustomInput
-          inputRef={r => this.inputs['name_input_id'] = r}
+        <TextInputLayout
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -143,14 +138,13 @@ class ProfileEditScreen extends BaseComponent {
           errorText={this.state.inputError}
           defaultValue={user && user.name}
           value={this.state.inputValue}
-          placeholder={strings.name}
-          placeholderTextColor={colors.light_gray}
+          label={strings.name}
           autoCapitalize="none"
           onSubmitEditing={() => this.focusNextField('surname_input_id')}
-          style={styles.input}/>
+          wrapperStyle={styles.input}/>
 
-        <CustomInput
-          inputRef={r => this.inputs['surname_input_id'] = r}
+        <TextInputLayout
+          ref="surname_input_id"
           numberOfLines={1}
           multiline={false}
           onChangeText={(value) => {
@@ -163,11 +157,10 @@ class ProfileEditScreen extends BaseComponent {
           errorText={this.state.inputError}
           defaultValue={user && user.surname}
           value={this.state.lastNameValue}
-          placeholder={strings.lastName}
-          placeholderTextColor={colors.light_gray}
+          label={strings.lastName}
           autoCapitalize="none"
           onSubmitEditing={() => this.onSubmitButtonClicked()}
-          style={styles.input}/>
+          wrapperStyle={styles.input}/>
       </View>
     )
   };
@@ -263,7 +256,9 @@ class ProfileEditScreen extends BaseComponent {
   };
 
   focusNextField = id => {
-    this.inputs[id].focus();
+    if (this.refs[id]) {
+      this.refs[id].focus();
+    }
   };
 
   onSubmitButtonClicked = () => {

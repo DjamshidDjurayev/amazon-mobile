@@ -12,6 +12,7 @@ import {actions} from '../../../../../state/actions';
 import CustomInput from '../../../../components/CustomInput';
 import CustomButton from '../../../../components/CustomButton';
 import LoadingDialog from '../../../../dialogs/LoadingDialog';
+import TextInputLayout from '../../../../components/floating/TextInputLayout';
 
 class ProfileEditScreen extends BaseComponent {
   static navigationOptions = {
@@ -56,8 +57,7 @@ class ProfileEditScreen extends BaseComponent {
 
     return(
       <View>
-        <CustomInput
-          inputRef={r => this.inputs['old_password_input_id'] = r}
+        <TextInputLayout
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -71,14 +71,13 @@ class ProfileEditScreen extends BaseComponent {
           returnKeyType="next"
           errorText={this.state.oldPasswordError}
           value={this.state.oldPassword}
-          placeholder={strings.old_password}
-          placeholderTextColor={colors.light_gray}
+          label={strings.old_password}
           autoCapitalize="none"
           onSubmitEditing={() => this.focusNextField('new_password_input_id')}
-          style={styles.input}/>
+          wrapperStyle={styles.input}/>
 
-        <CustomInput
-          inputRef={r => this.inputs['new_password_input_id'] = r}
+        <TextInputLayout
+          ref="new_password_input_id"
           numberOfLines={1}
           multiline={false}
           onChangeText={(value) => {
@@ -90,11 +89,10 @@ class ProfileEditScreen extends BaseComponent {
           returnKeyType="done"
           errorText={this.state.newPasswordError}
           value={this.state.newPassword}
-          placeholder={strings.new_password}
-          placeholderTextColor={colors.light_gray}
+          label={strings.new_password}
           autoCapitalize="none"
           onSubmitEditing={() => this.onSubmitButtonClicked()}
-          style={styles.input}/>
+          wrapperStyle={styles.input}/>
       </View>
     )
   };
@@ -149,7 +147,9 @@ class ProfileEditScreen extends BaseComponent {
   };
 
   focusNextField = id => {
-    this.inputs[id].focus();
+    if (this.refs[id]) {
+      this.refs[id].focus();
+    }
   };
 
   onSubmitButtonClicked = () => {
