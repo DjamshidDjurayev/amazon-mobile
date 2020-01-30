@@ -112,6 +112,7 @@ export default function product(state = initialState, action = {}) {
     case types.GET_PRODUCT_DETAILS_CANCEL:
       return {
         ...state,
+        isLoading: false,
       };
 
     case types.GET_PRODUCT_DETAILS_CANCELLED:

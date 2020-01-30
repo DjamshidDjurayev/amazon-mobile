@@ -1,4 +1,4 @@
-import {put, takeLatest, cancelled, call, take, race, select} from 'redux-saga/effects';
+import {put, takeLatest, cancelled, call, take, race} from 'redux-saga/effects';
 import * as types from '../state/actionTypes';
 import {actions} from '../state/actions';
 import BaseApi from '../network/BaseApi';

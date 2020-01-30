@@ -55,7 +55,6 @@ class CartScreen extends BaseComponent {
         renderItem={this.renderBucketItem}
         keyExtractor={item => item.id.toString()}
         ListHeaderComponentStyle={cart.length > 0 ? styles.headerContainer : {}}
-        ListHeaderComponent={this.renderHeaderContainer}
         ListEmptyComponent={this.renderEmptyView}
         ListFooterComponent={this.renderFooter}
         horizontal={false}

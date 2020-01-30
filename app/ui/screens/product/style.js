@@ -152,15 +152,15 @@ const styles = EStyleSheet.create({
     marginBottom: '6rem',
     marginRight: '12rem',
   },
-  featuresItem: {
+  dotView: {
     width: '5rem',
     height: '5rem',
     borderRadius: '10rem',
     backgroundColor: colors.black,
     marginRight: '10rem',
+    marginTop: '3rem',
   },
   featuresItemTitle: {
-    includeFontPadding: false,
     textAlignVertical: 'center',
     alignSelf: 'flex-start',
   },

@@ -31,6 +31,12 @@ class ProductDetailsScreen extends BaseComponent {
     };
   }
 
+  componentWillUnmount(): void {
+    if (this.props.productFetching) {
+      this.props.cancelProductFetching()
+    }
+  }
+
   componentDidMount(): void {
     const {navigation, getProduct} = this.props;
     const product = navigation.getParam('product', {});
@@ -91,7 +97,7 @@ class ProductDetailsScreen extends BaseComponent {
     const {product} = this.props;
     return (
       <View>
-        {product.table && product.table
+        {product && product.table && product.table
           .filter(t => t.key && t.value)
           .map(t => {
             return (
@@ -120,27 +126,38 @@ class ProductDetailsScreen extends BaseComponent {
 
     return (
       <View style={{marginTop: toDp(20)}}>
-        {product.twister && product.twister.map(twister => {
+        {product && product.twister && product.twister.map(twister => {
           if (twister.id === 'variation_size_name') {
             return (
-              <View>
+              <View style={{flexDirection: 'row',}}>
                 <CustomText title={twister.variationTitle}/>
-                {twister.data.map(size => {
-                  return <CustomText title={size.title}/>;
-                })}
+                <View style={{flexDirection: 'row',}}>
+                  {twister.data.map(size => {
+                    return (
+                      <TouchableOpacity>
+                        <CustomText title={size.title}/>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
               </View>
             );
           } else if (twister.id === 'variation_color_name') {
             return (
               <View>
                 <CustomText title={twister.variationTitle}/>
-                {twister.data.map(size => {
-                  return (
-                    <Image
-                      style={styles.twisterImage}
-                      source={{uri: size.src}}/>
-                  );
-                })}
+                <View style={{flexDirection: 'row',}}>
+                  {twister.data.map(size => {
+                    return (
+                      <TouchableOpacity>
+                        <Image
+                          resizeMode={'contain'}
+                          style={styles.twisterImage}
+                          source={{uri: size.src}}/>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
               </View>
             );
           }
@@ -162,10 +179,10 @@ class ProductDetailsScreen extends BaseComponent {
     const {product} = this.props;
     return (
       <View style={styles.featuresContainer}>
-        {product.features && product.features.map(item => {
+        {product && product.features && product.features.map(item => {
           return (
             <View style={styles.featuresItemContainer}>
-              <View style={styles.featuresItem}/>
+              <View style={styles.dotView}/>
               <CustomText title={item} style={styles.featuresItemTitle}/>
             </View>
           );
@@ -447,6 +464,7 @@ function mapDispatchToProps(dispatch) {
     addToCart: product => dispatch(actions.addToCart(product)),
     addToWishList: (product, id) => dispatch(actions.addToFavourites(product, id)),
     removeFromWishList: id => dispatch(actions.removeFromFavourites(id)),
+    cancelProductFetching: () => dispatch(actions.getProductDetailsCancel()),
   };
 }
 
@@ -457,6 +475,7 @@ function mapStateToProps(state, props) {
     isLoading: state.addToCart.isLoading,
     error: state.addToCart.error,
     isFavourite: state.favourites.favourites[product.id],
+    productFetching: state.product.isLoading,
   };
 }
 

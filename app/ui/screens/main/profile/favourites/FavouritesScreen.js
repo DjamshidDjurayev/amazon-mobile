@@ -35,7 +35,11 @@ class FavouritesScreen extends BaseComponent {
     return(
       <View>
         {Object.keys(favourites).map((key) => {
-          return <FavouriteItem item={favourites[key]}/>;
+          return (
+            <View key={key}>
+              <FavouriteItem item={favourites[key]} onClick={() => this.onProductClicked(favourites[key])}/>
+            </View>
+          );
         })}
       </View>
     )
@@ -70,6 +74,10 @@ class FavouritesScreen extends BaseComponent {
 
   onBackButtonClicked = () => {
     NavigationService.goBack()
+  };
+
+  onProductClicked = product => {
+    NavigationService.navigate('ProductDetails', {product})
   };
 }
 

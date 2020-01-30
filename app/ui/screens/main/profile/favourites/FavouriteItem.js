@@ -17,7 +17,9 @@ class FavouriteItem extends Component {
 
     return(
       <TouchableOpacity
-        onPress={onClick}
+        onPress={() => {
+          onClick && onClick()
+        }}
         style={styles.rootView}>
         <FastImage
           resizeMode={FastImage.resizeMode.contain}
