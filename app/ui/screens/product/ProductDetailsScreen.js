@@ -87,116 +87,129 @@ class ProductDetailsScreen extends BaseComponent {
     );
   };
 
-  renderProductDetails = () => {
+  renderSpecifications = () => {
     const {product} = this.props;
 
-    if (product) {
-      return (
-        <View style={styles.productDetailsContainer}>
-          <MenuItem
-            collapsible
-            bottomBorder={false}
-            title={strings.specifications}>
-            <View style={{backgroundColor: colors.white, padding: 14}}>
-              {product.table && product.table
-                .filter(t => t.key && t.value)
-                .map(t => {
-                  return (
-                    <View style={styles.tableRowContainer}>
-                      <View style={styles.tableKeyContainer}>
-                        <CustomText
-                          font={fontHelper.Lato_Bold}
-                          title={t.key}
-                          style={styles.tableKey} />
-                        <View style={styles.dottedView}/>
-                      </View>
+    return (
+      <View>
+        {product.table && product.table
+          .filter(t => t.key && t.value)
+          .map(t => {
+            return (
+              <View style={styles.tableRowContainer}>
+                <View style={styles.tableKeyContainer}>
+                  <CustomText
+                    font={fontHelper.Lato_Bold}
+                    title={t.key}
+                    style={styles.tableKey}/>
+                  <View style={styles.dottedView}/>
+                </View>
 
-                      <View style={styles.tableValueContainer}>
-                        <View style={styles.dottedView}/>
-                        <CustomText title={t.value} style={styles.tableValue}/>
-                      </View>
-                    </View>
-                  );
-                })}
+                <View style={styles.tableValueContainer}>
+                  <View style={styles.dottedView}/>
+                  <CustomText title={t.value} style={styles.tableValue}/>
+                </View>
+              </View>
+            );
+          })}
+      </View>
+    );
+  };
 
-              <View style={{marginTop: toDp(20)}}>
-                {product.twister && product.twister.map(twister => {
-                  if (twister.id === 'variation_size_name') {
-                    return (
-                      <View>
-                        <CustomText title={twister.variationTitle}/>
-                        {twister.data.map(size => {
-                          return <CustomText title={size.title}/>;
-                        })}
-                      </View>
-                    );
-                  } else if (twister.id === 'variation_color_name') {
-                    return (
-                      <View>
-                        <CustomText title={twister.variationTitle}/>
-                        {twister.data.map(size => {
-                          return (
-                            <Image
-                              style={styles.twisterImage}
-                              source={{uri: size.src}}/>
-                          );
-                        })}
-                      </View>
-                    );
-                  }
+  renderTwister = () => {
+    const {product} = this.props;
+
+    return (
+      <View style={{marginTop: toDp(20)}}>
+        {product.twister && product.twister.map(twister => {
+          if (twister.id === 'variation_size_name') {
+            return (
+              <View>
+                <CustomText title={twister.variationTitle}/>
+                {twister.data.map(size => {
+                  return <CustomText title={size.title}/>;
                 })}
               </View>
-            </View>
-          </MenuItem>
-          <Divider/>
+            );
+          } else if (twister.id === 'variation_color_name') {
+            return (
+              <View>
+                <CustomText title={twister.variationTitle}/>
+                {twister.data.map(size => {
+                  return (
+                    <Image
+                      style={styles.twisterImage}
+                      source={{uri: size.src}}/>
+                  );
+                })}
+              </View>
+            );
+          }
+        })}
+      </View>
+    );
+  };
 
-          <MenuItem
-            onClick={() => {
-            }}
-            collapsible
-            topBorder={false}
-            bottomBorder={false}
-            title={strings.details}>
+  renderSpecificationsContent = () => {
+    return (
+      <View style={styles.specificationsContainer}>
+        {this.renderSpecifications()}
+        {this.renderTwister()}
+      </View>
+    );
+  };
 
-            <View style={{backgroundColor: colors.white, padding: 14}}>
-              {product.features && product.features.map(item => {
-                return(
-                  <View style={{flexDirection: 'row', marginBottom: toDp(6), marginRight: toDp(12)}}>
-                    <View style={{
-                      width: toDp(5),
-                      height: toDp(5),
-                      borderRadius: toDp(10),
-                      backgroundColor: colors.black,
-                      marginRight: toDp(10),
-                    }}/>
-                    <CustomText title={item} style={{
-                      includeFontPadding: false,
-                      textAlignVertical: 'center',
-                      alignSelf: 'flex-start',
-                    }}/>
-                  </View>
-                );
-              })}
+  renderFeatures = () => {
+    const {product} = this.props;
+    return (
+      <View style={styles.featuresContainer}>
+        {product.features && product.features.map(item => {
+          return (
+            <View style={styles.featuresItemContainer}>
+              <View style={styles.featuresItem}/>
+              <CustomText title={item} style={styles.featuresItemTitle}/>
             </View>
-          </MenuItem>
-          <Divider/>
+          );
+        })}
+      </View>
+    );
+  };
 
-          <MenuItem
-            onClick={() => {
-            }}
-            collapsible
-            topBorder={false}
-            bottomBorder={true}
-            title={strings.payment_method}>
-            <View style={{backgroundColor: colors.white, padding: 14}}>
-              <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
-            </View>
-          </MenuItem>
-        </View>
-      );
-    } else {
-      return null;
-    }
+  renderPaymentMethods = () => {
+    return (
+      <View style={{backgroundColor: colors.white, padding: 14}}>
+        <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
+      </View>
+    );
+  };
+
+  renderProductDetails = () => {
+    return (
+      <View style={styles.productDetailsContainer}>
+        <MenuItem
+          collapsible
+          bottomBorder={false}
+          title={strings.specifications}>
+          {this.renderSpecificationsContent()}
+        </MenuItem>
+        <Divider/>
+        <MenuItem
+          collapsible
+          topBorder={false}
+          bottomBorder={false}
+          title={strings.details}>
+          {this.renderFeatures()}
+        </MenuItem>
+        <Divider/>
+        <MenuItem
+          collapsible
+          topBorder={false}
+          bottomBorder={true}
+          title={strings.payment_method}>
+          {this.renderPaymentMethods()}
+        </MenuItem>
+      </View>
+    );
   };
 
   renderProductDescription = () => {
@@ -414,7 +427,7 @@ class ProductDetailsScreen extends BaseComponent {
 
     if (!this.props.isLoading) {
       if (isFavourite) {
-        this.props.removeFromWishList(product.id)
+        this.props.removeFromWishList(product.id);
       } else {
         this.props.addToWishList(this.props.product, product.id);
       }

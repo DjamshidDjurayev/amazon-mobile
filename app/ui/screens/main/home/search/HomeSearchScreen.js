@@ -77,6 +77,7 @@ class HomeSearchScreen extends BaseComponent {
 
         <View style={styles.searchContainer}>
           <MainSearchView
+            style={styles.search}
             isLoading={isLoading}
             onChange={value => {
               if (!TextUtils.isEmpty(value.trim())) {
@@ -93,7 +94,6 @@ class HomeSearchScreen extends BaseComponent {
             fontSize={toDp(16)}
             onSubmitEditing={() => this.onSubmitButtonClicked()}
             title={strings.what_to_find} />
-
           {category ? this.renderCategoryTitle(category) : null}
         </View>
       </View>

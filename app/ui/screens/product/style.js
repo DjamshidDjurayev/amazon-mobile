@@ -139,6 +139,31 @@ const styles = EStyleSheet.create({
   tableRowContainer: {
     flexDirection: 'row',
   },
+  specificationsContainer: {
+    backgroundColor: colors.white,
+    padding: '14rem'
+  },
+  featuresContainer: {
+    backgroundColor: colors.white,
+    padding: '14rem'
+  },
+  featuresItemContainer: {
+    flexDirection: 'row',
+    marginBottom: '6rem',
+    marginRight: '12rem',
+  },
+  featuresItem: {
+    width: '5rem',
+    height: '5rem',
+    borderRadius: '10rem',
+    backgroundColor: colors.black,
+    marginRight: '10rem',
+  },
+  featuresItemTitle: {
+    includeFontPadding: false,
+    textAlignVertical: 'center',
+    alignSelf: 'flex-start',
+  },
 });
 
 export default styles

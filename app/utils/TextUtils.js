@@ -13,7 +13,7 @@ export default {
     return text.trim() === ""
   },
 
-  isDigitsOnly: (text: string) => {
+  hasDigitsOnly: (text: string) => {
     return /^\d+$/.test(text)
   },
 

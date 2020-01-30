@@ -250,12 +250,12 @@ class LoginScreen extends BaseComponent {
       return;
     }
 
-    // if (!TextUtils.isDigitsOnly(this.state.loginInputValue)) {
-    //   this.setState({
-    //     passwordError: strings.phone_wrong_format
-    //   });
-    //   return;
-    // }
+    if (!TextUtils.validateEmail(this.state.loginInputValue)) {
+      this.setState({
+        loginError: strings.wrong_email
+      });
+      return;
+    }
 
     const { loginInputValue, passwordInputValue} = this.state;
 

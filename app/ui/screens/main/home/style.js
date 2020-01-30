@@ -31,11 +31,10 @@ const styles = EStyleSheet.create({
     flex: 0.6,
   },
   mainSearchView: {
-    marginTop: '20rem'
+    marginTop: '20rem',
+    height: '50rem',
   },
-  sliderContainer: {
-
-  },
+  sliderContainer: {},
   inactiveDot: {
     backgroundColor: colors.gray_D6,
     width: '5rem',

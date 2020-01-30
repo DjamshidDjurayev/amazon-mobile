@@ -59,7 +59,7 @@ class MenuItem extends Component {
       onClick, title, textSize, containerStyle, iconSize,
       iconColor, textColor, topBorder, bottomBorder, borderRadius, rightText,
       rightTextColor, subTitle, subTitleColor, subTitleSize,
-      rightIconEnabled, opacity, collapsed, collapsible, children} = this.props;
+      rightIconEnabled, opacity, collapsible, children} = this.props;
 
     return(
       <View style={[styles.rootView, {
@@ -76,15 +76,11 @@ class MenuItem extends Component {
             if (collapsible) {
               this.setState({
                 collapsed: !this.state.collapsed
-              }, () => {
-                if (onClick) onClick()
               })
-            } else {
-              if (onClick) onClick()
             }
+            onClick && onClick()
           }}
           style={[styles.container, containerStyle]}>
-
           <View style={styles.titleContainer}>
             {subTitle ?
               <CustomText

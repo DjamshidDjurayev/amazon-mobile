@@ -86,7 +86,7 @@ const styles = EStyleSheet.create({
   rootView: {
     flexDirection: 'row',
     backgroundColor: colors.white,
-    borderRadius: '12rem',
+    borderRadius: '10rem',
     alignItems: 'center',
   },
   input: {

@@ -59,6 +59,7 @@ const ruLocale = {
   popularBrands: 'Популярные бренды',
   addToCart: 'Добавить в корзину',
   addToFavourites: 'Добавить в избранное',
+  wrong_email: 'Неправильный e-mail',
 };
 
 export default ruLocale

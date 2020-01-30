@@ -16,12 +16,13 @@ const styles = EStyleSheet.create({
     marginBottom: '12rem',
   },
   backButtonContainer: {
+    height: '50rem',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   backButton: {
     paddingLeft: '16rem',
     paddingRight: '16rem',
-    paddingTop: '10rem',
-    paddingBottom: '10rem',
   },
   searchContainer: {
     flex: 1,
@@ -30,12 +31,15 @@ const styles = EStyleSheet.create({
   emptyViewContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '50rem'
+    marginTop: '52rem'
   },
   categoryTitleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     margin: '3rem',
+  },
+  search: {
+    height: '52rem',
   }
 });
 

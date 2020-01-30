@@ -59,6 +59,7 @@ const uzLocale = {
   popularBrands: 'Popular brands',
   addToCart: 'Add to cart',
   addToFavourites: 'Add to Wishlist',
+  wrong_email: 'Wrong e-mail',
 };
 
 export default uzLocale
