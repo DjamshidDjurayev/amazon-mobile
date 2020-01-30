@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../../utils/colors';
+import {toDp} from '../../../utils/ScreenUtils';
 
 const styles = EStyleSheet.create({
   rootView: {
@@ -60,12 +61,15 @@ const styles = EStyleSheet.create({
   signUpText: {
     marginLeft: '4rem',
   },
-  loginInput: {
-    fontSize: "15rem",
+  input: {
+    fontSize: '15rem',
     fontWeight: 'normal',
     backgroundColor: colors.white,
     borderRadius: '8rem',
-  },
+    marginLeft: '16rem',
+    marginRight: '16rem',
+    marginBottom: '8rem',
+  }
 });
 
 export default styles

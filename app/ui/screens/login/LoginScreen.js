@@ -16,12 +16,12 @@ import strings from '../../../locales/strings';
 import {toDp} from '../../../utils/ScreenUtils';
 import CustomButton from '../../components/CustomButton';
 import TextUtils from '../../../utils/TextUtils';
-import CustomInput from '../../components/CustomInput';
 import NavigationService from '../../../navigation/NavigationService'
 import styles from './style';
 import BaseComponent from '../../base/BaseComponent';
 import Logo from '../../components/Logo';
 import Social from '../../components/Social';
+import TextInputLayout from '../../components/floating/TextInputLayout';
 
 class LoginScreen extends BaseComponent {
   static navigationOptions = {
@@ -30,7 +30,6 @@ class LoginScreen extends BaseComponent {
 
   constructor(props) {
     super(props);
-    this.inputs = {};
     this.state = {
       loginButtonDisabled: true,
       loginInputValue: '',
@@ -82,11 +81,12 @@ class LoginScreen extends BaseComponent {
   renderInputs = () => {
     return(
       <View>
-        <CustomInput
-          inputRef={r => this.inputs['login_input_id'] = r}
+        <TextInputLayout
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
+          height={65}
+          wrapperStyle={styles.input}
           onChangeText={(value) => {
             this.setState({
               loginInputValue: value,
@@ -94,34 +94,34 @@ class LoginScreen extends BaseComponent {
               loginError: '',
             })
           }}
-          keyboardType={'default'}
           returnKeyType="next"
           errorText={this.state.loginError}
           value={this.state.loginInputValue}
-          placeholder={strings.email}
-          placeholderTextColor={colors.light_gray}
+          keyboardType={'default'}
+          label={strings.email}
           autoCapitalize="none"
-          onSubmitEditing={() => this.focusNextField('password_input_id')}
-          style={styles.loginInput}/>
+          onSubmitEditing={() => this.focusNextField('password_id')}
+        />
 
-        <CustomInput
-          inputRef={r => this.inputs['password_input_id'] = r}
+        <TextInputLayout
+          ref="password_id"
           numberOfLines={1}
           multiline={false}
+          height={65}
+          wrapperStyle={styles.input}
           onChangeText={(passwordInputValue) => {
             this.setState({
               passwordInputValue,
               passwordError: '',
             })
           }}
-          errorText={this.state.passwordError}
           showHidePassword
           returnKeyType="done"
-          value={this.state.passwordInputValue}
-          placeholder={strings.password}
-          placeholderTextColor={colors.light_gray}
+          label={strings.password}
           autoCapitalize="none"
-          style={styles.loginInput}/>
+          value={this.state.passwordInputValue}
+          errorText={this.state.passwordError}
+        />
 
         <View style={styles.signUpContainer}>
           <CustomText
@@ -223,7 +223,9 @@ class LoginScreen extends BaseComponent {
   };
 
   focusNextField = id => {
-    this.inputs[id].focus();
+    if (this.refs[id]) {
+      this.refs[id].focus();
+    }
   };
 
   onLoginButtonClicked = () => {

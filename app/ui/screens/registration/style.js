@@ -58,16 +58,19 @@ const styles = EStyleSheet.create({
   signUpText: {
     marginLeft: '4rem',
   },
-  loginInput: {
-    fontSize: "15rem",
-    fontWeight: 'normal',
-    backgroundColor: colors.white,
-    borderRadius: '8rem',
-  },
   registrationButton: {
     marginTop: '20rem',
     marginBottom: '20rem',
   },
+  input: {
+    fontSize: '15rem',
+    fontWeight: 'normal',
+    backgroundColor: colors.white,
+    borderRadius: '8rem',
+    marginLeft: '16rem',
+    marginRight: '16rem',
+    marginBottom: '8rem',
+  }
 });
 
 export default styles

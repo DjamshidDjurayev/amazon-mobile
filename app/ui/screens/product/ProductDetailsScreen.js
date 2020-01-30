@@ -17,6 +17,7 @@ import MenuItem from '../../components/MenuItem';
 import strings from '../../../locales/strings';
 import CustomButton from '../../components/CustomButton';
 import Divider from '../../components/Divider';
+import fontHelper from '../../../utils/fontHelper';
 
 class ProductDetailsScreen extends BaseComponent {
   static navigationOptions = {
@@ -60,11 +61,6 @@ class ProductDetailsScreen extends BaseComponent {
           onClick={() => this.onAddToCartClicked()}
           style={styles.addToCartButton}
           title={strings.addToCart}/>
-
-        <CustomButton
-          onClick={() => this.onAddToWishlistClicked()}
-          style={styles.addToFavouritesButton}
-          title={strings.addToFavourites}/>
       </View>
     );
   };
@@ -108,7 +104,10 @@ class ProductDetailsScreen extends BaseComponent {
                   return (
                     <View style={styles.tableRowContainer}>
                       <View style={styles.tableKeyContainer}>
-                        <CustomText title={t.key} style={styles.tableKey} />
+                        <CustomText
+                          font={fontHelper.Lato_Bold}
+                          title={t.key}
+                          style={styles.tableKey} />
                         <View style={styles.dottedView}/>
                       </View>
 
@@ -158,20 +157,22 @@ class ProductDetailsScreen extends BaseComponent {
             topBorder={false}
             bottomBorder={false}
             title={strings.details}>
+
             <View style={{backgroundColor: colors.white, padding: 14}}>
               {product.features && product.features.map(item => {
                 return(
-                  <View style={{flexDirection: 'row'}}>
+                  <View style={{flexDirection: 'row', marginBottom: toDp(6), marginRight: toDp(12)}}>
                     <View style={{
                       width: toDp(5),
                       height: toDp(5),
                       borderRadius: toDp(10),
                       backgroundColor: colors.black,
-                      marginRight: toDp(6),
+                      marginRight: toDp(10),
                     }}/>
                     <CustomText title={item} style={{
                       includeFontPadding: false,
                       textAlignVertical: 'center',
+                      alignSelf: 'flex-start',
                     }}/>
                   </View>
                 );
@@ -263,6 +264,8 @@ class ProductDetailsScreen extends BaseComponent {
   };
 
   renderTopHeader = () => {
+    const {isFavourite} = this.props;
+
     return (
       <View style={styles.topHeaderContainer}>
         <View style={{flex: 1}}>
@@ -278,11 +281,12 @@ class ProductDetailsScreen extends BaseComponent {
 
         <View style={{flexDirection: 'row'}}>
           <TouchableOpacity
-            style={styles.iconStyle}
-            onPress={() => {
-            }}>
+            style={[styles.iconStyle, {
+              backgroundColor: isFavourite ? colors.green : colors.divider_transparent,
+            }]}
+            onPress={() => this.onAddToWishlistClicked()}>
             <Entypo
-              name={'heart-outlined'}
+              name={isFavourite ? 'heart' : 'heart-outlined'}
               size={toDp(24)}
               color={colors.white}/>
           </TouchableOpacity>
@@ -404,11 +408,16 @@ class ProductDetailsScreen extends BaseComponent {
     }
   };
 
-  onAddToWishlistClicked = () => {
+  onAddToWishlistClicked = add => {
+    const {isFavourite} = this.props;
     const product = this.props.navigation.getParam('product', {});
 
     if (!this.props.isLoading) {
-      this.props.addToWishList(this.props.product, product.id);
+      if (isFavourite) {
+        this.props.removeFromWishList(product.id)
+      } else {
+        this.props.addToWishList(this.props.product, product.id);
+      }
     }
   };
 
@@ -425,7 +434,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getProduct: id => dispatch(actions.getProductDetails(id)),
     addToCart: product => dispatch(actions.addToCart(product)),
-    addToWishList: (product, id) => dispatch(actions.addToFavourites(product, id))
+    addToWishList: (product, id) => dispatch(actions.addToFavourites(product, id)),
+    removeFromWishList: id => dispatch(actions.removeFromFavourites(id)),
   };
 }
 
@@ -435,6 +445,7 @@ function mapStateToProps(state, props) {
     product: state.product.product[product.id],
     isLoading: state.addToCart.isLoading,
     error: state.addToCart.error,
+    isFavourite: state.favourites.favourites[product.id],
   };
 }
 

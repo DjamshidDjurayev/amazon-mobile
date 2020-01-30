@@ -1,5 +1,5 @@
 import React from 'react'
-import {StatusBar, View} from 'react-native';
+import {StatusBar, View, ScrollView} from 'react-native';
 import BaseComponent from '../../../../base/BaseComponent';
 import styles from './style';
 import {SafeAreaView} from "react-navigation";
@@ -8,6 +8,8 @@ import strings from '../../../../../locales/strings';
 import colors from '../../../../../utils/colors';
 import NavigationService from '../../../../../navigation/NavigationService';
 import {connect} from 'react-redux';
+import CustomText from '../../../../components/CustomText';
+import FavouriteItem from './FavouriteItem';
 
 class FavouritesScreen extends BaseComponent {
   static navigationOptions = {
@@ -23,9 +25,29 @@ class FavouritesScreen extends BaseComponent {
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
         {this.renderToolbar()}
+        <ScrollView>{this.renderContent()}</ScrollView>
       </SafeAreaView>
     )
   }
+
+  renderContent = () => {
+    const {favourites} = this.props;
+    return(
+      <View>
+        {Object.keys(favourites).map((key) => {
+          return <FavouriteItem item={favourites[key]}/>;
+        })}
+      </View>
+    )
+  };
+
+  renderEmptyView = () => {
+    return (
+      <View style={styles.emptyViewContainer}>
+        <CustomText title={strings.empty}/>
+      </View>
+    )
+  };
 
   renderToolbar = () => {
     return(

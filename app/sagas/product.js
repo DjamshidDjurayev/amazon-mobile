@@ -15,7 +15,7 @@ function* getProductDetailsAsync(action) {
       if (!utils.isObjectEmpty(data)) {
         yield put(actions.getProductDetailsSuccess(data, id))
       } else {
-        yield put(actions.getProductDetailsError({data: "empty"}))
+        yield put(actions.getProductDetails(id))
       }
     }
   } catch (e) {

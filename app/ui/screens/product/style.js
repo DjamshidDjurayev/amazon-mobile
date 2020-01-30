@@ -97,10 +97,6 @@ const styles = EStyleSheet.create({
     marginTop: '16rem',
     marginBottom: '16rem',
   },
-  addToFavouritesButton: {
-    marginTop: '16rem',
-    marginBottom: '16rem',
-  },
   twisterImage: {
     height: '40rem',
     width: '40rem',
@@ -139,6 +135,9 @@ const styles = EStyleSheet.create({
     alignSelf: 'stretch',
     textAlignVertical: 'center',
     marginLeft: '5rem'
+  },
+  tableRowContainer: {
+    flexDirection: 'row',
   },
 });
 

@@ -2,7 +2,6 @@ import React from 'react'
 import {
   View,
   StatusBar,
-  TouchableOpacity,
   KeyboardAvoidingView,
   ScrollView, Alert,
 } from 'react-native';
@@ -15,11 +14,11 @@ import strings from '../../../locales/strings';
 import {toDp} from '../../../utils/ScreenUtils';
 import CustomButton from '../../components/CustomButton';
 import TextUtils from '../../../utils/TextUtils';
-import CustomInput from '../../components/CustomInput';
 import styles from './style';
 import BaseComponent from '../../base/BaseComponent';
 import Logo from '../../components/Logo';
 import Social from '../../components/Social';
+import TextInputLayout from '../../components/floating/TextInputLayout';
 
 class RegistrationScreen extends BaseComponent {
   static navigationOptions = {
@@ -82,8 +81,8 @@ class RegistrationScreen extends BaseComponent {
   renderInputs = () => {
     return(
       <View>
-        <CustomInput
-          inputRef={r => this.inputs['name_input_id'] = r}
+        <TextInputLayout
+          height={65}
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -95,14 +94,13 @@ class RegistrationScreen extends BaseComponent {
           }}
           returnKeyType="next"
           value={this.state.nameInputValue}
-          placeholder={strings.name}
-          placeholderTextColor={colors.light_gray}
-          autoCapitalize="none"
-          onSubmitEditing={() => this.focusNextField('last_name_input_id')}
-          style={styles.loginInput}/>
+          label={strings.name}
+          onSubmitEditing={() => this.focusNextField('last_name_id')}
+          wrapperStyle={styles.input} />
 
-        <CustomInput
-          inputRef={r => this.inputs['last_name_input_id'] = r}
+        <TextInputLayout
+          height={65}
+          ref="last_name_id"
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -113,14 +111,14 @@ class RegistrationScreen extends BaseComponent {
           }}
           returnKeyType="next"
           value={this.state.lastNameInputValue}
-          placeholder={strings.lastName}
+          label={strings.lastName}
           placeholderTextColor={colors.light_gray}
-          autoCapitalize="none"
           onSubmitEditing={() => this.focusNextField('phone_input_id')}
-          style={styles.loginInput}/>
+          wrapperStyle={styles.input} />
 
-        <CustomInput
-          inputRef={r => this.inputs['phone_input_id'] = r}
+        <TextInputLayout
+          height={65}
+          ref="phone_input_id"
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -133,14 +131,15 @@ class RegistrationScreen extends BaseComponent {
           keyboardType={'numeric'}
           returnKeyType="next"
           value={this.state.phoneInputValue}
-          placeholder={strings.phone}
+          label={strings.phone}
           placeholderTextColor={colors.light_gray}
           autoCapitalize="none"
           onSubmitEditing={() => this.focusNextField('email_input_id')}
-          style={styles.loginInput}/>
+          wrapperStyle={styles.input} />
 
-        <CustomInput
-          inputRef={r => this.inputs['email_input_id'] = r}
+        <TextInputLayout
+          height={65}
+          ref="email_input_id"
           numberOfLines={1}
           multiline={false}
           blurOnSubmit={false}
@@ -151,14 +150,15 @@ class RegistrationScreen extends BaseComponent {
           }}
           returnKeyType="next"
           value={this.state.emailInputValue}
-          placeholder={strings.email}
+          label={strings.email}
           placeholderTextColor={colors.light_gray}
           autoCapitalize="none"
           onSubmitEditing={() => this.focusNextField('password_input_id')}
-          style={styles.loginInput}/>
+          wrapperStyle={styles.input} />
 
-        <CustomInput
-          inputRef={r => this.inputs['password_input_id'] = r}
+        <TextInputLayout
+          height={65}
+          ref="password_input_id"
           showHidePassword
           numberOfLines={1}
           multiline={false}
@@ -169,10 +169,10 @@ class RegistrationScreen extends BaseComponent {
           }}
           returnKeyType="done"
           value={this.state.passwordInputValue}
-          placeholder={strings.password}
+          label={strings.password}
           placeholderTextColor={colors.light_gray}
           autoCapitalize="none"
-          style={styles.loginInput}/>
+          wrapperStyle={styles.input} />
 
         <CustomButton
           textSize={18}
@@ -182,7 +182,7 @@ class RegistrationScreen extends BaseComponent {
           disabled={this.state.signUpButtonDisabled}
           buttonColor={colors.green}
           disabledColor={colors.button_disabled}
-          title={strings.sign_up}/>
+          title={strings.sign_up} />
       </View>
     )
   };
@@ -255,8 +255,8 @@ class RegistrationScreen extends BaseComponent {
   };
 
   focusNextField = id => {
-    if (this.inputs[id]) {
-      this.inputs[id].focus();
+    if (this.refs[id]) {
+      this.refs[id].focus();
     }
   };
 
