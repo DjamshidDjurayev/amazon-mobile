@@ -36,6 +36,12 @@ class RegistrationScreen extends BaseComponent {
       phoneInputValue: "",
       passwordInputValue: "",
       emailInputValue: "",
+
+      nameInputError: "",
+      lastNameInputError: "",
+      phoneInputError: "",
+      passwordInputError: "",
+      emailInputError: "",
     }
   }
 
@@ -88,10 +94,12 @@ class RegistrationScreen extends BaseComponent {
           onChangeText={(nameInputValue) => {
             this.setState({
               nameInputValue,
-              signUpButtonDisabled: TextUtils.isEmpty(nameInputValue)
+              signUpButtonDisabled: TextUtils.isEmpty(nameInputValue),
+              nameInputError: '',
             })
           }}
           returnKeyType="next"
+          errorText={this.state.nameInputError}
           value={this.state.nameInputValue}
           label={strings.name}
           onSubmitEditing={() => this.focusNextField('last_name_id')}
@@ -105,9 +113,11 @@ class RegistrationScreen extends BaseComponent {
           onChangeText={(lastNameInputValue) => {
             this.setState({
               lastNameInputValue,
+              lastNameInputError: '',
             })
           }}
           returnKeyType="next"
+          errorText={this.state.lastNameInputError}
           value={this.state.lastNameInputValue}
           label={strings.lastName}
           placeholderTextColor={colors.light_gray}
@@ -122,11 +132,13 @@ class RegistrationScreen extends BaseComponent {
           onChangeText={(value, extractedValue) => {
             this.setState({
               phoneInputValue: extractedValue,
+              phoneInputError: '',
             });
           }}
           mask={'+[00000] [000] [00] [00]'}
           keyboardType={'numeric'}
           returnKeyType="next"
+          errorText={this.state.phoneInputError}
           value={this.state.phoneInputValue}
           label={strings.phone}
           placeholderTextColor={colors.light_gray}
@@ -142,9 +154,11 @@ class RegistrationScreen extends BaseComponent {
           onChangeText={(emailInputValue) => {
             this.setState({
               emailInputValue,
+              emailInputError: '',
             })
           }}
           returnKeyType="next"
+          errorText={this.state.emailInputError}
           value={this.state.emailInputValue}
           label={strings.email}
           placeholderTextColor={colors.light_gray}
@@ -160,9 +174,11 @@ class RegistrationScreen extends BaseComponent {
           onChangeText={(passwordInputValue) => {
             this.setState({
               passwordInputValue,
+              passwordInputError: '',
             })
           }}
           returnKeyType="done"
+          errorText={this.state.passwordInputError}
           value={this.state.passwordInputValue}
           label={strings.password}
           placeholderTextColor={colors.light_gray}
@@ -261,8 +277,58 @@ class RegistrationScreen extends BaseComponent {
       lastNameInputValue,
       phoneInputValue,
       passwordInputValue,
-      emailInputValue
+      emailInputValue,
     } = this.state;
+
+    if (TextUtils.isEmpty(nameInputValue)) {
+      this.setState({
+        nameInputError: strings.empty_field
+      });
+      return;
+    }
+
+    if (TextUtils.isEmpty(lastNameInputValue)) {
+      this.setState({
+        lastNameInputError: strings.empty_field
+      });
+      return;
+    }
+
+    if (TextUtils.isEmpty(phoneInputValue)) {
+      this.setState({
+        phoneInputError: strings.empty_field
+      });
+      return;
+    }
+
+
+    if (!TextUtils.isEmpty(emailInputValue)) {
+      this.setState({
+        emailInputError: strings.empty_field
+      });
+      return;
+    }
+
+    if (!TextUtils.isEmpty(passwordInputValue)) {
+      this.setState({
+        passwordInputError: strings.empty_field
+      });
+      return;
+    }
+
+    if (!TextUtils.validateEmail(emailInputValue)) {
+      this.setState({
+        emailInputError: strings.wrong_email
+      });
+      return;
+    }
+
+    if (passwordInputValue.length < 3) {
+      this.setState({
+        passwordInputError: strings.password_length_3
+      });
+      return;
+    }
 
     let body = {
       name: nameInputValue,

@@ -243,7 +243,7 @@ class ProductDetailsScreen extends BaseComponent {
           fontStyle={'bold'}
           title={product && product.title}/>
 
-        <View style={{marginTop: 10}}>
+        <View style={{marginTop: 10, alignItems: 'flex-start',}}>
           <StarRating
             buttonStyle={{marginRight: 10}}
             starSize={26}

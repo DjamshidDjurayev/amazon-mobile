@@ -227,35 +227,35 @@ class LoginScreen extends BaseComponent {
   };
 
   onLoginButtonClicked = () => {
-    if (TextUtils.isEmpty(this.state.loginInputValue)) {
+    const { loginInputValue, passwordInputValue} = this.state;
+
+    if (TextUtils.isEmpty(loginInputValue)) {
       this.setState({
         loginError: strings.empty_field
       });
       return;
     }
 
-    if (TextUtils.isEmpty(this.state.passwordInputValue)) {
+    if (TextUtils.isEmpty(passwordInputValue)) {
       this.setState({
         passwordError: strings.empty_field
       });
       return;
     }
 
-    if (this.state.passwordInputValue.length < 3) {
+    if (passwordInputValue.length < 3) {
       this.setState({
         passwordError: strings.password_length_3
       });
       return;
     }
 
-    if (!TextUtils.validateEmail(this.state.loginInputValue)) {
+    if (!TextUtils.validateEmail(loginInputValue)) {
       this.setState({
         loginError: strings.wrong_email
       });
       return;
     }
-
-    const { loginInputValue, passwordInputValue} = this.state;
 
     let body = {
       email: loginInputValue,
