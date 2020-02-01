@@ -7,18 +7,16 @@ import PropTypes from 'prop-types'
 
 class HomeProductSearchItem extends Component {
   static propTypes = {
-    index: PropTypes.number,
     product: PropTypes.object,
     onClick: PropTypes.func,
   };
 
   render() {
-    const {product, onClick, index} = this.props;
+    const {product, onClick} = this.props;
 
     return(
       <TouchableOpacity
         onPress={onClick}
-        key={index}
         style={styles.rootView}>
 
         <Image

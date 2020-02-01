@@ -174,6 +174,16 @@ const styles = EStyleSheet.create({
   },
   parallaxStyle: {
     flex: 1,
+    overflow: 'hidden',
+  },
+  emptyViewContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '20rem',
+  },
+  paymentsContainer: {
+    backgroundColor: colors.white,
+    padding: 14
   },
 });
 

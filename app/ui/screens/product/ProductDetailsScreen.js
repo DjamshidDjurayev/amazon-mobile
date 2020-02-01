@@ -2,7 +2,7 @@ import React from 'react';
 import BaseComponent from '../../base/BaseComponent';
 import styles from './style';
 import {SafeAreaView} from 'react-navigation';
-import {Image, ScrollView, StatusBar, View, TouchableOpacity, Share, TouchableHighlight, Animated, Modal} from 'react-native';
+import {Image, StatusBar, View, TouchableOpacity, Share} from 'react-native';
 import colors from '../../../utils/colors';
 import Swiper from '../../../libs/Swiper';
 import {toDp} from '../../../utils/ScreenUtils';
@@ -19,6 +19,7 @@ import CustomButton from '../../components/CustomButton';
 import Divider from '../../components/Divider';
 import fontHelper from '../../../utils/fontHelper';
 import ParallaxScrollView from '../../../libs/ParallaxScrollView';
+import TextUtils from '../../../utils/TextUtils';
 
 class ProductDetailsScreen extends BaseComponent {
   static navigationOptions = {
@@ -42,7 +43,6 @@ class ProductDetailsScreen extends BaseComponent {
   componentDidMount(): void {
     const {navigation, getProduct} = this.props;
     const product = navigation.getParam('product', {});
-    console.log(product);
     getProduct(product.id);
   }
 
@@ -108,71 +108,83 @@ class ProductDetailsScreen extends BaseComponent {
     const {product} = this.props;
     return (
       <View>
-        {product && product.table && product.table
-          .filter(t => t.key && t.value)
-          .map(t => {
-            return (
-              <View style={styles.tableRowContainer}>
-                <View style={styles.tableKeyContainer}>
-                  <CustomText
-                    font={fontHelper.Lato_Bold}
-                    title={t.key}
-                    style={styles.tableKey}/>
-                  <View style={styles.dottedView}/>
-                </View>
+        {product && product.table ? (
+          product.table
+            .filter(t => t.key && t.value)
+            .map(t => {
+              return (
+                <View style={styles.tableRowContainer}>
+                  <View style={styles.tableKeyContainer}>
+                    <CustomText
+                      font={fontHelper.Lato_Bold}
+                      title={t.key}
+                      style={styles.tableKey}/>
+                    <View style={styles.dottedView}/>
+                  </View>
 
-                <View style={styles.tableValueContainer}>
-                  <View style={styles.dottedView}/>
-                  <CustomText title={t.value} style={styles.tableValue}/>
+                  <View style={styles.tableValueContainer}>
+                    <View style={styles.dottedView}/>
+                    <CustomText title={t.value} style={styles.tableValue}/>
+                  </View>
                 </View>
-              </View>
-            );
-          })}
+              );
+            })
+        ) : this.renderEmptyView()}
       </View>
     );
   };
 
+
+  renderEmptyView = () => {
+    return (
+      <View style={styles.emptyViewContainer}>
+        <CustomText title={strings.empty}/>
+      </View>
+    )
+  };
+
   renderTwister = () => {
     const {product} = this.props;
-
     return (
       <View style={{marginTop: toDp(20)}}>
-        {product && product.twister && product.twister.map(twister => {
-          if (twister.id === 'variation_size_name') {
-            return (
-              <View style={{flexDirection: 'row'}}>
-                <CustomText title={twister.variationTitle}/>
+        {product && product.twister ? (
+          product.twister.map(twister => {
+            if (twister.id === 'variation_size_name') {
+              return (
                 <View style={{flexDirection: 'row'}}>
-                  {twister.data.map(size => {
-                    return (
-                      <TouchableOpacity>
-                        <CustomText title={size.title}/>
-                      </TouchableOpacity>
-                    );
-                  })}
+                  <CustomText title={twister.variationTitle}/>
+                  <View style={{flexDirection: 'row'}}>
+                    {twister.data.map(size => {
+                      return (
+                        <TouchableOpacity>
+                          <CustomText title={size.title}/>
+                        </TouchableOpacity>
+                      );
+                    })}
+                  </View>
                 </View>
-              </View>
-            );
-          } else if (twister.id === 'variation_color_name') {
-            return (
-              <View>
-                <CustomText title={twister.variationTitle}/>
-                <View style={{flexDirection: 'row'}}>
-                  {twister.data.map(size => {
-                    return (
-                      <TouchableOpacity>
-                        <Image
-                          resizeMode={'contain'}
-                          style={styles.twisterImage}
-                          source={{uri: size.src}}/>
-                      </TouchableOpacity>
-                    );
-                  })}
+              );
+            } else if (twister.id === 'variation_color_name') {
+              return (
+                <View>
+                  <CustomText title={twister.variationTitle}/>
+                  <View style={{flexDirection: 'row'}}>
+                    {twister.data.map(size => {
+                      return (
+                        <TouchableOpacity>
+                          <Image
+                            resizeMode={'contain'}
+                            style={styles.twisterImage}
+                            source={{uri: size.src}}/>
+                        </TouchableOpacity>
+                      );
+                    })}
+                  </View>
                 </View>
-              </View>
-            );
-          }
-        })}
+              );
+            }
+          })
+        ) : this.renderEmptyView()}
       </View>
     );
   };
@@ -190,22 +202,24 @@ class ProductDetailsScreen extends BaseComponent {
     const {product} = this.props;
     return (
       <View style={styles.featuresContainer}>
-        {product && product.features && product.features.map(item => {
-          return (
-            <View style={styles.featuresItemContainer}>
-              <View style={styles.dotView}/>
-              <CustomText title={item} style={styles.featuresItemTitle}/>
-            </View>
-          );
-        })}
+        {product && product.features ? (
+          product.features.map(item => {
+            return (
+              <View style={styles.featuresItemContainer}>
+                <View style={styles.dotView}/>
+                <CustomText title={item} style={styles.featuresItemTitle}/>
+              </View>
+            );
+          })
+        ) : this.renderEmptyView()}
       </View>
     );
   };
 
   renderPaymentMethods = () => {
     return (
-      <View style={{backgroundColor: colors.white, padding: 14}}>
-        <CustomText title={'AXAXAXAXAXAXAXAX XAXAXAXAXAXAXAXAXA XAXAXAXAXAXAXA'}/>
+      <View style={styles.paymentsContainer}>
+        <CustomText title={'Payme'}/>
       </View>
     );
   };
@@ -282,9 +296,12 @@ class ProductDetailsScreen extends BaseComponent {
     const {product} = this.props;
     let array = [];
 
-    if (product && product.images) {
-      array.push(product.images.mainImage);
-      array.push(product.images.mainImage);
+    if (product) {
+      if (product.images && !TextUtils.isEmpty(product.images.mainImage)) {
+        array.push(product.images.mainImage);
+      } else if (!TextUtils.isEmpty(product.image)) {
+        array.push(product.image);
+      }
     }
 
     return (
@@ -298,7 +315,8 @@ class ProductDetailsScreen extends BaseComponent {
           renderPagination={this.renderPagination}
           loop>
           {array.map((image, index) => this.renderSliderItem(image, index))}
-        </Swiper></>
+        </Swiper>
+      </>
     );
   };
 
@@ -482,7 +500,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, props) {
   const product = props.navigation.getParam('product', {});
   return {
-    product: state.product.product[product.id],
+    product: state.product.product[product.id] || product,
     isLoading: state.addToCart.isLoading,
     error: state.addToCart.error,
     isFavourite: state.favourites.favourites[product.id],

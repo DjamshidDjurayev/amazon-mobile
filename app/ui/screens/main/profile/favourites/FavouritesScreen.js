@@ -10,6 +10,7 @@ import NavigationService from '../../../../../navigation/NavigationService';
 import {connect} from 'react-redux';
 import CustomText from '../../../../components/CustomText';
 import FavouriteItem from './FavouriteItem';
+import TextUtils from '../../../../../utils/TextUtils';
 
 class FavouritesScreen extends BaseComponent {
   static navigationOptions = {
@@ -25,24 +26,29 @@ class FavouritesScreen extends BaseComponent {
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
         {this.renderToolbar()}
-        <ScrollView>{this.renderContent()}</ScrollView>
+        {this.renderContent()}
       </SafeAreaView>
     )
   }
 
   renderContent = () => {
     const {favourites} = this.props;
-    return(
-      <View>
-        {Object.keys(favourites).map((key) => {
-          return (
-            <View key={key}>
-              <FavouriteItem item={favourites[key]} onClick={() => this.onProductClicked(favourites[key])}/>
-            </View>
-          );
-        })}
-      </View>
-    )
+
+    if (!TextUtils.checkObjectIsEmpty(favourites)) {
+      return  (
+        <ScrollView>
+          {Object.keys(favourites).map((key) => {
+            return (
+              <View key={key}>
+                <FavouriteItem item={favourites[key]} onClick={() => this.onProductClicked(favourites[key])}/>
+              </View>
+            );
+          })}
+        </ScrollView>
+      )
+    } else {
+      return this.renderEmptyView()
+    }
   };
 
   renderEmptyView = () => {

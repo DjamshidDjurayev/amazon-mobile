@@ -127,7 +127,7 @@ class HomeSearchScreen extends BaseComponent {
             numColumns={1}
             style={{flex: 1}}
             data={products}
-            keyExtractor={item => item.id}
+            keyExtractor={(item, index) => `${item.id + index}`}
             renderItem={({ index, item }) => this.renderProductItem(item, index)}/>
         )
       }
@@ -149,12 +149,13 @@ class HomeSearchScreen extends BaseComponent {
 
   renderProductItem = (product, index) => {
     return(
-      <HomeProductSearchItem
-        index={index}
-        product={product}
-        onClick={() => {
-          NavigationService.navigate('ProductDetails', {product})
-      }}/>
+      <View key={index}>
+        <HomeProductSearchItem
+          product={product}
+          onClick={() => {
+            NavigationService.navigate('ProductDetails', {product})
+          }}/>
+      </View>
     )
   };
 

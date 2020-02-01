@@ -23,16 +23,16 @@ class FavouriteItem extends Component {
         style={styles.rootView}>
         <FastImage
           resizeMode={FastImage.resizeMode.contain}
-          source={{uri: item.images.mainImage}}
+          source={{uri: item && item.images && item.images.mainImage}}
           style={styles.image}/>
 
         <View style={styles.contentContainer}>
           <CustomText
             fontStyle={'bold'}
-            title={item.title}/>
+            title={item && item.title}/>
           <CustomText
             textColor={colors.red}
-            title={item.price || item.price_holder}/>
+            title={item && (item.price || item.price_holder)}/>
         </View>
       </TouchableOpacity>
     )

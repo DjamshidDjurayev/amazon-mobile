@@ -97,6 +97,7 @@ export default function product(state = initialState, action = {}) {
           ...state.product,
           [action.id]: {
             ...action.data,
+            id: action.id,
           }
         },
         error: null,

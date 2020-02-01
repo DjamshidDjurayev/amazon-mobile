@@ -1,4 +1,5 @@
 import * as types from '../actionTypes';
+import { omit } from 'lodash'
 
 const initialState = {
   favourites: {},
@@ -23,16 +24,14 @@ export default function favourites(state = initialState, action = {}) {
 
     case types.FAVOURITES_REMOVE_FROM_LIST:
       return {
-        favourites: {
-          ...state.favourites,
-          [action.id]: null
-        },
+        ...state,
+        favourites: omit(state.favourites, action.id),
       };
 
     case types.FAVOURITES_CLEAR_LIST:
       return {
         ...state,
-        favourites: [],
+        favourites: {},
       };
 
     default:
