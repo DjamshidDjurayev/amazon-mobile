@@ -13,13 +13,20 @@ const styles = EStyleSheet.create({
   },
   sliderContainer: {
   },
-  topHeaderContainer: {
+  slider: {
     position: 'absolute',
-    top: '28rem',
-    padding: '10rem',
-    flexDirection: 'row',
+    top: 0,
     left: 0,
     right: 0,
+  },
+  topHeaderContainer: {
+    padding: '10rem',
+    flexDirection: 'row',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    height: '58rem',
   },
   inactiveDot: {
     backgroundColor: colors.white,
@@ -138,6 +145,7 @@ const styles = EStyleSheet.create({
   },
   tableRowContainer: {
     flexDirection: 'row',
+    marginBottom: '4rem',
   },
   specificationsContainer: {
     backgroundColor: colors.white,
@@ -163,6 +171,9 @@ const styles = EStyleSheet.create({
   featuresItemTitle: {
     textAlignVertical: 'center',
     alignSelf: 'flex-start',
+  },
+  parallaxStyle: {
+    flex: 1,
   },
 });
 

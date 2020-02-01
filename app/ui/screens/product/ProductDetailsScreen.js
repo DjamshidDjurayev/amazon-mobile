@@ -2,7 +2,7 @@ import React from 'react';
 import BaseComponent from '../../base/BaseComponent';
 import styles from './style';
 import {SafeAreaView} from 'react-navigation';
-import {Image, ScrollView, StatusBar, View, TouchableOpacity, Share} from 'react-native';
+import {Image, ScrollView, StatusBar, View, TouchableOpacity, Share, TouchableHighlight, Animated, Modal} from 'react-native';
 import colors from '../../../utils/colors';
 import Swiper from '../../../libs/Swiper';
 import {toDp} from '../../../utils/ScreenUtils';
@@ -18,6 +18,7 @@ import strings from '../../../locales/strings';
 import CustomButton from '../../components/CustomButton';
 import Divider from '../../components/Divider';
 import fontHelper from '../../../utils/fontHelper';
+import ParallaxScrollView from '../../../libs/ParallaxScrollView';
 
 class ProductDetailsScreen extends BaseComponent {
   static navigationOptions = {
@@ -27,13 +28,14 @@ class ProductDetailsScreen extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
-      starCount: 0,
+      starCount: 3,
+      imageViewerShown: false,
     };
   }
 
   componentWillUnmount(): void {
     if (this.props.productFetching) {
-      this.props.cancelProductFetching()
+      this.props.cancelProductFetching();
     }
   }
 
@@ -48,14 +50,23 @@ class ProductDetailsScreen extends BaseComponent {
     return (
       <SafeAreaView style={styles.rootView}>
         {this.renderStatusBar()}
-        <ScrollView keyboardShouldPersistTaps={'always'}>
-          {this.renderSlider()}
-          {this.renderProductDescription()}
-          {this.renderProductDetails()}
-          {this.renderDeliveryInfo()}
-          {this.renderRelatedProducts()}
-          {this.renderButtons()}
-        </ScrollView>
+        <ParallaxScrollView
+          headerBackgroundColor={colors.green}
+          stickyHeaderHeight={toDp(58)}
+          backgroundColor={colors.ultra_light_gray}
+          contentBackgroundColor={colors.ultra_light_gray}
+          style={styles.parallaxStyle}
+          renderForeground={() => this.renderSlider()}
+          renderStickyHeader={() => this.renderTopHeader()}
+          parallaxHeaderHeight={toDp(280)}>
+          <View>
+            {this.renderProductDescription()}
+            {this.renderProductDetails()}
+            {this.renderDeliveryInfo()}
+            {this.renderRelatedProducts()}
+            {this.renderButtons()}
+          </View>
+        </ParallaxScrollView>
       </SafeAreaView>
     );
   }
@@ -129,9 +140,9 @@ class ProductDetailsScreen extends BaseComponent {
         {product && product.twister && product.twister.map(twister => {
           if (twister.id === 'variation_size_name') {
             return (
-              <View style={{flexDirection: 'row',}}>
+              <View style={{flexDirection: 'row'}}>
                 <CustomText title={twister.variationTitle}/>
-                <View style={{flexDirection: 'row',}}>
+                <View style={{flexDirection: 'row'}}>
                   {twister.data.map(size => {
                     return (
                       <TouchableOpacity>
@@ -146,7 +157,7 @@ class ProductDetailsScreen extends BaseComponent {
             return (
               <View>
                 <CustomText title={twister.variationTitle}/>
-                <View style={{flexDirection: 'row',}}>
+                <View style={{flexDirection: 'row'}}>
                   {twister.data.map(size => {
                     return (
                       <TouchableOpacity>
@@ -243,11 +254,11 @@ class ProductDetailsScreen extends BaseComponent {
           fontStyle={'bold'}
           title={product && product.title}/>
 
-        <View style={{marginTop: 10, alignItems: 'flex-start',}}>
+        <View style={{marginTop: 14, marginBottom: 10, alignItems: 'flex-start'}}>
           <StarRating
             buttonStyle={{marginRight: 10}}
-            starSize={26}
-            starColor={colors.green}
+            starSize={toDp(28)}
+            fullStarColor={colors.green}
             emptyStarColor={'#E4E4E4'}
             disabled={false}
             maxStars={5}
@@ -273,11 +284,13 @@ class ProductDetailsScreen extends BaseComponent {
 
     if (product && product.images) {
       array.push(product.images.mainImage);
+      array.push(product.images.mainImage);
     }
 
     return (
-      <View style={styles.sliderContainer}>
+      <>
         <Swiper
+          style={styles.slider}
           height={toDp(280)}
           removeClippedSubviews={false}
           autoplay
@@ -285,16 +298,12 @@ class ProductDetailsScreen extends BaseComponent {
           renderPagination={this.renderPagination}
           loop>
           {array.map((image, index) => this.renderSliderItem(image, index))}
-        </Swiper>
-
-        {this.renderTopHeader()}
-      </View>
+        </Swiper></>
     );
   };
 
   renderTopHeader = () => {
     const {isFavourite} = this.props;
-
     return (
       <View style={styles.topHeaderContainer}>
         <View style={{flex: 1}}>
@@ -331,7 +340,8 @@ class ProductDetailsScreen extends BaseComponent {
 
           <TouchableOpacity
             style={[styles.iconStyle, {marginRight: 0}]}
-            onPress={() => {}}>
+            onPress={() => {
+            }}>
             <Entypo
               name={'dots-three-vertical'}
               size={toDp(24)}
@@ -366,7 +376,7 @@ class ProductDetailsScreen extends BaseComponent {
     );
   };
 
-  renderPagination = (index, total, context) => {
+  renderPagination = (index, total) => {
     return (
       <View style={styles.paginationContainer}>
         {this.renderDotsPagination(index, total)}
@@ -377,11 +387,13 @@ class ProductDetailsScreen extends BaseComponent {
 
   renderSliderItem = (image, index) => {
     return (
-      <Image
-        key={index}
-        style={styles.imageStyle}
-        source={{uri: image}}
-        resizeMode={'contain'}/>
+      <TouchableOpacity key={index} onPress={() => {
+      }}>
+        <Image
+          style={styles.imageStyle}
+          source={{uri: image}}
+          resizeMode={'contain'}/>
+      </TouchableOpacity>
     );
   };
 
@@ -404,8 +416,7 @@ class ProductDetailsScreen extends BaseComponent {
   renderStatusBar = () => {
     return (
       <StatusBar
-        translucent
-        backgroundColor={'#DFDFDF80'}
+        backgroundColor={colors.statusbar_transparent}
         hidden={false}
         barStyle={'light-content'}/>
     );

@@ -23,7 +23,7 @@ class HomeProductSearchItem extends Component {
 
         <Image
           style={styles.image}
-          resizeMode={'cover'}
+          resizeMode={'contain'}
           source={{ uri: product.image}}/>
 
         <View style={styles.titleContainer}>
@@ -44,13 +44,14 @@ const styles = EStyleSheet.create({
   rootView: {
     backgroundColor: colors.white,
     borderRadius: '14rem',
-    marginTop: '10rem',
+    marginTop: '5rem',
+    marginBottom: '5rem',
     marginLeft: '8rem',
     marginRight: '8rem',
-    flex: 0.5
+    elevation: '1rem',
   },
   image: {
-    width: null,
+    width: '100%',
     height: '140rem',
     borderTopLeftRadius: '14rem',
     borderTopRightRadius: '14rem',

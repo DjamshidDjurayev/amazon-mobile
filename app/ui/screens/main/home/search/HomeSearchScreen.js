@@ -124,7 +124,7 @@ class HomeSearchScreen extends BaseComponent {
           <FlatList
             keyboardShouldPersistTaps={'handled'}
             horizontal={false}
-            numColumns={2}
+            numColumns={1}
             style={{flex: 1}}
             data={products}
             keyExtractor={item => item.id}
