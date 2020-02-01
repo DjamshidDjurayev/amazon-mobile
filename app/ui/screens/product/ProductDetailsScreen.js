@@ -111,9 +111,9 @@ class ProductDetailsScreen extends BaseComponent {
         {product && product.table ? (
           product.table
             .filter(t => t.key && t.value)
-            .map(t => {
+            .map((t, index) => {
               return (
-                <View style={styles.tableRowContainer}>
+                <View key={index} style={styles.tableRowContainer}>
                   <View style={styles.tableKeyContainer}>
                     <CustomText
                       font={fontHelper.Lato_Bold}
@@ -148,12 +148,12 @@ class ProductDetailsScreen extends BaseComponent {
     return (
       <View style={{marginTop: toDp(20)}}>
         {product && product.twister ? (
-          product.twister.map(twister => {
+          product.twister.map((twister, index) => {
             if (twister.id === 'variation_size_name') {
               return (
-                <View style={{flexDirection: 'row'}}>
+                <View key={index}>
                   <CustomText title={twister.variationTitle}/>
-                  <View style={{flexDirection: 'row'}}>
+                  <View>
                     {twister.data.map(size => {
                       return (
                         <TouchableOpacity>
@@ -169,9 +169,9 @@ class ProductDetailsScreen extends BaseComponent {
                 <View>
                   <CustomText title={twister.variationTitle}/>
                   <View style={{flexDirection: 'row'}}>
-                    {twister.data.map(size => {
+                    {twister.data.map((size, index) => {
                       return (
-                        <TouchableOpacity>
+                        <TouchableOpacity key={index}>
                           <Image
                             resizeMode={'contain'}
                             style={styles.twisterImage}
@@ -203,9 +203,9 @@ class ProductDetailsScreen extends BaseComponent {
     return (
       <View style={styles.featuresContainer}>
         {product && product.features ? (
-          product.features.map(item => {
+          product.features.map((item, index) => {
             return (
-              <View style={styles.featuresItemContainer}>
+              <View key={index} style={styles.featuresItemContainer}>
                 <View style={styles.dotView}/>
                 <CustomText title={item} style={styles.featuresItemTitle}/>
               </View>
@@ -310,10 +310,7 @@ class ProductDetailsScreen extends BaseComponent {
           style={styles.slider}
           height={toDp(280)}
           removeClippedSubviews={false}
-          autoplay
-          autoplayTimeout={10}
-          renderPagination={this.renderPagination}
-          loop>
+          renderPagination={this.renderPagination}>
           {array.map((image, index) => this.renderSliderItem(image, index))}
         </Swiper>
       </>

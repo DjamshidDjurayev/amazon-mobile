@@ -4,7 +4,6 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import PropTypes from 'prop-types'
 import CustomText from '../../../../components/CustomText';
 import colors from '../../../../../utils/colors';
-import FastImage from 'react-native-fast-image';
 
 class FavouriteItem extends Component {
   static propTypes = {
@@ -21,8 +20,8 @@ class FavouriteItem extends Component {
           onClick && onClick()
         }}
         style={styles.rootView}>
-        <FastImage
-          resizeMode={FastImage.resizeMode.contain}
+        <Image
+          resizeMode={'contain'}
           source={{uri: item && item.images && item.images.mainImage}}
           style={styles.image}/>
 
